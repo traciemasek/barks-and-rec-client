@@ -41,32 +41,41 @@ class App extends React.Component {
 }
 
 function msp(state){
-  //whatever object is returned from msp will be combined with this component's props
+  //whatever object is returned from msp will be combined with this component's props 
+  //reader/getter for store of state
   return state
   //probably won't want to return the entire store of state, so extract what you need aka shopping at the state store
   //return { likes: state.likes, things: state.things}
 }
 
+function mdp(dispatch) {
+  //writer/setter to state
+  //return functions that will be added to props, and then you can call onClick or wherever you want to trigger them to setState via redux dispatch/reducer
+  //THINKING AHEAD my handleLogin functions will call this.props.login (or whatever I call it in the mdp return) to setState in store once I get the user authed on the back end
+
+  //dispatch calls the reducer, which setsState
+  return {
+    //eventually these functions will be abstracted to a different file
+    like: () => {
+      dispatch({type: "INCREMENT_LIKES"})
+      //call this in the onClick for the like button onClock={props.like} since mdp automatically updates props with whatever you use here
+    },
+    //example below is from a controlled form that implicitly passes the event, which we then use to set the payload
+    //can also pass arguments just like in other eventlisteners
+    // handleChange: (event) => {
+    //   dispatch({type: "INPUT_CHANGE", payload: event.target.value})
+    // }
+  }
+
+}
+
 
 //connect connects this component to the store
 //takes 2 arguments: mapStateToProps & mapDispatchToProps
-export default connect(msp)(App);
+export default connect(msp, mdp)(App);
 
 //want to test double auth:
 //need routes
-
-//STEVEN LECTURE NOTES
-//router: give it what route you want it to hit, and what you want it to render
-//do you have all routes in app.js? not always, you can write nested routes but all basic main pages usually have a place in app in Switch
-//see 23:00 into the 051319 lecture about if you want something to appear on every page that starts with /adopter or /admin (so nav bar probably), then don't use exact path and put it all in /adopter, which would be under /adopter/dogs. If you only want very specific things to be on /adopter and nowhere else, then use exact path="/adopter"
-//Switch works the same as calling everything exact path=, but remember order matters so '/' would have to be at the very bottom which sort of doesn't make sense to me since it's basically the first page of the app. 
-//Switch will only render one route at a time! Use it at top level of all routes to switch between the major pages (28:31)
-//How are all these routes going to work when I have auth? Will I need the switch or will i use the ProtectedRoute component to route to either splash or admin/adopter and write switch routes elsewhere?
-
-//ROUTER PROPS
-//match has params
-//if using render in Route, then pass props render={(routerProps) => <Splash handleLogin={this.handleLogin} {...routerProps} />}/>
-
 //need auth
 
-//<Switch
+
