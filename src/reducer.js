@@ -1,5 +1,6 @@
 const defaultState = {
-  user: null
+  user: null,
+  dogs: []
 }
 
 function reducer(prevState = defaultState, action) {
@@ -10,6 +11,8 @@ function reducer(prevState = defaultState, action) {
     // case "ACTION_NAME":
     //   return {...prevState, key: newKey}
     // more cases
+    case "FETCH_ALL_DOGS":
+      return {...prevState, dogs: action.payload}
     default:
       return prevState
   }

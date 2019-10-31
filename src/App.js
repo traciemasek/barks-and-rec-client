@@ -4,10 +4,31 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Splash from './Splash';
+import MenuInverted from './menus/Header'
+import AdminMainContainer from './admin/AdminMainContainer'
+import AdopterMainContainer from './adopter/AdopterMainContainer'
+import ApplicationContainer from './adopter/ApplicationContainer'
+import DogsContainer from './dogs/DogsContainer'
+import FavesContainer from './dogs/FavesContainer'
+import DogShow from './dogs/DogShow'
 
 //App is wrapped in Route path="/" so "/" is established as base url--unsure how that might affect auth
 class App extends React.Component {
   //might be able to make this a functional component
+
+  componentDidMount() {
+    fetch("http://localhost:6969/api/v1/dogs")
+    .then(resp => resp.json())
+    // .then(dogs => {
+    //   this.setState({stateDogs: dogs})
+    // })
+    .then(dogs => {
+      //this is how this function talks to redux. It has access to the function we wrote in mdp that calls dispatch to change the state store with the reducer
+      this.props.fetchDogs(dogs)
+      //if you want to have this control loading render
+      //this.setState({loading: false})
+    })
+  }
 
   adminLogin = () => {}
 
@@ -16,22 +37,24 @@ class App extends React.Component {
   adopterSignUp = () => {}
 
   render() {
-    console.log("APP PROPS", this.props)
+    // console.log("APP PROPS", this.props)
     return (
       <div className="App">
-        {/* Since Header is on every page, it can be outside of routes */}
-        {/* <Header /> */}
+        {/* Since Menu header is on every page, it can be outside of routes */}
+        <MenuInverted />
+        
         <Switch>
-          {/* had to remove 'exact path' to get the form routes to render in the Splash component. Not sure I want routes--might just want conditional rendering of the forms?? */}
-          <Route path="/" component={Splash} />
-          {/* rather than routing to the 3 diff log in/sign up forms, i want to conditionally render them in the splash component */}
+          <Route exact path="/" component={Splash} />
+      
+          <Route exact path="/admin" render={(routerProps)=><AdminMainContainer {...routerProps}/>}/>
+          <Route path="/adopter/dogs/:id" render={(routerProps) => <DogShow {...routerProps}/>}/>
+          <Route path="/adopter/dogs" component={DogsContainer}/>
+          <Route path="/adopter/faves" component={FavesContainer}/>
+          <Route path="/adopter/application" component={ApplicationContainer}/>
+          <Route exact path ="/adopter" render={(routerProps) => <AdopterMainContainer {...routerProps}/>}/>
 
-          {/* unsure if i need exact path for /admin or /adopter */}
-          <Route path="/admin" render={()=><div>I'll be the Admin main page</div>}/>
-          {/* can do nested routes path="/adopter/dogs" */}
-          <Route path="/adopter/dogs" render={()=><div>I'll be the Adopter dogs page </div>}/>
-          {/* should all the nested routes be in a switch in the AdopterContainer?? that way if i pass something to /adopter here it should render on all the children routes???? maybe? */}
-          <Route path="/adopter" render={()=><div>I'll be the Adopter main page. Anything rendered here will show up on all nested '/adopter' pages unless I put `exact path` So maybe I should put the side nav here. Oh wait if I use switch, then it acts like exact path and will only show whatever is explicitly rendered on each route</div>}/>
+          {/* 404 */}
+          <Route render={() => <img alt="404 Not Found" src="https://httpstatusdogs.com/img/404.jpg"></img>} />
       </Switch>
       
          
@@ -53,13 +76,16 @@ function mdp(dispatch) {
   //return functions that will be added to props, and then you can call onClick or wherever you want to trigger them to setState via redux dispatch/reducer
   //THINKING AHEAD my handleLogin functions will call this.props.login (or whatever I call it in the mdp return) to setState in store once I get the user authed on the back end
 
-  //dispatch calls the reducer, which setsState
+  //dispatch calls the reducer, which setsState. For every time you need to set global state, you need to set up a function that calls dipatch in the mpd object here (1:24:00 react + redux 042219)
   return {
     //eventually these functions will be abstracted to a different file
     like: () => {
       dispatch({type: "INCREMENT_LIKES"})
       //call this in the onClick for the like button onClock={props.like} since mdp automatically updates props with whatever you use here
     },
+    fetchDogs: (dogs) => {
+      dispatch({type: "FETCH_ALL_DOGS", payload: dogs})
+    }
     //example below is from a controlled form that implicitly passes the event, which we then use to set the payload
     //can also pass arguments just like in other eventlisteners
     // handleChange: (event) => {

@@ -1,4 +1,5 @@
 // import * as serviceWorker from './serviceWorker';
+// import 'semantic-ui-css/semantic.min.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -8,6 +9,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducer'
 
+//don't forget to createStore if using redux
 const store = createStore(reducer)
 
 ReactDOM.render(

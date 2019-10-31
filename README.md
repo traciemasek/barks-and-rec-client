@@ -13,3 +13,11 @@
 
 ### Redux + React 042219
 1:20:00 ish is when he talks about passing args to mdp as payload
+
+npm i redux react-redux --save
+
+### Implementing Redux 042219
+-function called in component
+-arguments from function call passed to dispatch
+-dispatch calls reducer with action (type and payload)
+-reducer returns some sort of modified state
