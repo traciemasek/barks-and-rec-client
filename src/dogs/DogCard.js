@@ -7,9 +7,9 @@ class DogCard extends Component {
   render() {
     const {img1, name, id } = this.props.dog
     return (
-      <Card as={Link} to={`/adopter/dogs/${id}`}>
-        <Image src={img1} wrapped ui={false}/>
-        <Card.Content>
+      <Card >
+        <Image src={img1} wrapped ui={false} as={Link} to={`/adopter/dogs/${id}`}/>
+        <Card.Content as={Link} to={`/adopter/dogs/${id}`}>
           <Card.Header>{name}</Card.Header>
         </Card.Content>
         <Card.Content extra>

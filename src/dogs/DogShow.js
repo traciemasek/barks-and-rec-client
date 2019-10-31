@@ -4,11 +4,13 @@ import { connect } from 'react-redux'
 class DogShow extends Component {
   render() {
     console.log("DOG SHOW PROPS", this.props)
-    let dogId = parseInt(this.props.match.params.id)
-    console.log("dog id", dogId)
+    // let dogId = parseInt(this.props.match.params.id)
+    // console.log("dog id", dogId)
+    let dogId = parseInt(this.props.dogId)
 
     let foundDog = this.props.dogs.find(dog=>dog.id === dogId)
 
+    //fix async error
     return (
       <div>
         This will render an individual dog's show page with more detailed information about them

@@ -7,10 +7,10 @@ import Splash from './Splash';
 import MenuInverted from './menus/Header'
 import AdminMainContainer from './admin/AdminMainContainer'
 import AdopterMainContainer from './adopter/AdopterMainContainer'
-import ApplicationContainer from './adopter/ApplicationContainer'
-import DogsContainer from './dogs/DogsContainer'
-import FavesContainer from './dogs/FavesContainer'
-import DogShow from './dogs/DogShow'
+// import ApplicationContainer from './adopter/ApplicationContainer'
+// import DogsContainer from './dogs/DogsContainer'
+// import FavesContainer from './dogs/FavesContainer'
+// import DogShow from './dogs/DogShow'
 
 //App is wrapped in Route path="/" so "/" is established as base url--unsure how that might affect auth
 class App extends React.Component {
@@ -47,11 +47,11 @@ class App extends React.Component {
           <Route exact path="/" component={Splash} />
       
           <Route exact path="/admin" render={(routerProps)=><AdminMainContainer {...routerProps}/>}/>
-          <Route path="/adopter/dogs/:id" render={(routerProps) => <DogShow {...routerProps}/>}/>
+          {/* <Route path="/adopter/dogs/:id" render={(routerProps) => <DogShow {...routerProps}/>}/>
           <Route path="/adopter/dogs" component={DogsContainer}/>
           <Route path="/adopter/faves" component={FavesContainer}/>
-          <Route path="/adopter/application" component={ApplicationContainer}/>
-          <Route exact path ="/adopter" render={(routerProps) => <AdopterMainContainer {...routerProps}/>}/>
+          <Route path="/adopter/application" component={ApplicationContainer}/> */}
+          <Route path ="/adopter" render={(routerProps) => <AdopterMainContainer {...routerProps}/>}/>
 
           {/* 404 */}
           <Route render={() => <img alt="404 Not Found" src="https://httpstatusdogs.com/img/404.jpg"></img>} />
