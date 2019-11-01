@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-export default class Header extends Component {
+export default class HeaderAdmin extends Component {
   state = { activeItem: 'dashboard' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -11,29 +11,30 @@ export default class Header extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu inverted attached>
+      <Menu inverted attached >
+        <Menu.Item name='ADMIN' />
         <Menu.Item
-          as={Link} to='/adopter/'
+          as={Link} to='/admin/'
           name='dashboard'
           active={activeItem === 'dashboard'}
           onClick={this.handleItemClick}
         />
         <Menu.Item 
-          as={Link} to='/adopter/dogs'
-          name='adoptable dogs'
-          active={activeItem === 'adoptable dogs'}
+          as={Link} to='/admin/dogs'
+          name='dogs'
+          active={activeItem === 'dogs'}
           onClick={this.handleItemClick}
         />
         <Menu.Item
-          as={Link} to='/adopter/faves'
-          name='my faves'
-          active={activeItem === 'my faves'}
+          as={Link} to='/admin/adopters'
+          name='adopters'
+          active={activeItem === 'adopters'}
           onClick={this.handleItemClick}
         />
         <Menu.Item
-          as={Link} to='/adopter/application'
-          name='application'
-          active={activeItem === 'application'}
+          as={Link} to='/admin/tasks'
+          name='tasks'
+          active={activeItem === 'tasks'}
           onClick={this.handleItemClick}
         />
       </Menu>

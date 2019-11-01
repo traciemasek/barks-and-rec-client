@@ -3,8 +3,9 @@ import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+// import { Grid } from 'semantic-ui-react'
 import Splash from './Splash';
-import MenuInverted from './menus/Header'
+import Header from './menus/Header'
 import AdminMainContainer from './admin/AdminMainContainer'
 import AdopterMainContainer from './adopter/AdopterMainContainer'
 // import ApplicationContainer from './adopter/ApplicationContainer'
@@ -40,23 +41,22 @@ class App extends React.Component {
     // console.log("APP PROPS", this.props)
     return (
       <div className="App">
+      
         {/* Since Menu header is on every page, it can be outside of routes */}
-        <MenuInverted />
+        <Header />
         
         <Switch>
           <Route exact path="/" component={Splash} />
       
-          <Route exact path="/admin" render={(routerProps)=><AdminMainContainer {...routerProps}/>}/>
-          {/* <Route path="/adopter/dogs/:id" render={(routerProps) => <DogShow {...routerProps}/>}/>
-          <Route path="/adopter/dogs" component={DogsContainer}/>
-          <Route path="/adopter/faves" component={FavesContainer}/>
-          <Route path="/adopter/application" component={ApplicationContainer}/> */}
+          <Route path="/admin" render={(routerProps)=><AdminMainContainer {...routerProps}/>}/>
+
           <Route path ="/adopter" render={(routerProps) => <AdopterMainContainer {...routerProps}/>}/>
 
           {/* 404 */}
           <Route render={() => <img alt="404 Not Found" src="https://httpstatusdogs.com/img/404.jpg"></img>} />
-      </Switch>
-      
+        </Switch>
+
+  
          
     </div>
     );
