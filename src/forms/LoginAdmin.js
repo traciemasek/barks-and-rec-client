@@ -34,16 +34,14 @@ class LoginAdmin extends React.Component {
     })
     .then(resp => resp.json())
     .then(response => {
+      console.log("ADMIN LOG IN RESPONSE", response)
       if (response.exception === "#<NoMethodError: undefined method `authenticate' for nil:NilClass>") {
         alert("Admin user doesn't exist")
       } else if (response.errors){
         alert(response.errors)
       } else {
-        this.props.setUser(response)
-        localStorage.token = response.token
-        //need to figure out a better way to do this 
-        //i know how to do it with an admin key in the token but ruby is defeating me
-        // localStorage.admin = true
+        this.props.setUser(response.admin)
+        localStorage.token = response.token     
         this.props.history.push("/admin")
       }
     })

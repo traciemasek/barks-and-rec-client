@@ -21,3 +21,46 @@ npm i redux react-redux --save
 -arguments from function call passed to dispatch
 -dispatch calls reducer with action (type and payload)
 -reducer returns some sort of modified state
+
+function mdp(dispatch) {
+  //writer/setter to state
+  //return functions that will be added to props, and then you can call onClick or wherever you want to trigger them to setState via redux dispatch/reducer
+  //dispatch calls the reducer, which setsState. For every time you need to set global state, you need to set up a function that calls dipatch in the mpd object here (1:24:00 react + redux 042219)
+  return {
+    //eventually these functions will be abstracted to a different file actions.js
+    stopLoading: () => {
+      dispatch({type: "STOP_LOADING"})
+      // dispatch(stopLoading())
+    },
+    fetchDogs: dogs => {
+      dispatch({type: "FETCH_ALL_DOGS", payload: dogs})
+      // dispatch(fetchDogs(dogs))
+    },
+    fetchAdopters: adopters => {
+      dispatch({type: "FETCH_ALL_ADOPTERS", payload: adopters})
+    },
+    fetchApplications: applications => {
+      dispatch({type: "FETCH_ALL_APPLICATIONS", payload: applications})
+    },
+    setAdmin: admin => {
+      dispatch({type: "SET_ADMIN_USER", payload: admin})
+    },
+    setAdopter: adopter => {
+      dispatch({type: "SET_ADOPTER_USER", payload: adopter})
+    }
+    //example below is from a controlled form that implicitly passes the event, which we then use to set the payload
+    //can also pass arguments just like in other eventlisteners
+    // handleChange: (event) => {
+    //   dispatch({type: "INPUT_CHANGE", payload: event.target.value})
+    // }
+  }
+
+}
+
+
+//connect connects this component to the store
+//takes 2 arguments: mapStateToProps & mapDispatchToProps
+export default connect(msp, mdp)(App);
+
+## Authorization
+-can cp Steven's code from 051319 Authorization and Security lecture from ApplicationController & AuthController for basic single user auth template

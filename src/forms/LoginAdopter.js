@@ -33,12 +33,13 @@ class LoginAdopter extends React.Component {
     })
     .then(resp => resp.json())
     .then(response => {
+      console.log("ADOPTER LOG IN RESPONSE", response)
       if (response.exception === "#<NoMethodError: undefined method `authenticate' for nil:NilClass>") {
         alert("User doesn't exist")
       } else if (response.errors){
         alert(response.errors)
       } else {
-        this.props.setUser(response)
+        this.props.setUser(response.adopter)
         localStorage.token = response.token
         this.props.history.push("/adopter")
       }

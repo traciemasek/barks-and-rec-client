@@ -1,4 +1,5 @@
 const defaultState = {
+  loading: true,
   user: null,
   admin: false,
   dogs: [],
@@ -12,10 +13,11 @@ function reducer(prevState = defaultState, action) {
   //whatever is returned from the reducer BECOMES state (replaces it in the store, no merging)
   switch(action.type){
     //when you log in an admin, set admin to true--need to figure this out for autologin
+    case "STOP_LOADING":
+      return {...prevState, loading: false}
     case "SET_ADOPTER_USER":
       return {...prevState, user: action.payload, admin: false}
     case "SET_ADMIN_USER":
-      //how to set admin to true???
       return {...prevState, user: action.payload, admin: true}
     case "LOGOUT":
       return {...prevState, user: null, admin: false}
