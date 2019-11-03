@@ -14,10 +14,6 @@ class Splash extends React.Component {
     formType: null
   }
 
-  handleAdminLogin = () => {
-
-  }
-
   handleClick = (e) => {
     console.log(e.target.name)
     this.setState({
@@ -28,9 +24,6 @@ class Splash extends React.Component {
   adminLoginButton = () => <button name="admin" onClick={this.handleClick}>Admin Log In</button>
   adopterLoginButton = () => <button name="adopterLogin" onClick={this.handleClick}>Adopter Log In</button>
   adopterSignupButton = () => <button name="adopterSignup" onClick={this.handleClick}>Adopter Sign Up</button>
-
-
-
   
   //ultimately, I don't think I want routes bc I don't want the user to be able to go directly to any of these log in paths
   //should use state to conditionally render the form components instead upon button click

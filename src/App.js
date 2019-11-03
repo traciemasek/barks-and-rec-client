@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
@@ -8,26 +7,94 @@ import Splash from './Splash';
 import Header from './menus/Header'
 import AdminMainContainer from './admin/AdminMainContainer'
 import AdopterMainContainer from './adopter/AdopterMainContainer'
-// import ApplicationContainer from './adopter/ApplicationContainer'
-// import DogsContainer from './dogs/DogsContainer'
-// import FavesContainer from './dogs/FavesContainer'
-// import DogShow from './dogs/DogShow'
 
 //App is wrapped in Route path="/" so "/" is established as base url--unsure how that might affect auth
 class App extends React.Component {
-  //might be able to make this a functional component
 
   componentDidMount() {
+    const token = localStorage.token
+    if (token) {
+      this.autoLogin(token)
+    }
+    // const admin = localStorage.admin
+    // if (token && admin) {
+    //   this.autoLoginAdmin(token)
+    // } else if (token && !admin) {
+    //   this.autoLoginAdopter(token)
+    // }
+
+    this.fetchDogs()
+    this.fetchAdopters()
+    this.fetchApplications()
+  }
+
+  autoLogin = (token) => {
+    fetch("http://localhost:6969/api/v1/auto_login", {
+      headers: {
+        "Authorization": token
+      }
+    })
+    .then(resp => resp.json())
+    .then(response => {
+      // console.log(response)
+        if(response.admin){
+      this.props.setAdmin(response.admin)
+    } else {
+      this.props.setAdopter(response)
+    }
+    })
+  }
+
+  autoLoginAdmin = (token) => {
+    fetch("http://localhost:6969/api/v1/auto_login_admin", {
+      headers: {
+        "Authorization": token
+        // "Authorization": `Admin ${user_id}`
+        //then need to conditionally split in ruby to set correct user
+      }
+    })
+    .then(resp => resp.json())
+    .then(admin => {
+      this.props.setAdmin(admin)
+    })
+  }
+
+  autoLoginAdopter = (token) => {
+    fetch("http://localhost:6969/api/v1/auto_login_adopter", {
+      headers: {
+        "Authorization": token
+      }
+    })
+    .then(resp => resp.json())
+    .then(adopter => {
+      this.props.setAdopter(adopter)
+    })
+  }
+
+  fetchDogs = () => {
     fetch("http://localhost:6969/api/v1/dogs")
     .then(resp => resp.json())
-    // .then(dogs => {
-    //   this.setState({stateDogs: dogs})
-    // })
     .then(dogs => {
       //this is how this function talks to redux. It has access to the function we wrote in mdp that calls dispatch to change the state store with the reducer
       this.props.fetchDogs(dogs)
       //if you want to have this control loading render
       //this.setState({loading: false})
+    })
+  }
+
+  fetchAdopters = () => {
+    fetch("http://localhost:6969/api/v1/adopters")
+    .then(resp => resp.json())
+    .then(adopters => {
+      this.props.fetchAdopters(adopters)
+    })
+  }
+
+  fetchApplications = () => {
+    fetch("http://localhost:6969/api/v1/applications")
+    .then(resp => resp.json())
+    .then(applications => {
+      this.props.fetchApplications(applications)
     })
   }
 
@@ -38,10 +105,11 @@ class App extends React.Component {
   adopterSignUp = () => {}
 
   render() {
-    // console.log("APP PROPS", this.props)
+    console.log("APP PROPS", this.props)
     return (
       <div className="App">
-      
+        {/* NEED CONDITIONAL RENDERING BASED ON ROLE */}
+
         {/* Since Menu header is on every page, it can be outside of routes */}
         <Header />
         
@@ -83,8 +151,20 @@ function mdp(dispatch) {
       dispatch({type: "INCREMENT_LIKES"})
       //call this in the onClick for the like button onClock={props.like} since mdp automatically updates props with whatever you use here
     },
-    fetchDogs: (dogs) => {
+    fetchDogs: dogs => {
       dispatch({type: "FETCH_ALL_DOGS", payload: dogs})
+    },
+    fetchAdopters: adopters => {
+      dispatch({type: "FETCH_ALL_ADOPTERS", payload: adopters})
+    },
+    fetchApplications: applications => {
+      dispatch({type: "FETCH_ALL_APPLICATIONS", payload: applications})
+    },
+    setAdmin: admin => {
+      dispatch({type: "SET_ADMIN_USER", payload: admin})
+    },
+    setAdopter: adopter => {
+      dispatch({type: "SET_ADOPTER_USER", payload: adopter})
     }
     //example below is from a controlled form that implicitly passes the event, which we then use to set the payload
     //can also pass arguments just like in other eventlisteners

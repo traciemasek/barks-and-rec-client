@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import DogCard from '../dogs/DogCard';
 import DogShow from '../dogs/DogShow'
 import DogsContainer from '../dogs/DogsContainer';
 import FavesContainer from '../dogs/FavesContainer';
@@ -11,18 +10,12 @@ class AdopterMainContainer extends React.Component {
 
   //will likely need local state for conditional rendering
   state = {
-    stateDogs: [],
-    showDogs: false,
     //loading: true
   }
-
-  // showDogs = () => {
-  //   this.setState({showDogs: true})
-  // }
   
   render() {
-    console.log("ADOPTER MAIN PROPS", this.props)
-    console.log("ADOPTER MAIN STATE", this.state)
+    // console.log("ADOPTER MAIN PROPS", this.props)
+    // console.log("ADOPTER MAIN STATE", this.state)
     return (
       <div>
 

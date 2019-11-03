@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 
 export default class AdoptersCard extends Component {
   render() {
+    let { username } = this.props.adopter
     return (
       <div>
-        I will be a little card for each adopter
+        Adopter username: {username}
       </div>
     )
   }

@@ -11,9 +11,7 @@ class DogShow extends Component {
   
       let foundDog = this.props.dogs.find(dog=>dog.id === dogId)
       let { age, age_group, name, img1, breed, description, size, weight, dog_friendly, kid_friendly ,cat_friendly, has_special_needs } = foundDog
-     
-      //fix error where if the user goes directly to the dynamic route, the dog isn't there on first load
-     
+    
         return (
           <div>
             This will render an individual dog's show page with more detailed information about them. It needs to render differently based on user type

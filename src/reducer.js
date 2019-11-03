@@ -1,6 +1,9 @@
 const defaultState = {
   user: null,
-  dogs: []
+  admin: false,
+  dogs: [],
+  adopters: [],
+  applications: []
 }
 
 function reducer(prevState = defaultState, action) {
@@ -8,11 +11,20 @@ function reducer(prevState = defaultState, action) {
   //console.log("ACTION", action)
   //whatever is returned from the reducer BECOMES state (replaces it in the store, no merging)
   switch(action.type){
-    // case "ACTION_NAME":
-    //   return {...prevState, key: newKey}
-    // more cases
+    //when you log in an admin, set admin to true--need to figure this out for autologin
+    case "SET_ADOPTER_USER":
+      return {...prevState, user: action.payload, admin: false}
+    case "SET_ADMIN_USER":
+      //how to set admin to true???
+      return {...prevState, user: action.payload, admin: true}
+    case "LOGOUT":
+      return {...prevState, user: null, admin: false}
     case "FETCH_ALL_DOGS":
       return {...prevState, dogs: action.payload}
+    case "FETCH_ALL_ADOPTERS":
+      return {...prevState, adopters: action.payload}
+    case "FETCH_ALL_APPLICATIONS":
+      return {...prevState, applications: action.payload}
     default:
       return prevState
   }
