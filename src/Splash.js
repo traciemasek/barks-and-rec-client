@@ -24,7 +24,7 @@ class Splash extends React.Component {
   //the case statement is gnarly; is there anyway to make this better? (Would probably need a ternary since JSX requires expressions)
   //maybe once I have the header and image as separate components it'll be better??
   render() {
-    console.log("SPLASH state", this.state)
+    // console.log("SPLASH state", this.state)
  
     switch (this.state.formType) {
       case "admin log in":
@@ -63,8 +63,9 @@ class Splash extends React.Component {
         return (
           <div>
             <HeaderSplash handleMenuItemClick={this.handleMenuItemClick}/>
-            I am the landing page. Eventually I will have a giant image and a header and a logo and shit. For now I have some buttons.
-            <h1>Did this work?</h1>
+            
+            <h1>Barks and Rec</h1>
+            <p>I am the landing page. Eventually I will have a giant image and a header and a logo and shit. For now I have some buttons.</p>
       
           </div>
         )

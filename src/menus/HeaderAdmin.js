@@ -3,8 +3,10 @@ import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { logout } from '../actions.js'
 
 class HeaderAdmin extends Component {
+  //want to move this state and functionality to redux store to keep it with reload, which not that I think about it probably still won't work bc reload would reset the redux store too i think. it would have to be in localStorage or derive value from the url
   state = { activeItem: 'dashboard' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -12,7 +14,6 @@ class HeaderAdmin extends Component {
   logout = () => {
     console.log("logging out")
     this.props.logout()
-    localStorage.removeItem("admin")
     localStorage.removeItem("token")
     this.props.history.push("/")
   }
@@ -80,12 +81,5 @@ function msp(state){
   }
 }
 
-function mdp(dispatch){
-  return {
-    logout: () => {
-      dispatch({type: "LOGOUT"})
-    }
-  }
-}
 
-export default withRouter(connect(msp, mdp)(HeaderAdmin))
+export default withRouter(connect(msp, { logout })(HeaderAdmin))

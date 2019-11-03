@@ -6,22 +6,18 @@ import DogsContainer from '../dogs/DogsContainer';
 import FavesContainer from '../dogs/FavesContainer';
 import ApplicationContainer from './ApplicationContainer';
 import HeaderAdopter from '../menus/HeaderAdopter';
+import { fetchDogs } from '../actions';
 
 class AdopterMainContainer extends React.Component {
 
-  //will likely need local state for conditional rendering
-  state = {
-    loading: true
-  }
-
-  componentDidMount(){
-    this.setState({loading: false})
-  }
+  // componentDidMount(){
+  //   do I need anything in here for this page?
+  // }
   
   render() {
     // console.log("ADOPTER MAIN PROPS", this.props)
     // console.log("ADOPTER MAIN STATE", this.state)
-    if (this.state.loading) {
+    if (this.props.loading) {
       return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
     } else {
 
@@ -61,10 +57,6 @@ class AdopterMainContainer extends React.Component {
       
               <p>If the user hasn't submitted an application, the teaser should say "Submit an application to adopt" else it should say "Application Status"</p>
       
-             
-              {/* <Link to="/adopter/dogs">
-                <button>See all dogs</button>
-              </Link>  */}
               <button onClick={()=>this.props.history.push("/adopter/dogs")}>See all dogs</button>
       
               <Link to="/adopter/faves">
@@ -90,17 +82,11 @@ class AdopterMainContainer extends React.Component {
 function msp(state){
   // console.log("adopter main state", state)
   return {
-    dogs: state.dogs
+    user: state.user,
+    dogs: state.dogs,
+    loading: state.loading
   }
 }
 
-// function mdp(dispatch){
-//   //moved the fetch to App bc it needs to happen earlier
-//   return {
-//     fetchDogs: (dogs) => {
-//       dispatch({type: "FETCH_ALL_DOGS", payload: dogs})
-//     }
-//   }
-// }
 
-export default connect(msp)(AdopterMainContainer)
+export default connect(msp, { fetchDogs })(AdopterMainContainer)

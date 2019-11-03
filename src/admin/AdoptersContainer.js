@@ -19,7 +19,9 @@ class AdoptersContainer extends Component {
 }
 
 function msp(state) {
-  return {adopters: state.adopters}
+  return {
+    adopters: state.adopters
+  }
 }
 
 export default connect(msp)(AdoptersContainer)

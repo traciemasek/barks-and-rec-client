@@ -55,7 +55,7 @@ class LoginAdmin extends React.Component {
         <label>Admin Username:</label>
         <input type="text" name="username" placeholder="Username" value={username} onChange={this.handleChange}/>
         <label>Password:</label>
-        <input type="text" name="password" placeholder="Password" value={password} onChange={this.handleChange}/>
+        <input type="password" name="password" placeholder="Password" value={password} onChange={this.handleChange}/>
         <input type="submit" value="Log In"/>
       </form>
     )

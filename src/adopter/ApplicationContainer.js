@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ApplicationForm from './ApplicationForm'
 import ApplicationStatus from './ApplicationStatus'
 import { Grid, Segment } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 
 class ApplicationContainer extends Component {
 
@@ -29,5 +30,12 @@ class ApplicationContainer extends Component {
   }
 }
 
-export default ApplicationContainer 
+function msp(state) {
+  return {
+    user: state.user,
+    dogs: state.dogs
+  }
+}
+
+export default connect(msp)(ApplicationContainer )
 

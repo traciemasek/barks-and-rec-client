@@ -3,6 +3,7 @@ import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { logout } from '../actions.js'
 
 class HeaderAdopter extends Component {
   state = { activeItem: 'dashboard' }
@@ -78,12 +79,6 @@ function msp(state){
   }
 }
 
-function mdp(dispatch){
-  return {
-    logout: () => {
-      dispatch({type: "LOGOUT"})
-    }
-  }
-}
 
-export default withRouter(connect(msp, mdp)(HeaderAdopter))
+
+export default withRouter(connect(msp, { logout })(HeaderAdopter))

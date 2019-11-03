@@ -7,89 +7,98 @@ import DogsContainer from '../dogs/DogsContainer';
 import AdoptersContainer from './AdoptersContainer';
 import AdoptersShow from './AdoptersShow';
 import TasksContainer from './TasksContainer';
+import { fetchAdopters, fetchApplications, fetchDogs } from '../actions';
 
 
 class AdminMainContainer extends React.Component {
+
+  componentDidMount() {
+    this.props.fetchDogs()
+    this.props.fetchAdopters()
+    this.props.fetchApplications()
+  }
+
+
   render() {
-    return (
-      <>
-      <div>
-        <HeaderAdmin/>
-        <br/>
-        <Switch>
-          <Route path="/admin/dogs/:id" render={routerProps => {
-            const { match } = routerProps
-            const dogId = match.params.id
-            return (
-              <DogShow dogId={dogId}/>
-            )
-          }} />
-          <Route path="/admin/dogs" render={() => {
-            return <DogsContainer />
-          }}/>
-          <Route path="/admin/adopters/:id" render={() => {
-            return <AdoptersShow />
-          }} />
-          <Route path="/admin/adopters" render={() => {
-            return <AdoptersContainer />
-          }} />
-          <Route path="/admin/tasks" render={() => {
-            return <TasksContainer />
-          }} />
-          <Route path="/admin" render={()=>{
-            return (
-            <>
-            <h1>ADMINS ONLY!!! </h1>
-            <div>
-              This will be some sort of navigation that will likely live to the side <span role="img" aria-label="left arrow">⬅️</span> or maybe like some fancy dropdown shit
-            </div>
-    
-            <p></p>
-    
-            <p>Would be cool if notifications can go here that tell the admins about new application submissions and tasks </p>
-    
-       
-    
-           
-            <button onClick={()=>this.props.history.push("/admin/dogs")}>See all dogs</button>
-    
-            <Link to="/admin/tasks">
-              <button>See all adopters</button>
-            </Link>
-    
-            <Link to="/admin/tasks">
-              <button>See all tasks</button>
-            </Link>
-            </>
-            )
-          }} />
+    if (this.props.loading) {
+      return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+    } else {
+      return (
+        <>
+        <div>
+          <HeaderAdmin/>
+          <br/>
+          <Switch>
+            <Route path="/admin/dogs/:id" render={routerProps => {
+              const { match } = routerProps
+              const dogId = match.params.id
+              return (
+                <DogShow dogId={dogId}/>
+              )
+            }} />
+            <Route path="/admin/dogs" render={() => {
+              return <DogsContainer />
+            }}/>
+            <Route path="/admin/adopters/:id" render={() => {
+              return <AdoptersShow />
+            }} />
+            <Route path="/admin/adopters" render={() => {
+              return <AdoptersContainer />
+            }} />
+            <Route path="/admin/tasks" render={() => {
+              return <TasksContainer />
+            }} />
+            <Route path="/admin" render={()=>{
+              return (
+              <>
+              <h1>ADMINS ONLY!!! </h1>
+              <div>
+                This will be some sort of navigation that will likely live to the side <span role="img" aria-label="left arrow">⬅️</span> or maybe like some fancy dropdown shit
+              </div>
+      
+              <p></p>
+      
+              <p>Would be cool if notifications can go here that tell the admins about new application submissions and tasks </p>
+      
+            
+              {/* this no longer has router props so history.push won't work
+              <button onClick={()=>this.props.history.push("/admin/dogs")}>See all dogs</button> */}
+
+
+      
+              <Link to="/admin/dogs">
+                <button>See all dogs</button>
+              </Link>
+
+              <Link to="/admin/adopters">
+                <button>See all adopters</button>
+              </Link>
+      
+              <Link to="/admin/tasks">
+                <button>See all tasks</button>
+              </Link>
+              </>
+              )
+            }} />
+            
+          </Switch>
+            
           
-        </Switch>
-          
-        
-      </div>
-      </>
-    )
+        </div>
+        </>
+      )
+    }
   }
 }
 
 function msp(state){
-  // console.log("adopter main state", state)
+  // console.log("admin main state", state)
   return {
-    dogs: state.dogs
+    user: state.user,
+    dogs: state.dogs,
+    loading: state.loading
   }
 }
 
-// function mdp(dispatch){
-//   //moved the fetch to App bc it needs to happen earlier
-//   return {
-//     fetchDogs: (dogs) => {
-//       dispatch({type: "FETCH_ALL_DOGS", payload: dogs})
-//     }
-//   }
-// }
 
-      
-
-
-export default connect(msp)(AdminMainContainer)
+export default connect(msp, { fetchAdopters, fetchApplications, fetchDogs })(AdminMainContainer)
