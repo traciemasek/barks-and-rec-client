@@ -2,44 +2,64 @@ import React, { Component } from 'react';
 import { Card, Icon, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
-import { createFavorite } from "../actions"
+import { createFavorite, removeFavorite } from "../actions"
 
 class AdopterDogCard extends Component {
 
-  handleFavorite = () => {
-    console.log("clicking dog id", this.props.dog.id, "user id", this.props.user.id)
+  createFavorite = () => {
     let body = {
       adopter_id: this.props.user.id,
       dog_id: this.props.dog.id
     }
     this.props.createFavorite(body)
-    //prepare the body for the post request and call the action from this.props.createFavorite
+  }
+
+  removeFavorite = () => {
+    const { id } = this.props.dog
+    let favorites = this.props.favorites
+    let favorite = favorites.find(favorite => favorite.dog_id === id)
+    this.props.removeFavorite(favorite.id)
   }
 
   render() {
+    // console.log("dog card dog props", this.props)
     const {img1, name, id } = this.props.dog
+    const favorite = this.props.favorite
+
     return (
+    favorite 
+    ?
       <Card >
         <Image src={img1} wrapped ui={false} as={Link} to={`/adopter/dogs/${id}`}/>
         <Card.Content as={Link} to={`/adopter/dogs/${id}`}>
           <Card.Header>{name}</Card.Header>
         </Card.Content>
         <Card.Content extra>
-          {/* figure out how to render the icon as red if the dog is in the user's favorites */}
-          {/* clicking on this should create favorite and need to conditionally render this based on if the dog is one of the adopter's favorites once i have auth */}
-          {/* if already favorited, it should not be clickable to add to favorites, and clicking should REMOVE it */}
-          <Icon name="like" onClick={this.handleFavorite}/>
+          <Icon name="like" color="red" onClick={this.removeFavorite}/>
         </Card.Content>
       </Card>
-      
+    :
+    <Card >
+      <Image src={img1} wrapped ui={false} as={Link} to={`/adopter/dogs/${id}`}/>
+      <Card.Content as={Link} to={`/adopter/dogs/${id}`}>
+        <Card.Header>{name}</Card.Header>
+      </Card.Content>
+      <Card.Content extra>
+        <Icon name="like" onClick={this.createFavorite}/>
+      </Card.Content>
+    </Card>
     )
   }
 }
 
+// color="red"
+
 function msp(state){
   return {
-    user: state.user
+    user: state.user, 
+    favorites: state.favorites,
+    favoriteDogs: state.favoriteDogs
   }
 }
 
-export default connect(msp, { createFavorite })(AdopterDogCard)
+export default connect(msp, { createFavorite, removeFavorite })(AdopterDogCard)

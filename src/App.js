@@ -9,6 +9,7 @@ import AdopterMainContainer from './adopter/AdopterMainContainer'
 import { setAdmin, setAdopter } from './actions.js'
 
 
+
 class App extends React.Component {
 
   componentDidMount() {
@@ -40,9 +41,9 @@ class App extends React.Component {
 
   render() {
     console.log("APP PROPS", this.props)
-      if(this.props.userLoading) {
-        return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
-      } else {
+      // if(this.props.userLoading) {
+      //   return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+      // } else {
         return (
           <div className="App">
             <Switch>
@@ -81,16 +82,19 @@ class App extends React.Component {
         </div>
       );
     } //end of else
-  } //end of render
+   //end of render
 }
 
 function msp(state){
   return {
+    // state
     user: state.user,
     userLoading: state.userLoading,
+    tasksLoading: state.tasksLoading,
     admin: state.admin,
     favorites: state.favorites,
-    application: state.adopterApplication
+    favoriteDogs: state.favoriteDogs,
+    adopterApplication: state.adopterApplication
   }
   //probably won't want to return the entire store of state, so extract what you need aka shopping at the state store
   //return { likes: state.likes, things: state.things}

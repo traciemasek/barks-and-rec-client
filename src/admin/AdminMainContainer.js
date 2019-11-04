@@ -7,7 +7,7 @@ import DogsContainer from '../dogs/DogsContainer';
 import AdoptersContainer from './AdoptersContainer';
 import AdoptersShow from './AdoptersShow';
 import TasksContainer from './TasksContainer';
-import { fetchAdopters, fetchApplications, fetchDogs } from '../actions';
+import { fetchAdopters, fetchApplications, fetchDogs, fetchTasks } from '../actions';
 
 
 class AdminMainContainer extends React.Component {
@@ -16,11 +16,12 @@ class AdminMainContainer extends React.Component {
     this.props.fetchDogs()
     this.props.fetchAdopters()
     this.props.fetchApplications()
+    this.props.fetchTasks()
   }
 
 
   render() {
-    if (this.props.loading) {
+    if (this.props.userLoading) {
       return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
     } else {
       return (
@@ -96,9 +97,9 @@ function msp(state){
   return {
     user: state.user,
     dogs: state.dogs,
-    loading: state.loading
+    userLoading: state.userLoading
   }
 }
 
 
-export default connect(msp, { fetchAdopters, fetchApplications, fetchDogs })(AdminMainContainer)
+export default connect(msp, { fetchAdopters, fetchApplications, fetchDogs, fetchTasks })(AdminMainContainer)

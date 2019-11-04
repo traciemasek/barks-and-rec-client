@@ -12,6 +12,7 @@ import reducer from './reducer'
 
 //see lecture code for how to use combineReducers
 
+
 //don't forget to createStore if using redux
 const store = createStore(reducer, applyMiddleware(thunk))
 

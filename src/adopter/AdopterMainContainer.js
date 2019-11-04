@@ -1,11 +1,14 @@
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import DogShow from '../dogs/DogShow'
 import DogsContainer from '../dogs/DogsContainer';
 import FavesContainer from '../dogs/FavesContainer';
 import ApplicationContainer from './ApplicationContainer';
 import HeaderAdopter from '../menus/HeaderAdopter';
+import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
+import FavoriteDogsTeaserCard from '../teasers/FavoriteDogsTeaserCard'
+import ApplicationTeaserCard from '../teasers/ApplicationTeaserCard'
 import { fetchDogs } from '../actions';
 
 class AdopterMainContainer extends React.Component {
@@ -49,16 +52,18 @@ class AdopterMainContainer extends React.Component {
               </div>
       
               <p></p>
-      
-              <p>Need conditional rendering here. If the adopter has just signed up, this should show a welcome page with info on how to use the app. If they've logged in before, it should render the 3 teaser cards: Adoptable Dogs, My Faves, My Application, which should route to the appropriate routes and render the appropriate components. </p>
+
       
               <p>If they don't have any favorited dogs, My Faves should be a greyed out photo with instructions to add some</p>
       
               <p>If the user hasn't submitted an application, the teaser should say "Submit an application to adopt" else it should say "Application Status"</p>
-      
+              
+              <AdoptableDogsTeaserCard />
+              <FavoriteDogsTeaserCard />
+              <ApplicationTeaserCard />
              
       
-              <Link to="/adopter/dogs">
+              {/* <Link to="/adopter/dogs">
                 <button>See all dogs</button>
               </Link>
 
@@ -68,7 +73,7 @@ class AdopterMainContainer extends React.Component {
       
               <Link to="/adopter/application">
                 <button>Application</button>
-              </Link>
+              </Link> */}
               </>
               )
             }} />

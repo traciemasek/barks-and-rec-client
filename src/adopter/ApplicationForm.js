@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Form} from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { submitApplication } from '../actions'
 
 class ApplicationForm extends Component {
   state = {
@@ -15,28 +17,12 @@ class ApplicationForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     let application = {
-      //adopter is stubbed, will need to change to the id of the logged in adopter once auth is set up
-      adopter_id: 1,
+      adopter_id: this.props.user.id,
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       why_adopt: this.state.why_adopt
     }
-    fetch("http://localhost:6969/api/v1/applications", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accepts: "application/json"
-      },
-      body: JSON.stringify(application)
-    })
-    .then(resp => resp.json())
-    .then(console.log)
-
-    this.setState({
-      first_name: "",
-      last_name: "",
-      why_adopt: ""
-    })
+    this.props.submitApplication(application)
   }
 
   render() {
@@ -60,4 +46,10 @@ class ApplicationForm extends Component {
   }
 }
 
-export default ApplicationForm
+function msp(state){
+  return {
+    user: state.user
+  }
+}
+
+export default connect(msp, { submitApplication })(ApplicationForm)

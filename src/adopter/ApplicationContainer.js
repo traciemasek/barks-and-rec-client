@@ -8,7 +8,24 @@ class ApplicationContainer extends Component {
 
   //would be awesome to start with instructions and a step/button/card that says Apply! Submit Your Application exactly like the first step in the group. Clicking that should render the application. Once the application has been submitted, only the checklist should show
   render() {
-    return (
+    return(
+      <>
+      {this.props.adopterApplication
+      ?
+      <>
+      <Grid centered>
+        <Segment basic>
+          <Segment basic padded key={"big"} size={"big"}>
+            Check your application status!
+          </Segment>
+        </Segment>
+        </Grid>
+        <br/>
+        <Grid centered>
+        <ApplicationStatus/>
+      </Grid>
+      </>
+      :
       <>
       <Grid centered>
         <Segment basic>
@@ -16,15 +33,13 @@ class ApplicationContainer extends Component {
             Apply to adopt!
           </Segment>
         </Segment>
-        
-      </Grid>
-      <br/>
-      <Grid centered>
+        </Grid>
+        <br/>
+        <Grid centered>
         <ApplicationForm/>
-       
-        <ApplicationStatus/>
       </Grid>
-        
+      </>
+      }
       </>
     )
   }
@@ -33,7 +48,7 @@ class ApplicationContainer extends Component {
 function msp(state) {
   return {
     user: state.user,
-    dogs: state.dogs
+    adopterApplication: state.adopterApplication
   }
 }
 

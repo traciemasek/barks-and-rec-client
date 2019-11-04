@@ -1,3 +1,30 @@
+ME THINKING:
+
+APPLICATION FLOW:
+-user submits application to custom route or just applications#create
+-the create action should create the Application instance AND
+-create four tasks instances OR possibly one at a time if I want to enforce the approval happening in chained steps
+-response from the sumbitApplication post fetch should have all four tasks attached--they need to be added to tasks in redux
+-also need to set up a fetch to get all tasks and add to redux store when admin logs in 
+-Task model needs: 
+  adopter:references,
+  t.boolean "complete", default: false 
+  type (type should match the attributes on the application instance: initial_review, references, home_visit, final_approval
+-Uncompleted Tasks should show up in Admin task container
+-Click to mark task complete SHOULD:
+  patch request to task to toggle completed to true
+  patch request to Application to mark corresponding status type as true (need type and adopter_id and can find application by adopter_id)
+-response from application patch request then need to make sure to update the status type in the adopterApplication in redux
+-response from task patch request should mark the task completed = true in redux and remove from list or strikethrough, whatever I decide
+
+
+
+-figure out how to handle completed tasks (strikethrough or move to different tab)
+
+
+
+
+
 //STEVEN LECTURE NOTES
 //router: give it what route you want it to hit, and what you want it to render
 //do you have all routes in app.js? not always, you can write nested routes but all basic main pages usually have a place in app in Switch
