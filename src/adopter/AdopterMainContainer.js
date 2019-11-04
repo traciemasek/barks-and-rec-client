@@ -10,9 +10,9 @@ import { fetchDogs } from '../actions';
 
 class AdopterMainContainer extends React.Component {
 
-  // componentDidMount(){
-  //   do I need anything in here for this page?
-  // }
+  componentDidMount(){
+    this.props.fetchDogs()
+  }
   
   render() {
     // console.log("ADOPTER MAIN PROPS", this.props)
@@ -20,7 +20,6 @@ class AdopterMainContainer extends React.Component {
     if (this.props.loading) {
       return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
     } else {
-
       return (
         <div>
           <HeaderAdopter />
@@ -57,8 +56,12 @@ class AdopterMainContainer extends React.Component {
       
               <p>If the user hasn't submitted an application, the teaser should say "Submit an application to adopt" else it should say "Application Status"</p>
       
-              <button onClick={()=>this.props.history.push("/adopter/dogs")}>See all dogs</button>
+             
       
+              <Link to="/adopter/dogs">
+                <button>See all dogs</button>
+              </Link>
+
               <Link to="/adopter/faves">
                 <button>My favorite dogs</button>
               </Link>

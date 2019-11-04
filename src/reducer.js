@@ -1,4 +1,4 @@
-import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS } from "./types"
+import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE } from "./types"
 
 const defaultState = {
   userLoading: true,
@@ -8,11 +8,14 @@ const defaultState = {
   user: null,
   admin: false,
   dogs: [],
+  favorites: [],
+  adopterApplication: null,
   adopters: [],
   applications: []
 }
 
-//propbably want a separate reducer or separate key? to change loading after fetchDogs, fetchAdopters, fetchApplications--OR put all those fetches in one action???
+
+//how to set favorites? serialized from user and just add them when you set the user and then update with each post request? push the response from the post into the array???
 
 function reducer(prevState = defaultState, action) {
   //console.log("STATE", prevState)
@@ -22,7 +25,10 @@ function reducer(prevState = defaultState, action) {
   switch(action.type){
     
     case SET_ADOPTER_USER:
-      return {...prevState, user: action.payload, admin: false, userLoading: false}
+      return {...prevState, user: action.payload, admin: false, userLoading: false, favorites: action.payload.dogs, adopterApplication: action.payload.application}
+
+    case ADD_FAVORITE:
+      return {}
     case SET_ADMIN_USER:
       return {...prevState, user: action.payload, admin: true, userLoading: false}
     case LOGOUT:
