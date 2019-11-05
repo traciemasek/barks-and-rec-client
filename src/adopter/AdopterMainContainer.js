@@ -20,7 +20,7 @@ class AdopterMainContainer extends React.Component {
   render() {
     // console.log("ADOPTER MAIN PROPS", this.props)
     // console.log("ADOPTER MAIN STATE", this.state)
-    if (this.props.loading) {
+    if (this.props.userLoading) {
       return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
     } else {
       return (
@@ -92,7 +92,7 @@ function msp(state){
   return {
     user: state.user,
     dogs: state.dogs,
-    loading: state.loading
+    userLoading: state.userLoading
   }
 }
 

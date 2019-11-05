@@ -45,12 +45,13 @@ function reducer(prevState = defaultState, action) {
     case FETCH_ALL_APPLICATIONS:
       return {...prevState, applications: action.payload, applicationsLoading: false}
     case FETCH_ALL_TASKS:
-      //add tasks to tasks, set tasksLoading to false
       return {...prevState, tasks: action.payload, tasksLoading: false}
     case SUBMIT_APPLICATION:
-      //add tasks to tasks without nesting them in another array
+      let tasksCopy = [...prevState.tasks, ...action.payload.tasks]
+      let applicationsCopy = [...prevState.applications, action.payload.application]
+      //add tasks to tasks without nesting them in another array!!!
       //add application to adopterApplication and applications 
-      return {}
+      return {...prevState, adopterApplication: action.payload.application, tasks: tasksCopy, applications: applicationsCopy}
     default:
       return prevState
   }

@@ -10,6 +10,10 @@ APPLICATION FLOW:
   adopter:references,
   t.boolean "complete", default: false 
   type (type should match the attributes on the application instance: initial_review, references, home_visit, final_approval
+
+  TO DO
+-test the application status stuff by updating application in rails c and refreshing
+-styles the tasks a bit with a click to complete
 -Uncompleted Tasks should show up in Admin task container
 -Click to mark task complete SHOULD:
   patch request to task to toggle completed to true

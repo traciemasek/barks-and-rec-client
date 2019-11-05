@@ -85,10 +85,10 @@ function submitApplication(application) {
     })
     .then(resp => resp.json())
     .then(response => {
-      console.log(response)
+      console.log("submitapplication response", response)
       // response should also include all 4 tasks which need to be added to tasks in redux
       //make sure you're attaching the tasks as an array of tasks
-      // dispatch({type: SUBMIT_APPLICATION, payload: response})
+      dispatch({type: SUBMIT_APPLICATION, payload: response})
     })
     }
   }

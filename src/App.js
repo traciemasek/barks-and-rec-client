@@ -94,7 +94,9 @@ function msp(state){
     admin: state.admin,
     favorites: state.favorites,
     favoriteDogs: state.favoriteDogs,
-    adopterApplication: state.adopterApplication
+    adopterApplication: state.adopterApplication,
+    applications: state.applications,
+    tasks: state.tasks
   }
   //probably won't want to return the entire store of state, so extract what you need aka shopping at the state store
   //return { likes: state.likes, things: state.things}
