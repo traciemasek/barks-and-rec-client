@@ -8,19 +8,26 @@ class ApplicationStatus extends Component {
     // console.log("APPLICATION STATUS", this.props.adopterApplication.initial_review)
     const {submitted, initial_review, references, home_visit, final_approval} = this.props.adopterApplication
 
-    // this is all dependent on the tasks being completed in order
-    // miiiiight make more sense to either keep everything disabled until complete or make everything active until complete? or find some way to make sure the tasks go in order (chaining their creation based on approval of the previous step)
-    let initial_review_active = submitted 
-    let references_active = initial_review 
+    let initial_review_active = !initial_review && submitted 
+    let references_active = !references && initial_review
+    let home_visit_active = !home_visit && references 
+    let final_approval_active = !final_approval && home_visit 
     let references_disabled = initial_review_active
-    let home_visit_active = references 
-    let home_visit_disabled = !references_active && !home_visit
-    let final_approval_active = home_visit 
-    let final_approval_disabled = !home_visit_active && !final_approval
-    
+    let home_visit_disabled
+    if (references_active || initial_review_active) {
+      home_visit_disabled = true
+    } else {home_visit_disabled = false}
+    let final_approval_disabled 
+    if (home_visit_active || references_active || initial_review_active) {
+      final_approval_disabled = true
+    } else {final_approval_disabled = false}
+
+    let final_approval_description = final_approval ? "You're approved to adopt!!!" : "You're almost approved to adopt!" 
+
+    //make extra set of steps all complete for when application.final_approval
     const steps = [
       {
-        //need to figure out how to change active & disabled
+
         key: 'apply',
         // active: false,
         // disabled: false,
@@ -59,7 +66,7 @@ class ApplicationStatus extends Component {
         completed: final_approval,
         icon: 'clipboard check', 
         title: 'Final Approval',
-        description: "You're approved to adopt!"
+        description: `${final_approval_description}`
       },
     ]
     if (this.props.userLoading){

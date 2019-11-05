@@ -1,34 +1,15 @@
 import React, { Component } from 'react';
-import AdopterDogCard from './AdopterDogCard';
+import AdminDogCard from './AdminDogCard';
 import { Grid, Container, Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { fetchDogs } from '../actions';
 // import { Switch, Route } from 'react-router-dom';
 
-class DogsContainer extends Component {
-
-  // now fetching in AdopterMain
-  // componentDidMount(){
-  //   this.props.fetchDogs()
-  // }
-
+class AdminDogsContainer extends Component {
 
   renderDogs = () => {
-    //add a prop of favorite if the dog is in the user's favorites?
-    //something like a double iteration (dog=> {
-    // if (this.props.favorites.includes(dog)) {add the favorite key to props <AdopterDogCard key={dog.id} dog={dog} favorite />}
-    // else {
-      // regular <AdopterDogCard key={dog.id} dog={dog}/>
-    // }
-    // })
-    let favoriteIds = this.props.favoriteDogs.map(favorite => favorite.id)
-    return this.props.dogs.map(dog => {
-      return favoriteIds.includes(dog.id)
-      ?
-      <AdopterDogCard key={dog.id} dog={dog} favorite={true}/>
-      :
-      <AdopterDogCard key={dog.id} dog={dog} />
-    })
+    // let favoriteIds = this.props.favoriteDogs.map(favorite => favorite.id)
+    return this.props.dogs.map(dog => <AdminDogCard key={dog.id} dog={dog} />)
   }
 
   render() {
@@ -41,7 +22,7 @@ class DogsContainer extends Component {
         <Container fluid>
             
           <p>Click on a dog's photo for more information</p>
-          <p>Click a heart to mark a dog as a favorite to potentially adopt!</p>
+          <p>Need to get rid of the hearts and show number of interested adopters instead!!</p>
   
           <Grid centered>
             <Card.Group centered>
@@ -67,4 +48,4 @@ function msp(state) {
   })
 }
 
-export default connect(msp, { fetchDogs })(DogsContainer)
+export default connect(msp, { fetchDogs })(AdminDogsContainer)

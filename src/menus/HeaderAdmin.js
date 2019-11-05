@@ -26,7 +26,9 @@ class HeaderAdmin extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu inverted attached >
+      <Menu inverted fixed="top">
+      {/* <Menu inverted attached> */}
+        {/* <Container> */}
         <Menu.Item name='ADMIN' />
         <Menu.Item
           as={Link} to='/admin/'
@@ -69,6 +71,7 @@ class HeaderAdmin extends Component {
        />
        </>
         : null }
+        {/* </Container> */}
       </Menu>
     )
   }

@@ -1,4 +1,4 @@
-import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS } from "./types"
+import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK } from "./types"
 
 
 function fetchDogs() {
@@ -7,6 +7,16 @@ function fetchDogs() {
     .then(resp => resp.json())
     .then(dogs => {
       dispatch({type: FETCH_ALL_DOGS, payload: dogs})
+    })
+  }
+}
+
+function fetchAllFavorites() {
+  return function(dispatch){
+    fetch("http://localhost:6969/api/v1/favorites")
+    .then(resp => resp.json())
+    .then(favorites => {
+      dispatch({type: FETCH_ALL_FAVORITES, payload: favorites})
     })
   }
 }
@@ -86,12 +96,52 @@ function submitApplication(application) {
     .then(resp => resp.json())
     .then(response => {
       console.log("submitapplication response", response)
-      // response should also include all 4 tasks which need to be added to tasks in redux
-      //make sure you're attaching the tasks as an array of tasks
       dispatch({type: SUBMIT_APPLICATION, payload: response})
     })
     }
   }
+
+function completeTask(taskBody){
+  return function(dispatch){
+    fetch("http://localhost:6969/api/v1/tasks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accepts: "application/json"
+      },
+      body: JSON.stringify(taskBody)
+    })
+    .then(resp => resp.json())
+    .then(response => {
+      console.log("complete task response", response)
+      dispatch({type: NEW_TASK, payload: response})
+    })
+    }
+}
+function finalApprovalTask(taskBody, id){
+  return function(dispatch){
+    fetch(`http://localhost:6969/api/v1/tasks/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accepts: "application/json"
+      },
+      body: JSON.stringify(taskBody)
+    })
+    .then(resp => resp.json())
+    .then(response => {
+      console.log("complete task response", response)
+      dispatch({type: FINAL_APPROVAL_TASK, payload: response})
+    })
+    }
+}
+
+// complete task response 
+// {newTask: {…}, updatedTask: true, updatedApplication: true}
+// newTask: {id: 37, category: "references", complete: false, adopter_id: 10, created_at: "2019-11-05T22:47:56.447Z", …}
+// updatedApplication: true
+// updatedTask: true
+// __proto__: Object
 
 
 function setAdmin(admin) {
@@ -117,7 +167,10 @@ export {
   logout,
   createFavorite,
   removeFavorite,
-  submitApplication
+  submitApplication,
+  fetchAllFavorites,
+  completeTask,
+  finalApprovalTask
 }
 
 //for thunky actions:

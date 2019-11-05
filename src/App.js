@@ -41,24 +41,24 @@ class App extends React.Component {
 
   render() {
     console.log("APP PROPS", this.props)
-      // if(this.props.userLoading) {
-      //   return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
-      // } else {
+      if(localStorage.token && this.props.userLoading) {
+        return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+      } else {
         return (
           <div className="App">
             <Switch>
               {/* if you are logged in and try to go to '/', redirect to admin or adopter main */}
               <Route exact path="/">
-                {localStorage.token 
+                {localStorage.token
                 ? 
-                <Redirect to={this.props.admin ? "/admin": "/adopter"}/>
+                <Redirect to={this.props.admin && !this.props.userLoading ? "/admin": "/adopter"}/>
                 :
                 <Splash/>
                 }
               </Route>
               {/* if you are not logged in or admin is not true, redirect to "/" or adopter? */}
               <Route path="/admin">
-                {localStorage.token && this.props.admin
+                {localStorage.token && !this.props.userLoading && this.props.admin 
                 ?
                 <AdminMainContainer />
                 :
@@ -82,7 +82,7 @@ class App extends React.Component {
         </div>
       );
     } //end of else
-   //end of render
+  }//end of render
 }
 
 function msp(state){
@@ -96,7 +96,8 @@ function msp(state){
     favoriteDogs: state.favoriteDogs,
     adopterApplication: state.adopterApplication,
     applications: state.applications,
-    tasks: state.tasks
+    tasks: state.tasks,
+    allFavorites: state.allFavorites
   }
   //probably won't want to return the entire store of state, so extract what you need aka shopping at the state store
   //return { likes: state.likes, things: state.things}

@@ -3,11 +3,16 @@ import { Switch, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HeaderAdmin from '../menus/HeaderAdmin'
 import DogShow from '../dogs/DogShow';
-import DogsContainer from '../dogs/DogsContainer';
+import AdminDogsContainer from '../dogs/AdminDogsContainer';
 import AdoptersContainer from './AdoptersContainer';
 import AdoptersShow from './AdoptersShow';
 import TasksContainer from './TasksContainer';
-import { fetchAdopters, fetchApplications, fetchDogs, fetchTasks } from '../actions';
+import { fetchAdopters, fetchApplications, fetchDogs, fetchTasks, fetchAllFavorites } from '../actions';
+import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
+import FavoriteDogsTeaserCard from '../teasers/FavoriteDogsTeaserCard'
+import ApplicationTeaserCard from '../teasers/ApplicationTeaserCard'
+
+
 
 
 class AdminMainContainer extends React.Component {
@@ -17,6 +22,7 @@ class AdminMainContainer extends React.Component {
     this.props.fetchAdopters()
     this.props.fetchApplications()
     this.props.fetchTasks()
+    this.props.fetchAllFavorites()
   }
 
 
@@ -38,7 +44,7 @@ class AdminMainContainer extends React.Component {
               )
             }} />
             <Route path="/admin/dogs" render={() => {
-              return <DogsContainer />
+              return <AdminDogsContainer />
             }}/>
             <Route path="/admin/adopters/:id" render={() => {
               return <AdoptersShow />
@@ -62,10 +68,9 @@ class AdminMainContainer extends React.Component {
               <p>Would be cool if notifications can go here that tell the admins about new application submissions and tasks </p>
       
             
-              {/* this no longer has router props so history.push won't work
-              <button onClick={()=>this.props.history.push("/admin/dogs")}>See all dogs</button> */}
+        
 
-
+              <AdoptableDogsTeaserCard />
       
               <Link to="/admin/dogs">
                 <button>See all dogs</button>
@@ -102,4 +107,4 @@ function msp(state){
 }
 
 
-export default connect(msp, { fetchAdopters, fetchApplications, fetchDogs, fetchTasks })(AdminMainContainer)
+export default connect(msp, { fetchAdopters, fetchApplications, fetchDogs, fetchTasks, fetchAllFavorites })(AdminMainContainer)
