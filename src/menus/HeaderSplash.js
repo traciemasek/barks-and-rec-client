@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Menu } from 'semantic-ui-react'
+import { Modal, Menu } from 'semantic-ui-react'
 // import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import SignupAdopter from '../forms/SignupAdopter'
 
 class HeaderSplash extends Component {
   state = { 
@@ -12,7 +13,7 @@ class HeaderSplash extends Component {
 
   handleItemClick = (e, { name }) => {
     // console.log("name from menu item", name)
-    this.props.handleMenuItemClick(name)
+    // this.props.handleMenuItemClick(name)
     this.setState({ 
       activeItem: name,
     })
@@ -20,7 +21,6 @@ class HeaderSplash extends Component {
 
   render() {
     const { activeItem } = this.state
-    // console.log("SPLASH MENU PROPS", this.props)
     return (
       <Menu inverted attached>
         <Menu.Item
@@ -33,14 +33,41 @@ class HeaderSplash extends Component {
           active={activeItem === 'adopter log in'}
           onClick={this.handleItemClick}
         />
-        <Menu.Item
+        <Modal 
+          dimmer='blurring'
+          size="mini" 
+          trigger={<Menu.Item
           name='adopter sign up'
           active={activeItem === 'adopter sign up'}
           onClick={this.handleItemClick}
-        />
-      
+        />}>
+          <Modal.Header>Sign up!</Modal.Header>
+          <Modal.Content>
+            <SignupAdopter />
+          </Modal.Content>
+        </Modal>
       </Menu>
     )
+    // return (
+    //   <Menu inverted attached>
+    //     <Menu.Item
+    //       name='admin log in'
+    //       active={activeItem === 'admin log in'}
+    //       onClick={this.handleItemClick}
+    //     />
+    //     <Menu.Item 
+    //       name='adopter log in'
+    //       active={activeItem === 'adopter log in'}
+    //       onClick={this.handleItemClick}
+    //     />
+    //     <Menu.Item
+    //       name='adopter sign up'
+    //       active={activeItem === 'adopter sign up'}
+    //       onClick={this.handleItemClick}
+    //     />
+      
+    //   </Menu>
+    // )
   }
 }
 

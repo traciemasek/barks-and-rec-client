@@ -1,7 +1,7 @@
 import React from 'react';
-import LoginAdmin from "./forms/LoginAdmin"
-import LoginAdopter from "./forms/LoginAdopter"
-import SignupAdopter from "./forms/SignupAdopter"
+// import LoginAdmin from "./forms/LoginAdmin"
+// import LoginAdopter from "./forms/LoginAdopter"
+// import SignupAdopter from "./forms/SignupAdopter"
 import HeaderSplash from "./menus/HeaderSplash"
 // import { Route, Switch, Link } from "react-router-dom"
 
@@ -18,64 +18,69 @@ class Splash extends React.Component {
     })
   }
   
-  //ultimately, I don't think I want routes bc I don't want the user to be able to go directly to any of these log in paths
-  //should use state to conditionally render the form components instead upon button click
-  //routes might be better bc i can render the menu and jumbotron once hopefully
-  //the case statement is gnarly; is there anyway to make this better? (Would probably need a ternary since JSX requires expressions)
-  //maybe once I have the header and image as separate components it'll be better??
   render() {
     // console.log("SPLASH state", this.state)
- 
-    switch (this.state.formType) {
-      case "admin log in":
-          return (
-            <div>
-              <HeaderSplash handleMenuItemClick={this.handleMenuItemClick}/>
-          
-              <br/>
-              <h1>Admin Log In Form:</h1>
-              <LoginAdmin/>
-              <br/>
-            </div>
-          )
-      case "adopter log in":
-          return (
-            <div>
-              <HeaderSplash handleMenuItemClick={this.handleMenuItemClick}/>
-            
-              <br/>
-              <h1>Adopter Log In Form:</h1>
-              <LoginAdopter/>
-              <br/>
-            </div>
-          )
-      case "adopter sign up":
-          return (
-            <div>
-              <HeaderSplash handleMenuItemClick={this.handleMenuItemClick}/>
-              <br/>
-              <h1>Adopter Sign Up Form:</h1>
-              <SignupAdopter/>
-              <br/>
-            </div>
-          )
-      default:
-        return (
-          <div>
-            <HeaderSplash handleMenuItemClick={this.handleMenuItemClick}/>
-            
-            <h1>Barks and Rec</h1>
-            <p>I am the landing page. Eventually I will have a giant image and a header and a logo and shit. For now I have some buttons.</p>
-      
-          </div>
-        )
-    } //end of switch
-    
+    return (
+      <div>
+        <HeaderSplash handleMenuItemClick={this.handleMenuItemClick}/>
+        
+        <h1>Barks and Rec</h1>
+        <p>I am the landing page. Eventually I will have a giant image and a header and a logo and shit. For now I have some buttons.</p>
+  
+      </div>
+    )
   }
 
 }
 
 export default Splash
+
+// GRAVEYARD 
+
+// switch (this.state.formType) {
+//   case "admin log in":
+//       return (
+//         <div>
+//           <HeaderSplash handleMenuItemClick={this.handleMenuItemClick}/>
+      
+//           <br/>
+//           <h1>Admin Log In Form:</h1>
+//           <LoginAdmin/>
+//           <br/>
+//         </div>
+//       )
+//   case "adopter log in":
+//       return (
+//         <div>
+//           <HeaderSplash handleMenuItemClick={this.handleMenuItemClick}/>
+        
+//           <br/>
+//           <h1>Adopter Log In Form:</h1>
+//           <LoginAdopter/>
+//           <br/>
+//         </div>
+//       )
+//   case "adopter sign up":
+//       return (
+//         <div>
+//           <HeaderSplash handleMenuItemClick={this.handleMenuItemClick}/>
+//           <br/>
+//           <h1>Adopter Sign Up Form:</h1>
+//           <SignupAdopter/>
+//           <br/>
+//         </div>
+//       )
+//   default:
+//     return (
+//       <div>
+//         <HeaderSplash handleMenuItemClick={this.handleMenuItemClick}/>
+        
+//         <h1>Barks and Rec</h1>
+//         <p>I am the landing page. Eventually I will have a giant image and a header and a logo and shit. For now I have some buttons.</p>
+  
+//       </div>
+//     )
+// } //end of switch
 
  // handleClick = (e) => {
   //   console.log(e.target.name)

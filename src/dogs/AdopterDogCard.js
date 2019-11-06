@@ -29,7 +29,7 @@ class AdopterDogCard extends Component {
     return (
     favorite 
     ?
-      <Card >
+      <Card raised>
         <Image src={img1} wrapped ui={false} as={Link} to={`/adopter/dogs/${id}`}/>
         <Card.Content as={Link} to={`/adopter/dogs/${id}`}>
           <Card.Header>{name}</Card.Header>

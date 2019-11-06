@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HeaderAdmin from '../menus/HeaderAdmin'
 import DogShow from '../dogs/DogShow';
@@ -11,7 +11,7 @@ import { fetchAdopters, fetchApplications, fetchDogs, fetchTasks, fetchAllFavori
 import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
 import TasksTeaserCard from '../teasers/TasksTeaserCard'
 import AdoptersTeaserCard from '../teasers/AdoptersTeaserCard'
-import { Grid, Card} from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
 
 
