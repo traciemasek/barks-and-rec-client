@@ -10,6 +10,7 @@ import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
 import FavoriteDogsTeaserCard from '../teasers/FavoriteDogsTeaserCard'
 import ApplicationTeaserCard from '../teasers/ApplicationTeaserCard'
 import { fetchDogs } from '../actions';
+import { Grid, Card } from 'semantic-ui-react'
 
 class AdopterMainContainer extends React.Component {
 
@@ -20,7 +21,7 @@ class AdopterMainContainer extends React.Component {
   render() {
     // console.log("ADOPTER MAIN PROPS", this.props)
     // console.log("ADOPTER MAIN STATE", this.state)
-    if (this.props.userLoading) {
+    if (this.props.userLoading || this.props.dogsLoading) {
       return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
     } else {
       return (
@@ -47,20 +48,19 @@ class AdopterMainContainer extends React.Component {
               return (
               <>
               <h1>Welcome potential adopters</h1>
-              <div>
-                This will be some sort of navigation that will likely live to the side <span role="img" aria-label="left arrow">⬅️</span> or maybe like some fancy dropdown shit
-              </div>
-      
-              <p></p>
+              
 
       
-              <p>If they don't have any favorited dogs, My Faves should be a greyed out photo with instructions to add some</p>
-      
-              <p>If the user hasn't submitted an application, the teaser should say "Submit an application to adopt" else it should say "Application Status"</p>
+           
               
-              <AdoptableDogsTeaserCard />
-              <FavoriteDogsTeaserCard />
-              <ApplicationTeaserCard />
+              <Grid centered>
+                {/* <Card.Group centered > */}
+                <AdoptableDogsTeaserCard />
+                
+                <FavoriteDogsTeaserCard />
+                <ApplicationTeaserCard />
+                {/* </Card.Group> */}
+              </Grid>
              
       
               {/* <Link to="/adopter/dogs">
@@ -92,7 +92,8 @@ function msp(state){
   return {
     user: state.user,
     dogs: state.dogs,
-    userLoading: state.userLoading
+    userLoading: state.userLoading,
+    dogsLoading: state.dogsLoading
   }
 }
 

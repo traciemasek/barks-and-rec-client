@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AdoptersCard from './AdoptersCard'
+import { Segment } from 'semantic-ui-react'
 
 class AdoptersContainer extends Component {
 
@@ -11,7 +12,9 @@ class AdoptersContainer extends Component {
   render() {
     return (
       <div>
-        I will render the adopter cards or show
+        <br></br>
+        <br></br>
+        <Segment>THIS LOOKS EXACTLY HOW I WANT DON'T WORRY ABOUT IT</Segment>
         {this.renderAdopters()}
       </div>
     )

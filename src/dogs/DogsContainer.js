@@ -14,13 +14,6 @@ class DogsContainer extends Component {
 
 
   renderDogs = () => {
-    //add a prop of favorite if the dog is in the user's favorites?
-    //something like a double iteration (dog=> {
-    // if (this.props.favorites.includes(dog)) {add the favorite key to props <AdopterDogCard key={dog.id} dog={dog} favorite />}
-    // else {
-      // regular <AdopterDogCard key={dog.id} dog={dog}/>
-    // }
-    // })
     let favoriteIds = this.props.favoriteDogs.map(favorite => favorite.id)
     return this.props.dogs.map(dog => {
       return favoriteIds.includes(dog.id)

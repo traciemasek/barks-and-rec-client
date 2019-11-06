@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { setAdopter } from '../actions'
 
 class SignupAdopter extends React.Component {
   state = {
@@ -15,7 +16,6 @@ class SignupAdopter extends React.Component {
     })
   }
 
-  //with redux, you don't have to worry about passing the submit up to App, you can just use mdp to add user to redux store right here, right?????????
   handleSubmit = e => {
     e.preventDefault()
 
@@ -39,7 +39,7 @@ class SignupAdopter extends React.Component {
         if (response.errors) {
           alert(response.errors)
         } else {
-          this.props.setUser(response.adopter)
+          this.props.setAdopter(response.adopter)
           localStorage.token = response.token
           this.props.history.push("/adopter")
         }
@@ -74,12 +74,5 @@ function msp(state){
   }
 }
 
-function mdp(dispatch){
-  return {
-    setUser: adopter => {
-      dispatch({type: "SET_ADOPTER_USER", payload: adopter})
-    }
-  }
-}
 
-export default withRouter(connect(msp, mdp)(SignupAdopter))
+export default withRouter(connect(msp, { setAdopter })(SignupAdopter))

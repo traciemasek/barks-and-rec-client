@@ -10,12 +10,12 @@ function AdoptableDogsTeaserCard(props) {
   ?
   (
     <Card centered as={Link} to='/admin/dogs'>
-      <Image src='https://www.sciencemag.org/site/extra/dogs/dog-collage.jpg' wrapped ui={false} />
+      <Image src='https://www.rachaelraymag.com/.image/t_share/MTU4OTEwNjk0MDg1ODk1ODgz/collage-images-of-dogs-f6a29a4e.jpg' wrapped ui={false} />
       <Card.Content>
         <Card.Header>Adoptable Dogs</Card.Header>
       
         <Card.Description>
-          See all dogs currently available for adoption
+          All dogs currently available for adoption
         </Card.Description>
       </Card.Content>
     </Card>

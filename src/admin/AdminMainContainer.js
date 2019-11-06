@@ -9,8 +9,9 @@ import AdoptersShow from './AdoptersShow';
 import TasksContainer from './TasksContainer';
 import { fetchAdopters, fetchApplications, fetchDogs, fetchTasks, fetchAllFavorites } from '../actions';
 import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
-import FavoriteDogsTeaserCard from '../teasers/FavoriteDogsTeaserCard'
-import ApplicationTeaserCard from '../teasers/ApplicationTeaserCard'
+import TasksTeaserCard from '../teasers/TasksTeaserCard'
+import AdoptersTeaserCard from '../teasers/AdoptersTeaserCard'
+import { Grid, Card} from 'semantic-ui-react'
 
 
 
@@ -59,9 +60,7 @@ class AdminMainContainer extends React.Component {
               return (
               <>
               <h1>ADMINS ONLY!!! </h1>
-              <div>
-                This will be some sort of navigation that will likely live to the side <span role="img" aria-label="left arrow">⬅️</span> or maybe like some fancy dropdown shit
-              </div>
+            
       
               <p></p>
       
@@ -69,20 +68,13 @@ class AdminMainContainer extends React.Component {
       
             
         
-
-              <AdoptableDogsTeaserCard />
+              <Grid centered>
+                <AdoptableDogsTeaserCard />
+                <TasksTeaserCard />
+                <AdoptersTeaserCard />
+              </Grid>
       
-              <Link to="/admin/dogs">
-                <button>See all dogs</button>
-              </Link>
-
-              <Link to="/admin/adopters">
-                <button>See all adopters</button>
-              </Link>
-      
-              <Link to="/admin/tasks">
-                <button>See all tasks</button>
-              </Link>
+            
               </>
               )
             }} />

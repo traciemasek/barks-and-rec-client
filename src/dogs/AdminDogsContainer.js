@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AdminDogCard from './AdminDogCard';
-import { Grid, Container, Card } from 'semantic-ui-react';
+import { Grid, Container, Card , Segment} from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { fetchDogs } from '../actions';
 // import { Switch, Route } from 'react-router-dom';
@@ -20,9 +20,8 @@ class AdminDogsContainer extends Component {
       return (
         
         <Container fluid>
-            
-          <p>Click on a dog's photo for more information</p>
-          <p>Need to get rid of the hearts and show number of interested adopters instead!!</p>
+          <Segment basic></Segment>  
+          <Segment>Need to fix the buttons to make them not have a clicky feel. ALSO admin needs to be able to edit current dogs off show page AND add new dog</Segment>
   
           <Grid centered>
             <Card.Group centered>

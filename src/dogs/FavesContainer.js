@@ -13,8 +13,9 @@ class FavesContainer extends Component {
   //need functionality to remove a favorite
 
   render() {
-    if(this.props.userLoading){
+    if(this.props.userLoading || this.props.dogsLoading){
       return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+    // } else if (!this.props.favoriteDogs.length) {
     } else if (!this.props.favoriteDogs.length) {
       return (
         <>
@@ -43,7 +44,8 @@ class FavesContainer extends Component {
 function msp(state) {
   return {
     favoriteDogs: state.favoriteDogs,
-    userLoading: state.userLoading
+    userLoading: state.userLoading,
+    dogsLoading: state.dogsLoading
   }
 }
 
