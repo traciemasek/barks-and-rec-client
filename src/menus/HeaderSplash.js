@@ -4,6 +4,8 @@ import { Modal, Menu } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import SignupAdopter from '../forms/SignupAdopter'
+import LoginAdopter from '../forms/LoginAdopter'
+import LoginAdmin from '../forms/LoginAdmin'
 
 class HeaderSplash extends Component {
   state = { 
@@ -23,16 +25,34 @@ class HeaderSplash extends Component {
     const { activeItem } = this.state
     return (
       <Menu inverted attached>
-        <Menu.Item
+        <Modal 
+          dimmer='blurring'
+          size="mini" 
+          trigger={<Menu.Item
           name='admin log in'
           active={activeItem === 'admin log in'}
           onClick={this.handleItemClick}
-        />
-        <Menu.Item 
+        />}>
+          <Modal.Header>Admin Log In!</Modal.Header>
+          <Modal.Content>
+            <LoginAdmin />
+          </Modal.Content>
+        </Modal>
+
+        <Modal 
+          dimmer='blurring'
+          size="mini" 
+          trigger={<Menu.Item 
           name='adopter log in'
           active={activeItem === 'adopter log in'}
           onClick={this.handleItemClick}
-        />
+        />}>
+          <Modal.Header>Adopter Log In!</Modal.Header>
+          <Modal.Content>
+            <LoginAdopter />
+          </Modal.Content>
+        </Modal>
+
         <Modal 
           dimmer='blurring'
           size="mini" 

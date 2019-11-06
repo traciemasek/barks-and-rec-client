@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import DogShow from '../dogs/DogShow'
+import DogShow from '../dogs/DogShowAdopter'
 import DogsContainer from '../dogs/DogsContainer';
 import FavesContainer from '../dogs/FavesContainer';
 import ApplicationContainer from './ApplicationContainer';
@@ -10,7 +10,7 @@ import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
 import FavoriteDogsTeaserCard from '../teasers/FavoriteDogsTeaserCard'
 import ApplicationTeaserCard from '../teasers/ApplicationTeaserCard'
 import { fetchDogs } from '../actions';
-import { Grid } from 'semantic-ui-react'
+import { Grid, Card } from 'semantic-ui-react'
 
 class AdopterMainContainer extends React.Component {
 
@@ -25,8 +25,12 @@ class AdopterMainContainer extends React.Component {
       return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
     } else {
       return (
-        <div>
-          <HeaderAdopter />
+        <>
+        <HeaderAdopter />
+        <Grid centered>
+          <Grid.Row></Grid.Row>
+        <Grid.Column width={12}>
+
           <Switch>
             <Route path="/adopter/dogs/:id" render={routerProps => {
               const { match } = routerProps
@@ -47,42 +51,28 @@ class AdopterMainContainer extends React.Component {
             <Route path="/adopter" render={()=>{
               return (
               <>
-              <h1>Welcome potential adopters</h1>
-              
+              <Grid verticalAlign="top" centered>
+                <Grid.Row>
+                  <h1>Welcome potential adopters</h1>
+                </Grid.Row>
+                <Grid.Row></Grid.Row>
 
-      
-           
-              
-              <Grid centered>
-                {/* <Card.Group centered > */}
-                <AdoptableDogsTeaserCard />
-                
-                <FavoriteDogsTeaserCard />
-                <ApplicationTeaserCard />
-                {/* </Card.Group> */}
+                <Card.Group centered>
+                  <AdoptableDogsTeaserCard />
+                  <FavoriteDogsTeaserCard />
+                  <ApplicationTeaserCard />
+                </Card.Group>
               </Grid>
-             
-      
-              {/* <Link to="/adopter/dogs">
-                <button>See all dogs</button>
-              </Link>
-
-              <Link to="/adopter/faves">
-                <button>My favorite dogs</button>
-              </Link>
-      
-              <Link to="/adopter/application">
-                <button>Application</button>
-              </Link> */}
-              </>
+              
+             </>
               )
             }} />
             
           </Switch>
-            
-          
-        </div>
-      )
+        </Grid.Column>
+      </Grid>
+    </>
+    )
     }
   }
 }

@@ -68,7 +68,7 @@ class SignupAdopter extends React.Component {
         <Form.Input required fluid label='Password' name='password' placeholder='Password' type="password" onChange={this.handleChange} value={password}/>
         <Form.Input required fluid label='Password Confirmation' name='passwordConfirmation' placeholder='Password' type="password" onChange={this.handleChange} value={passwordConfirmation}/>
         {/* </Form.Group> */}
-        <Form.Button>Submit</Form.Button>
+        <Form.Button color="instagram">Submit</Form.Button>
       </Form>
     )
   }

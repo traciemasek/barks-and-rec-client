@@ -8,21 +8,21 @@ import HeaderSplash from "./menus/HeaderSplash"
 
 class Splash extends React.Component {
 
-  state = {
-    formType: null
-  }
+  // state = {
+  //   formType: null
+  // }
 
-  handleMenuItemClick = name => {
-    this.setState({
-      formType: name
-    })
-  }
+  // handleMenuItemClick = name => {
+  //   this.setState({
+  //     formType: name
+  //   })
+  // }
   
   render() {
     // console.log("SPLASH state", this.state)
     return (
       <div>
-        <HeaderSplash handleMenuItemClick={this.handleMenuItemClick}/>
+        <HeaderSplash />
         
         <h1>Barks and Rec</h1>
         <p>I am the landing page. Eventually I will have a giant image and a header and a logo and shit. For now I have some buttons.</p>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { Form } from 'semantic-ui-react'
 
 class LoginAdopter extends React.Component {
   state = {
@@ -44,33 +45,18 @@ class LoginAdopter extends React.Component {
         this.props.history.push("/adopter")
       }
     })
-
-    //this "works" but just alerts the 500 error, which isn't very good ux
-    // .then(resp => {
-    //   if (!resp.ok) {
-    //     console.log(resp)
-    //     throw Error(resp.statusText)
-    //   }
-    //   return resp.json();
-    // }).then(adopter => {
-    //   console.log(adopter)
-    // }).catch(error => {
-    //   alert(error)
-    // })
-    
   }
 
 
   render() {
     const { username, password } = this.state
     return(
-      <form onSubmit={this.handleSubmit}>
-        <label>Username:</label>
-        <input type="text" name="username" placeholder="Username" value={username} onChange={this.handleChange}/>
-        <label>Password:</label>
-        <input type="password" name="password" placeholder="Password" value={password} onChange={this.handleChange}/>
-        <input type="submit" value="Log In"/>
-      </form>
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Input required fluid label='Username' name='username' placeholder='username' onChange={this.handleChange} value={username}/>
+        <Form.Input required fluid label='Password' name='password' placeholder='Password' type="password" onChange={this.handleChange} value={password}/>
+        
+        <Form.Button color="instagram">Log In</Form.Button>
+      </Form>
     )
   }
 

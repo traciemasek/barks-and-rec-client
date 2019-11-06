@@ -25,7 +25,7 @@ class HeaderAdopter extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu inverted attached>
+      <Menu inverted fixed="top">
         <Menu.Item
           as={Link} to='/adopter/'
           name='dashboard'

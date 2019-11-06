@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HeaderAdmin from '../menus/HeaderAdmin'
-import DogShow from '../dogs/DogShow';
+import DogShow from '../dogs/DogShowAdopter';
 import AdminDogsContainer from '../dogs/AdminDogsContainer';
 import AdoptersContainer from './AdoptersContainer';
 import AdoptersShow from './AdoptersShow';

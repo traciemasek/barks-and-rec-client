@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AdopterDogCard from './AdopterDogCard';
-import { Grid, Container, Card } from 'semantic-ui-react';
+import { Grid, Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { fetchDogs } from '../actions';
 // import { Switch, Route } from 'react-router-dom';
@@ -31,18 +31,19 @@ class DogsContainer extends Component {
     } else {
       return (
         
-        <Container fluid>
-            
-          <p>Click on a dog's photo for more information</p>
-          <p>Click a heart to mark a dog as a favorite to potentially adopt!</p>
+        <Grid centered>
   
-          <Grid centered>
-            <Card.Group centered>
-              {this.renderDogs()}
-            </Card.Group>
-          </Grid>
-  
-        </Container>
+          <Grid.Row centered>
+            Click on a dog's photo for more information
+            Click a heart to mark a dog as a favorite to potentially adopt!
+          </Grid.Row>
+          <Grid.Row></Grid.Row>
+          
+          <Card.Group centered>
+            {this.renderDogs()}
+          </Card.Group>
+       
+        </Grid>
         
       )
     }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react';
+import { Card, Icon, Image, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { createFavorite, removeFavorite } from "../actions"
+
 
 class AdopterDogCard extends Component {
 
@@ -23,36 +24,64 @@ class AdopterDogCard extends Component {
 
   render() {
     // console.log("dog card dog props", this.props)
-    const {img1, name, id } = this.props.dog
+    const {img1, name, id, breed, age_group, sex } = this.props.dog
     const favorite = this.props.favorite
+    const style= {
+      textTransform: "capitalize"
+    }
+    let genderIcon = sex === "female" ? "venus" : "mars"
 
     return (
     favorite 
     ?
       <Card raised>
-        <Image src={img1} wrapped ui={false} as={Link} to={`/adopter/dogs/${id}`}/>
+        <Image fluid src={img1} wrapped ui={false} as={Link} to={`/adopter/dogs/${id}`}/>
         <Card.Content as={Link} to={`/adopter/dogs/${id}`}>
           <Card.Header>{name}</Card.Header>
+          <Card.Meta 
+            style={style}>
+            {breed}  
+            <Icon name={genderIcon} /> 
+             {age_group}
+          </Card.Meta>
         </Card.Content>
+        
         <Card.Content extra>
-          <Icon name="like" color="red" onClick={this.removeFavorite}/>
+          <Button color="red" onClick={this.removeFavorite}>
+            <Button.Content>
+              <Icon name={'heart'} />Favorite 
+            </Button.Content>
+          </Button>
         </Card.Content>
       </Card>
     :
-    <Card >
-      <Image src={img1} wrapped ui={false} as={Link} to={`/adopter/dogs/${id}`}/>
+    <Card raised>
+      <Image fluid src={img1} wrapped ui={false} as={Link} to={`/adopter/dogs/${id}`}/>
       <Card.Content as={Link} to={`/adopter/dogs/${id}`}>
         <Card.Header>{name}</Card.Header>
+        <Card.Meta 
+            style={style}>
+            {breed}  
+            <Icon name={genderIcon} /> 
+             {age_group}
+          </Card.Meta>
       </Card.Content>
       <Card.Content extra>
-        <Icon name="like" onClick={this.createFavorite}/>
+
+        <Button basic color="red" animated="fade" onClick={this.createFavorite}>
+          <Button.Content visible>Add to favorites</Button.Content>
+          <Button.Content hidden>
+            <Icon name='heart' />
+          </Button.Content>
+        </Button>
+
       </Card.Content>
     </Card>
     )
   }
 }
 
-// color="red"
+
 
 function msp(state){
   return {

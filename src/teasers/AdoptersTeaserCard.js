@@ -5,7 +5,7 @@ import { Image, Card } from 'semantic-ui-react'
 function AdoptersTeaserCard(props) {
 
   return (
-    <Card centered as={Link} to='/admin/adopters'>
+    <Card as={Link} to='/admin/adopters'>
       <Image src='https://news.orvis.com/images/02-dogs/2017/08-aug/shelter.jpg' wrapped ui={false} />
       <Card.Content>
         <Card.Header>Adopters</Card.Header>

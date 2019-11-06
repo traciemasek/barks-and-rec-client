@@ -9,7 +9,7 @@ function AdoptableDogsTeaserCard(props) {
   !props.userLoading && props.admin
   ?
   (
-    <Card centered as={Link} to='/admin/dogs'>
+    <Card as={Link} to='/admin/dogs'>
       <Image src='https://www.rachaelraymag.com/.image/t_share/MTU4OTEwNjk0MDg1ODk1ODgz/collage-images-of-dogs-f6a29a4e.jpg' wrapped ui={false} />
       <Card.Content>
         <Card.Header>Adoptable Dogs</Card.Header>
@@ -22,7 +22,7 @@ function AdoptableDogsTeaserCard(props) {
   )
   :
    (
-    <Card centered as={Link} to='/adopter/dogs'>
+    <Card as={Link} to='/adopter/dogs'>
       <Image src='https://www.sciencemag.org/site/extra/dogs/dog-collage.jpg' wrapped ui={false} />
       <Card.Content>
         <Card.Header>Adoptable Dogs</Card.Header>

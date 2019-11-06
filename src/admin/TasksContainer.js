@@ -39,7 +39,7 @@ class TasksContainer extends Component {
           <Grid centered >
             <Grid.Row></Grid.Row>
             <Grid.Row></Grid.Row>
-            <Grid.Row>I will be a list of tasks for the admin to complete. Completing a task will update the corresponding step in the adopter's application status</Grid.Row>
+     
             <Grid.Row></Grid.Row>
           
           
