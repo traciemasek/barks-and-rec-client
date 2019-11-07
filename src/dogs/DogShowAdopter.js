@@ -25,6 +25,7 @@ class DogShow extends Component {
           </Grid.Column>
           <Grid.Column  width={8}>
             <Header style={{paddingBottom: "6px"}}
+              as="h1"
               size="huge" 
               dividing
               content={name}

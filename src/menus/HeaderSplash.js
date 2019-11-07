@@ -24,7 +24,7 @@ class HeaderSplash extends Component {
   render() {
     const { activeItem } = this.state
     return (
-      <Menu inverted attached>
+      <Menu inverted attached borderless size="large">
         <Modal 
           dimmer='blurring'
           size="mini" 

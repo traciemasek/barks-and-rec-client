@@ -136,13 +136,6 @@ function finalApprovalTask(taskBody, id){
     }
 }
 
-// complete task response 
-// {newTask: {…}, updatedTask: true, updatedApplication: true}
-// newTask: {id: 37, category: "references", complete: false, adopter_id: 10, created_at: "2019-11-05T22:47:56.447Z", …}
-// updatedApplication: true
-// updatedTask: true
-// __proto__: Object
-
 
 function setAdmin(admin) {
   return {type: SET_ADMIN_USER, payload: admin}

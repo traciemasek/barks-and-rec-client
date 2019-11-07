@@ -24,12 +24,12 @@ class AdopterDogCard extends Component {
 
   render() {
     // console.log("dog card dog props", this.props)
-    const {img1, name, id, breed, age_group, sex } = this.props.dog
+    const {img1, name, id, breed, age_group } = this.props.dog
     const favorite = this.props.favorite
     const style= {
       textTransform: "capitalize"
     }
-    let genderIcon = sex === "female" ? "venus" : "mars"
+    // let genderIcon = sex === "female" ? "venus" : "mars"
 
     return (
     favorite 
@@ -40,9 +40,7 @@ class AdopterDogCard extends Component {
           <Card.Header>{name}</Card.Header>
           <Card.Meta 
             style={style}>
-            {breed}  
-            <Icon name={genderIcon} /> 
-             {age_group}
+            {breed} • {age_group}
           </Card.Meta>
         </Card.Content>
         
@@ -61,9 +59,7 @@ class AdopterDogCard extends Component {
         <Card.Header>{name}</Card.Header>
         <Card.Meta 
             style={style}>
-            {breed}  
-            <Icon name={genderIcon} /> 
-             {age_group}
+            {breed} • {age_group}
           </Card.Meta>
       </Card.Content>
       <Card.Content extra>

@@ -59,7 +59,8 @@ class TaskCard extends Component {
     let day = created_at.slice(5, 7)
     let year = created_at.slice(0, 4)
     let date = `${day}/${month}/${year}`
-    // let adopterName = this.props.adopters.find(adopter => adopter.id === adopter_id).username
+    let adopter = this.props.adopters.find(adopter => adopter.id === adopter_id)
+    let adopterName = adopter.first_name + ' ' + adopter.last_name
 
     //if complete, defaultChecked & disabled as props for checkbox
     if (complete) {
@@ -69,7 +70,7 @@ class TaskCard extends Component {
           <Checkbox defaultChecked disabled/>
         </Table.Cell>
         <Table.Cell> <Icon name={this.icon(category)}/>{this.categoryPretty(category)}</Table.Cell>
-        <Table.Cell>{adopter_id}</Table.Cell>
+        <Table.Cell>{adopterName}</Table.Cell>
         <Table.Cell>{complete ? "Complete" : "Pending"}</Table.Cell>
         <Table.Cell>{date}</Table.Cell>
       </Table.Row>

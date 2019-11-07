@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -26,13 +26,14 @@ class HeaderAdmin extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu inverted fixed="top">
+     
+      <Menu inverted fixed="top" size="large">
       {/* <Menu inverted attached> */}
         {/* <Container> */}
-        <Menu.Item name='ADMIN' />
+        {/* <Menu.Item name='ADMIN' /> */}
         <Menu.Item
           as={Link} to='/admin/'
-          name='dashboard'
+          name='ADMIN Dashboard'
           active={activeItem === 'dashboard'}
           onClick={this.handleItemClick}
         />
@@ -56,7 +57,7 @@ class HeaderAdmin extends Component {
         />
          {this.props.user && this.props.admin ? 
         <>
-         <Menu.Item
+         <Menu.Item position="right"
         //  as={Link} to='/adopter/application'
         //make this a drop down with options 
          icon="user circle outline"
@@ -73,6 +74,7 @@ class HeaderAdmin extends Component {
         : null }
         {/* </Container> */}
       </Menu>
+    
     )
   }
 }

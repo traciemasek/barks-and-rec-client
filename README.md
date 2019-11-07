@@ -1,97 +1,68 @@
-ME THINKING:
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-APPLICATION FLOW:
--user submits application to custom route or just applications#create
--the create action should create the Application instance AND
--create four tasks instances OR possibly one at a time if I want to enforce the approval happening in chained steps
--response from the sumbitApplication post fetch should have all four tasks attached--they need to be added to tasks in redux
--also need to set up a fetch to get all tasks and add to redux store when admin logs in 
--Task model needs: 
-  adopter:references,
-  t.boolean "complete", default: false 
-  type (type should match the attributes on the application instance: initial_review, references, home_visit, final_approval
+## Available Scripts
 
-  TO DO
--test the application status stuff by updating application in rails c and refreshing
--styles the tasks a bit with a click to complete
--Uncompleted Tasks should show up in Admin task container
--Click to mark task complete SHOULD:
-  patch request to task to toggle completed to true
-  patch request to Application to mark corresponding status type as true (need type and adopter_id and can find application by adopter_id)
--response from application patch request then need to make sure to update the status type in the adopterApplication in redux
--response from task patch request should mark the task completed = true in redux and remove from list or strikethrough, whatever I decide
+In the project directory, you can run:
 
+### `yarn start`
 
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
--figure out how to handle completed tasks (strikethrough or move to different tab)
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
+### `yarn test`
 
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `yarn build`
 
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-//STEVEN LECTURE NOTES
-//router: give it what route you want it to hit, and what you want it to render
-//do you have all routes in app.js? not always, you can write nested routes but all basic main pages usually have a place in app in Switch
-//see 23:00 into the 051319 lecture about if you want something to appear on every page that starts with /adopter or /admin (so nav bar probably), then don't use exact path and put it all in /adopter, which would be under /adopter/dogs. If you only want very specific things to be on /adopter and nowhere else, then use exact path="/adopter"
-//Switch works the same as calling everything exact path=, but remember order matters so '/' would have to be at the very bottom which sort of doesn't make sense to me since it's basically the first page of the app. 
-//Switch will only render one route at a time! Use it at top level of all routes to switch between the major pages (28:31)
-//How are all these routes going to work when I have auth? Will I need the switch or will i use the ProtectedRoute component to route to either splash or admin/adopter and write switch routes elsewhere?
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-//ROUTER PROPS
-//match has params
-//if using render in Route, then pass props render={(routerProps) => <Splash handleLogin={this.handleLogin} {...routerProps} />}/>
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### `yarn eject`
 
-### Redux + React 042219
-1:20:00 ish is when he talks about passing args to mdp as payload
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-npm i redux react-redux --save
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-### Implementing Redux 042219
--function called in component
--arguments from function call passed to dispatch
--dispatch calls reducer with action (type and payload)
--reducer returns some sort of modified state
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-function mdp(dispatch) {
-  //writer/setter to state
-  //return functions that will be added to props, and then you can call onClick or wherever you want to trigger them to setState via redux dispatch/reducer
-  //dispatch calls the reducer, which setsState. For every time you need to set global state, you need to set up a function that calls dipatch in the mpd object here (1:24:00 react + redux 042219)
-  return {
-    //eventually these functions will be abstracted to a different file actions.js
-    stopLoading: () => {
-      dispatch({type: "STOP_LOADING"})
-      // dispatch(stopLoading())
-    },
-    fetchDogs: dogs => {
-      dispatch({type: "FETCH_ALL_DOGS", payload: dogs})
-      // dispatch(fetchDogs(dogs))
-    },
-    fetchAdopters: adopters => {
-      dispatch({type: "FETCH_ALL_ADOPTERS", payload: adopters})
-    },
-    fetchApplications: applications => {
-      dispatch({type: "FETCH_ALL_APPLICATIONS", payload: applications})
-    },
-    setAdmin: admin => {
-      dispatch({type: "SET_ADMIN_USER", payload: admin})
-    },
-    setAdopter: adopter => {
-      dispatch({type: "SET_ADOPTER_USER", payload: adopter})
-    }
-    //example below is from a controlled form that implicitly passes the event, which we then use to set the payload
-    //can also pass arguments just like in other eventlisteners
-    // handleChange: (event) => {
-    //   dispatch({type: "INPUT_CHANGE", payload: event.target.value})
-    // }
-  }
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-}
+## Learn More
 
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-//connect connects this component to the store
-//takes 2 arguments: mapStateToProps & mapDispatchToProps
-export default connect(msp, mdp)(App);
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-## Authorization
--can cp Steven's code from 051319 Authorization and Security lecture from ApplicationController & AuthController for basic single user auth template
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `yarn build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
