@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import AdopterDogCard from './AdopterDogCard';
-import { Grid, Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { fetchDogs } from '../actions';
+import { Grid, Card, Segment, Header } from 'semantic-ui-react';
 // import { Switch, Route } from 'react-router-dom';
 
 class DogsContainer extends Component {
@@ -34,8 +34,12 @@ class DogsContainer extends Component {
         <Grid centered>
   
           <Grid.Row centered>
-            Click on a dog's photo for more information
-            Click a heart to mark a dog as a favorite to potentially adopt!
+            <Segment basic>
+              <Header as={"h1"}>Meet our available dogs!</Header>
+            <p> If a dog is listed here, that means they are AVAILABLE for adoption. </p>
+
+          <p>While we may have pending adoption applications ahead of you for your dog of interest, the best thing to do is still to apply. Once you are approved, you remain approved for any new dogs that we rescue in the future!</p>
+            </Segment>
           </Grid.Row>
           <Grid.Row></Grid.Row>
           

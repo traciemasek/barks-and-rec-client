@@ -22,14 +22,19 @@ class AdopterMainContainer extends React.Component {
     // console.log("ADOPTER MAIN PROPS", this.props)
     // console.log("ADOPTER MAIN STATE", this.state)
     if (this.props.userLoading || this.props.dogsLoading) {
-      return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+      return (
+        <Grid centered>
+          <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+        </Grid>
+      )
     } else {
       return (
-        <>
-        <HeaderAdopter />
-        <Grid centered>
-          <Grid.Row></Grid.Row>
-        <Grid.Column width={12}>
+        <div>
+          <HeaderAdopter />
+
+          <Grid centered>
+            <Grid.Row></Grid.Row>
+          <Grid.Column width={12}>
 
           <Switch>
             <Route path="/adopter/dogs/:id" render={routerProps => {
@@ -62,16 +67,16 @@ class AdopterMainContainer extends React.Component {
                   <FavoriteDogsTeaserCard />
                   <ApplicationTeaserCard />
                 </Card.Group>
+
               </Grid>
               
-             </>
-              )
+             </>)
             }} />
             
           </Switch>
         </Grid.Column>
       </Grid>
-    </>
+    </div>
     )
     }
   }

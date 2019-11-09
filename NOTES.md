@@ -5,6 +5,9 @@ NOTIFICATIONS BRAINSTORMING
 When an application is submitted, it should create an AdminNotification 
 Number of unread notifications should appear in menu as a label
 How to get notifications marked as read
+  can try to make them appear as a drop down off the label if the label takes an onclick??
+  onClick of the menu item would mark it as read--or maybe explicit mark as read link?
+  otherwise maybe make a notifications tab rather than having the label show up on tasks or application
 
 
 

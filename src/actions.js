@@ -1,4 +1,4 @@
-import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK } from "./types"
+import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG } from "./types"
 
 
 function fetchDogs() {
@@ -48,6 +48,24 @@ function fetchTasks() {
     .then(resp => resp.json())
     .then(tasks => {
       dispatch({type: FETCH_ALL_TASKS, payload: tasks})
+    })
+  }
+}
+
+function createDog(body){
+  return function(dispatch){
+    fetch("http://localhost:6969/api/v1/dogs", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accepts: "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+    .then(resp => resp.json())
+    .then(response => {
+      console.log(response)
+      dispatch({type: ADD_DOG, payload: response})
     })
   }
 }
@@ -130,7 +148,7 @@ function finalApprovalTask(taskBody, id){
     })
     .then(resp => resp.json())
     .then(response => {
-      console.log("complete task response", response)
+      console.log("complete final task response", response)
       dispatch({type: FINAL_APPROVAL_TASK, payload: response})
     })
     }
@@ -163,7 +181,8 @@ export {
   submitApplication,
   fetchAllFavorites,
   completeTask,
-  finalApprovalTask
+  finalApprovalTask,
+  createDog
 }
 
 //for thunky actions:

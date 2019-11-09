@@ -18,10 +18,15 @@ class FavesContainer extends Component {
     // } else if (!this.props.favoriteDogs.length) {
     } else if (!this.props.favoriteDogs.length) {
       return (
-        <>
-          <p>You don't have any favorite dogs yet! Check out the list of dogs currently available for adoption and click the heart to save it to your list!</p>
+        <Grid centered >
+          <Grid.Row></Grid.Row>
+          <Grid.Row>
+          <h1>You don't have any favorite dogs yet!</h1>
+            
+          <p>Check out the list of dogs currently available for adoption and click the heart to add it to your favorites!</p>
+          </Grid.Row>
           <AdoptableDogsTeaserCard />
-        </>
+        </Grid>
       )
     } else {
         return (

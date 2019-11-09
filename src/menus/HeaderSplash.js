@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Menu } from 'semantic-ui-react'
+import { Modal, Menu, Sticky, Segment } from 'semantic-ui-react'
 // import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -24,7 +24,9 @@ class HeaderSplash extends Component {
   render() {
     const { activeItem } = this.state
     return (
-      <Menu inverted attached borderless size="large">
+      <Sticky>
+      <Segment inverted attached >
+      <Menu inverted secondary borderless size="large">
         <Modal 
           dimmer='blurring'
           size="mini" 
@@ -67,27 +69,10 @@ class HeaderSplash extends Component {
           </Modal.Content>
         </Modal>
       </Menu>
+      </Segment> 
+      </Sticky>
     )
-    // return (
-    //   <Menu inverted attached>
-    //     <Menu.Item
-    //       name='admin log in'
-    //       active={activeItem === 'admin log in'}
-    //       onClick={this.handleItemClick}
-    //     />
-    //     <Menu.Item 
-    //       name='adopter log in'
-    //       active={activeItem === 'adopter log in'}
-    //       onClick={this.handleItemClick}
-    //     />
-    //     <Menu.Item
-    //       name='adopter sign up'
-    //       active={activeItem === 'adopter sign up'}
-    //       onClick={this.handleItemClick}
-    //     />
-      
-    //   </Menu>
-    // )
+    
   }
 }
 

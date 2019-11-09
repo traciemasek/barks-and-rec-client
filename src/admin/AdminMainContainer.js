@@ -7,11 +7,12 @@ import AdminDogsContainer from '../dogs/AdminDogsContainer';
 import AdoptersContainer from './AdoptersContainer';
 import AdoptersShow from './AdoptersShow';
 import TasksContainer from './TasksContainer';
+import NewDog from '../dogs/NewDog';
 import { fetchAdopters, fetchApplications, fetchDogs, fetchTasks, fetchAllFavorites } from '../actions';
 import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
 import TasksTeaserCard from '../teasers/TasksTeaserCard'
 import AdoptersTeaserCard from '../teasers/AdoptersTeaserCard'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Card } from 'semantic-ui-react'
 
 
 
@@ -29,13 +30,20 @@ class AdminMainContainer extends React.Component {
 
   render() {
     if (this.props.userLoading) {
-      return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+      return (
+        <Grid centered>
+          <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+        </Grid>
+      )
     } else {
       return (
-        <>
         <div>
           <HeaderAdmin/>
-          <br/>
+
+          <Grid centered>
+            <Grid.Row></Grid.Row>
+          <Grid.Column width={12}>
+      
           <Switch>
             <Route path="/admin/dogs/:id" render={routerProps => {
               const { match } = routerProps
@@ -56,35 +64,34 @@ class AdminMainContainer extends React.Component {
             <Route path="/admin/tasks" render={() => {
               return <TasksContainer />
             }} />
+            <Route path="/admin/new" render={() => {
+              return <NewDog />
+            }} />
             <Route path="/admin" render={()=>{
               return (
               <>
-              <h1>ADMINS ONLY!!! </h1>
+              <Grid verticalAlign="top" centered>
+                <Grid.Row>
+                  <h1>ADMINS ONLY!!! </h1>
+                </Grid.Row>
+                <Grid.Row></Grid.Row>
+              
+                <Card.Group centered>
+                  <AdoptableDogsTeaserCard />
+                  <TasksTeaserCard />
+                  <AdoptersTeaserCard />
+                </Card.Group>
             
-      
-              <p></p>
-      
-              <p>Would be cool if notifications can go here that tell the admins about new application submissions and tasks </p>
-      
-            
-        
-              <Grid centered>
-                <AdoptableDogsTeaserCard />
-                <TasksTeaserCard />
-                <AdoptersTeaserCard />
               </Grid>
-      
-            
-              </>
-              )
+    
+              </>)
             }} />
             
           </Switch>
-            
-          
-        </div>
-        </>
-      )
+        </Grid.Column>
+      </Grid> 
+     </div>
+    )
     }
   }
 }

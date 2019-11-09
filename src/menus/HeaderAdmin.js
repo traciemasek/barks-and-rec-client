@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Segment } from 'semantic-ui-react'
+import { Menu, Label, Segment, Sticky } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
@@ -7,7 +7,25 @@ import { logout } from '../actions.js'
 
 class HeaderAdmin extends Component {
   //want to move this state and functionality to redux store to keep it with reload, which not that I think about it probably still won't work bc reload would reset the redux store too i think. it would have to be in localStorage or derive value from the url
-  state = { activeItem: 'dashboard' }
+  state = { activeItem: '' }
+
+  componentDidMount(){
+    // console.log("header props", this.props.location.pathname)
+    let location = this.props.location.pathname
+    switch (location){
+      case "/admin/dogs":
+        this.setState({activeItem: 'dogs'})
+        break;
+      case "/admin/adopters":
+        this.setState({activeItem: 'adopters'})
+        break;
+      case "/admin/tasks":
+        this.setState({activeItem: 'tasks'})
+        break;
+      default:
+        this.setState({activeItem: 'dashboard'})
+    }
+  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -24,13 +42,12 @@ class HeaderAdmin extends Component {
 
   render() {
     const { activeItem } = this.state
-
+    let incompleteTasks = this.props.tasks.filter(task => !task.complete)
+  
     return (
-     
-      <Menu inverted fixed="top" size="large">
-      {/* <Menu inverted attached> */}
-        {/* <Container> */}
-        {/* <Menu.Item name='ADMIN' /> */}
+    <Sticky>
+    <Segment inverted attached >
+      <Menu inverted secondary borderless size="large">
         <Menu.Item
           as={Link} to='/admin/'
           name='ADMIN Dashboard'
@@ -49,16 +66,27 @@ class HeaderAdmin extends Component {
           active={activeItem === 'adopters'}
           onClick={this.handleItemClick}
         />
+        {incompleteTasks.length > 0 ? 
         <Menu.Item
           as={Link} to='/admin/tasks'
           name='tasks'
           active={activeItem === 'tasks'}
-          onClick={this.handleItemClick}
-        />
+          onClick={this.handleItemClick}>
+            Tasks <Label color='red' floating>
+              {incompleteTasks.length}
+            </Label>
+          </Menu.Item>
+          :
+          <Menu.Item
+          as={Link} to='/admin/tasks'
+          name='tasks'
+          active={activeItem === 'tasks'}
+          onClick={this.handleItemClick}>
+          </Menu.Item>
+         }   
          {this.props.user && this.props.admin ? 
         <>
          <Menu.Item position="right"
-        //  as={Link} to='/adopter/application'
         //make this a drop down with options 
          icon="user circle outline"
          name={this.props.user.username}
@@ -66,15 +94,14 @@ class HeaderAdmin extends Component {
          onClick={this.userMenu}
        />
          <Menu.Item
-        //  as={Link} to='/adopter/application'
          name='admin log out'
          onClick={this.logout}
        />
        </>
         : null }
-        {/* </Container> */}
       </Menu>
-    
+      </Segment> 
+      </Sticky>
     )
   }
 }
@@ -82,7 +109,8 @@ class HeaderAdmin extends Component {
 function msp(state){
   return {
     user: state.user,
-    admin: state.admin
+    admin: state.admin,
+    tasks: state.tasks
   }
 }
 

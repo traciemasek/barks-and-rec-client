@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Icon, Image, Button, Label } from 'semantic-ui-react';
+import { Card, Icon, Image, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { createFavorite, removeFavorite } from "../actions"
@@ -21,15 +21,15 @@ class AdminDogCard extends Component {
           <Card.Header>{name}</Card.Header>
         </Card.Content>
         <Card.Content extra>
-          <Button as='div' labelPosition='right'>
-            <Button color='red'>
+          <Label color="red" labelposition='right'>
+            <Label color='red'>
               <Icon name='heart' />
               Faves
-            </Button>
-            <Label as='a' basic color='red' pointing='left'>
+            </Label>
+            <Label basic color='red' pointing='left'>
               {numFaves}
             </Label>
-          </Button>
+          </Label>
         </Card.Content>
       </Card>
     

@@ -37,10 +37,7 @@ class TaskCard extends Component {
 
   handleComplete = () => {
     let { id, category, adopter_id } = this.props.task
-    console.log("clicking", this.props.task)
-    //patch current task
-    //patch application
-    //create new task
+ 
     let taskBody = {
       id: id, 
       category: category,
@@ -54,13 +51,17 @@ class TaskCard extends Component {
   }
 
   render() {
+    // console.log("task card props", this.props)
     let { category, adopter_id, complete, created_at } = this.props.task
     let month = created_at.slice(8, 10)
     let day = created_at.slice(5, 7)
     let year = created_at.slice(0, 4)
     let date = `${day}/${month}/${year}`
-    let adopter = this.props.adopters.find(adopter => adopter.id === adopter_id)
-    let adopterName = adopter.first_name + ' ' + adopter.last_name
+    let adopterName
+    if (this.props.adopters.length > 0) {
+      let adopter = this.props.adopters.find(adopter => adopter.id === adopter_id)
+      adopterName = adopter.first_name + ' ' + adopter.last_name
+    }
 
     //if complete, defaultChecked & disabled as props for checkbox
     if (complete) {
@@ -82,7 +83,7 @@ class TaskCard extends Component {
           <Checkbox onClick={this.handleComplete}/>
         </Table.Cell>
         <Table.Cell> <Icon name={this.icon(category)}/>{this.categoryPretty(category)}</Table.Cell>
-        <Table.Cell>{adopter_id}</Table.Cell>
+        <Table.Cell>{adopterName}</Table.Cell>
         <Table.Cell>{complete ? "Complete" : "Pending"}</Table.Cell>
         <Table.Cell>{date}</Table.Cell>
       </Table.Row>

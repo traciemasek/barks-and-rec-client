@@ -1,12 +1,30 @@
 import React, { Component } from 'react'
-import { Menu, Segment } from 'semantic-ui-react'
+import { Menu, Segment, Sticky } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { logout } from '../actions.js'
 
 class HeaderAdopter extends Component {
-  state = { activeItem: 'dashboard' }
+  state = { activeItem: '' }
+
+  componentDidMount(){
+    // console.log("header props", this.props.location.pathname)
+    let location = this.props.location.pathname
+    switch (location){
+      case "/adopter/dogs":
+        this.setState({activeItem: 'adoptable dogs'})
+        break;
+      case "/adopter/faves":
+        this.setState({activeItem: 'my faves'})
+        break;
+      case "/adopter/application":
+        this.setState({activeItem: 'application'})
+        break;
+      default:
+        this.setState({activeItem: 'dashboard'})
+    }
+  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -23,9 +41,11 @@ class HeaderAdopter extends Component {
 
   render() {
     const { activeItem } = this.state
-
+ 
     return (
-      <Menu inverted fixed="top" size="large" >
+      <Sticky>
+      <Segment inverted attached>
+        <Menu inverted secondary borderless size="large">
         <Menu.Item
           as={Link} to='/adopter/'
           name='dashboard'
@@ -53,7 +73,6 @@ class HeaderAdopter extends Component {
         {this.props.user && !this.props.admin ? 
         <>
          <Menu.Item position="right"
-        //  as={Link} to='/adopter/application'
         //make this a drop down with options 
          icon="user circle outline"
          name={this.props.user.username}
@@ -61,14 +80,14 @@ class HeaderAdopter extends Component {
          onClick={this.userMenu}
        />
          <Menu.Item
-        //  as={Link} to='/adopter/application'
          name='log out'
          onClick={this.logout}
        />
        </>
         : null }
       </Menu>
-
+    </Segment>
+    </Sticky>
     )
   }
 }

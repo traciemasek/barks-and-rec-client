@@ -1,4 +1,4 @@
-import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK } from "./types"
+import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG } from "./types"
 
 const defaultState = {
   userLoading: true,
@@ -26,6 +26,8 @@ function reducer(prevState = defaultState, action) {
       return {...prevState, user: action.payload, admin: false, userLoading: false, favorites: action.payload.favorites, favoriteDogs: action.payload.dogs, adopterApplication: action.payload.application}
     case ADD_FAVORITE:
       return {...prevState, favorites: [...prevState.favorites, action.payload.favorite], favoriteDogs: [...prevState.favoriteDogs, action.payload.favoriteDog]}
+    case ADD_DOG:
+      return {...prevState, dogs: [action.payload, ...prevState.dogs]}
     case REMOVE_FAVORITE:
       let favoritesCopy = [...prevState.favorites]
       let favoriteDogsCopy = [...prevState.favoriteDogs]
@@ -57,16 +59,16 @@ function reducer(prevState = defaultState, action) {
       return {...prevState, adopterApplication: action.payload.application, tasks: tasksCopy, applications: applicationsCopy}
     case NEW_TASK:
       let applicationsCopy2 = [...prevState.applications]
-      //find the copy of the updated application 
-      let foundApplication = applicationsCopy2.find(application=>application.id === action.payload.updatedApplication.id)
+      //find the copy of the updated application and remove it from the array 
+      applicationsCopy2 = applicationsCopy2.filter(application => application.id !==action.payload.updatedApplication.id)
       //replace it with the updated response 
-      foundApplication = action.payload.updatedApplication
+      applicationsCopy2.push(action.payload.updatedApplication)
       //copy the current array of tasks and add the new one
       let tasksCopy2 = [...prevState.tasks, action.payload.newTask]
       //find the copy of the updated task
       let foundTask = tasksCopy2.find(task=>task.id === action.payload.updatedTask.id)
-      //replace it with the updated task 
-      foundTask = action.payload.updatedTask
+      //mark the updated task as complete
+      foundTask.complete = true
       return {...prevState, applications: applicationsCopy2, tasks: tasksCopy2}
     case FINAL_APPROVAL_TASK:
       //update the task & the application
@@ -74,13 +76,14 @@ function reducer(prevState = defaultState, action) {
       //find the copy of the updated application 
       let foundApplication2 = applicationsCopy3.find(application=>application.id === action.payload.updatedApplication.id)
       //replace it with the updated response 
-      foundApplication2 = action.payload.updatedApplication
+      foundApplication2.final_approval = true
       //copy the current array of tasks and add the new one
       let tasksCopy3 = [...prevState.tasks]
       //find the copy of the updated task
       let foundTask2 = tasksCopy3.find(task=>task.id === action.payload.updatedTask.id)
       //replace it with the updated task 
-      foundTask2 = action.payload.updatedTask
+      foundTask2.complete = true
+      // foundTask2 = action.payload.updatedTask
       return {...prevState, applications: applicationsCopy3, tasks: tasksCopy3}
     default:
       return prevState
