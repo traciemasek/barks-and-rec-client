@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HeaderAdmin from '../menus/HeaderAdmin'
-import DogShow from '../dogs/DogShowAdopter';
+import AdminDogShow from '../dogs/AdminDogShow';
 import AdminDogsContainer from '../dogs/AdminDogsContainer';
 import AdoptersContainer from './AdoptersContainer';
 import AdoptersShow from './AdoptersShow';
@@ -49,7 +49,7 @@ class AdminMainContainer extends React.Component {
               const { match } = routerProps
               const dogId = match.params.id
               return (
-                <DogShow dogId={dogId}/>
+                <AdminDogShow dogId={dogId}/>
               )
             }} />
             <Route path="/admin/dogs" render={() => {

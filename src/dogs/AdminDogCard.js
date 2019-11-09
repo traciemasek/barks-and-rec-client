@@ -16,7 +16,10 @@ class AdminDogCard extends Component {
     return (
     
       <Card >
-        <Image src={img1} wrapped ui={false} as={Link} to={`/admin/dogs/${id}`}/>
+        <Image 
+          src={img1} as={Link} to={`/admin/dogs/${id}`}
+          // label={{ as: 'a', color: 'teal', corner: 'right', icon: 'edit' }}
+          />
         <Card.Content as={Link} to={`/admin/dogs/${id}`}>
           <Card.Header>{name}</Card.Header>
         </Card.Content>
