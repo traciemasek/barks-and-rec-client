@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AdopterDogCard from './AdopterDogCard';
 import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
-import { Container, Grid, Card } from 'semantic-ui-react'
+import { Container, Grid, Card, Header } from 'semantic-ui-react'
 
 class FavesContainer extends Component {
 
@@ -21,10 +21,13 @@ class FavesContainer extends Component {
         <Grid centered >
           <Grid.Row></Grid.Row>
           <Grid.Row>
-          <h1>You don't have any favorite dogs yet!</h1>
-            
+          <Header as={"h1"}>You don't have any favorite dogs yet!</Header>
+          </Grid.Row>
+
+          <Grid.Row>
           <p>Check out the list of dogs currently available for adoption and click the heart to add it to your favorites!</p>
           </Grid.Row>
+          
           <AdoptableDogsTeaserCard />
         </Grid>
       )
@@ -34,6 +37,10 @@ class FavesContainer extends Component {
             <br/>
               <Container>
                 <Grid centered>
+                  <Grid.Row>
+                    <Header size="huge">Favorites</Header>
+                  </Grid.Row>
+                  
                   <Card.Group>
                   {this.renderFavorites()}
                   </Card.Group>

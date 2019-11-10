@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Menu, Segment, Sticky } from 'semantic-ui-react'
+import { Menu, Segment, Sticky, Icon, Label, Popup } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { logout } from '../actions.js'
+import FeedCard from '../adopter/FeedCard'
 
 class HeaderAdopter extends Component {
   state = { activeItem: '' }
@@ -41,6 +42,9 @@ class HeaderAdopter extends Component {
 
   render() {
     const { activeItem } = this.state
+    let { adopterNotifications } = this.props
+    adopterNotifications = adopterNotifications.filter(note=>!note.read)
+    let popupFeed = <FeedCard/>
  
     return (
       <Sticky>
@@ -72,17 +76,40 @@ class HeaderAdopter extends Component {
         />
         {this.props.user && !this.props.admin ? 
         <>
-         <Menu.Item position="right"
+        <Menu.Menu position="right">
+        {adopterNotifications.length > 0
+        ?
+        <>
+        <Popup 
+          on="click"
+          trigger={
+            <Menu.Item onClick={()=>console.log("I need this to be a drop down with a feed")}>
+              <Icon fitted name="alarm"/>
+              <Label color='red' floating>
+                  {adopterNotifications.length}
+              </Label>
+            </Menu.Item>}
+          content={popupFeed}
+          position="bottom center"
+        >
+        </Popup>
+        </>
+        : 
+        <Menu.Item>
+          <Icon fitted disabled name="alarm"/>
+        </Menu.Item>
+        }
+         <Menu.Item 
         //make this a drop down with options 
          icon="user circle outline"
          name={this.props.user.username}
-         active={activeItem === 'log out'}
          onClick={this.userMenu}
        />
          <Menu.Item
          name='log out'
          onClick={this.logout}
        />
+       </Menu.Menu>
        </>
         : null }
       </Menu>
@@ -95,7 +122,8 @@ class HeaderAdopter extends Component {
 function msp(state){
   return {
     user: state.user,
-    admin: state.admin
+    admin: state.admin,
+    adopterNotifications: state.adopterNotifications
   }
 }
 

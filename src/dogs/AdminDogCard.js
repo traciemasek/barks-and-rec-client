@@ -6,8 +6,6 @@ import { createFavorite, removeFavorite } from "../actions"
 
 class AdminDogCard extends Component {
 
- 
-
   render() {
     // console.log("dog card dog props", this.props)
     const {img1, name, id } = this.props.dog

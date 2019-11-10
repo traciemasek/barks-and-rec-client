@@ -1,4 +1,4 @@
-import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG } from "./types"
+import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG, REMOVE_NOTIFICATION } from "./types"
 
 
 function fetchDogs() {
@@ -154,8 +154,10 @@ function completeTask(taskBody){
     })
     }
 }
+
 function finalApprovalTask(taskBody, id){
   return function(dispatch){
+    //  this is going to update action in tasks, probably want to make a custom route
     fetch(`http://localhost:6969/api/v1/tasks/${id}`, {
       method: "PATCH",
       headers: {
@@ -169,7 +171,25 @@ function finalApprovalTask(taskBody, id){
       console.log("complete final task response", response)
       dispatch({type: FINAL_APPROVAL_TASK, payload: response})
     })
-    }
+  }
+}
+
+function removeNotification(id){
+  return function(dispatch){
+    fetch(`http://localhost:6969/api/v1/notifications/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accepts: "application/json"
+      },
+      // body: JSON.stringify({read: true})
+    })
+    .then(resp => resp.json())
+    .then(response => {
+      console.log("remove notification response", response)
+      dispatch({type: REMOVE_NOTIFICATION, payload: response})
+    })
+  }
 }
 
 
@@ -201,7 +221,8 @@ export {
   completeTask,
   finalApprovalTask,
   createDog, 
-  updateDog
+  updateDog, 
+  removeNotification
 }
 
 //for thunky actions:

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ApplicationForm from './ApplicationForm'
 import ApplicationStatus from './ApplicationStatus'
-import { Grid, Segment, Header } from 'semantic-ui-react'
+import { Grid, Segment, Header, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
 class ApplicationContainer extends Component {
@@ -37,9 +37,13 @@ class ApplicationContainer extends Component {
           <Grid.Row></Grid.Row>
           <Grid.Row>
             <Header as={"h1"}>Congrats! You're approved to adopt!</Header>
+            
           </Grid.Row>
           
-          
+          <Grid.Row>
+          {/* <Image src="https://1p4xnw9vz583g92k7249hwjj-wpengine.netdna-ssl.com/wp-content/uploads/2014/05/Celebrating-Dogs.jpg" rounded centered /> */}
+          <Image src="http://www.sandiegopetsmagazine.com/wp-content/uploads/2019/07/dog_party.jpg" rounded centered />
+          </Grid.Row>
         </Grid>
       
       }

@@ -3,8 +3,6 @@ import { Modal, Menu, Sticky, Segment } from 'semantic-ui-react'
 // import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import SignupAdopter from '../forms/SignupAdopter'
-import LoginAdopter from '../forms/LoginAdopter'
 import LoginAdmin from '../forms/LoginAdmin'
 
 class HeaderSplash extends Component {
@@ -40,33 +38,7 @@ class HeaderSplash extends Component {
           </Modal.Content>
         </Modal>
 
-        <Modal 
-          
-          size="mini" 
-          trigger={<Menu.Item 
-            position="right"
-            name='adopter log in'
-            active={activeItem === 'adopter log in'}
-            onClick={this.handleItemClick}
-        />}>
-          <Modal.Header>Adopter Log In!</Modal.Header>
-          <Modal.Content>
-            <LoginAdopter />
-          </Modal.Content>
-        </Modal>
-
-        <Modal 
-          size="mini" 
-          trigger={<Menu.Item
-          name='adopter sign up'
-          active={activeItem === 'adopter sign up'}
-          onClick={this.handleItemClick}
-        />}>
-          <Modal.Header>Sign up!</Modal.Header>
-          <Modal.Content>
-            <SignupAdopter />
-          </Modal.Content>
-        </Modal>
+        
       </Menu>
       </Segment> 
       </Sticky>

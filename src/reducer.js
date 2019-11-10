@@ -1,4 +1,4 @@
-import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG } from "./types"
+import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG, REMOVE_NOTIFICATION } from "./types"
 
 const defaultState = {
   userLoading: true,
@@ -13,6 +13,7 @@ const defaultState = {
   favoriteDogs: [],
   allFavorites: [],
   adopterApplication: false,
+  adopterNotifications: [],
   adopters: [],
   applications: [], 
   tasks: []
@@ -23,7 +24,7 @@ function reducer(prevState = defaultState, action) {
   //console.log("ACTION", action)
   switch(action.type){
     case SET_ADOPTER_USER:
-      return {...prevState, user: action.payload, admin: false, userLoading: false, favorites: action.payload.favorites, favoriteDogs: action.payload.dogs, adopterApplication: action.payload.application}
+      return {...prevState, user: action.payload, admin: false, userLoading: false, favorites: action.payload.favorites, favoriteDogs: action.payload.dogs, adopterApplication: action.payload.application, adopterNotifications: action.payload.notifications}
     case ADD_FAVORITE:
       return {...prevState, favorites: [...prevState.favorites, action.payload.favorite], favoriteDogs: [...prevState.favoriteDogs, action.payload.favoriteDog]}
     case ADD_DOG:
@@ -60,7 +61,6 @@ function reducer(prevState = defaultState, action) {
     case SUBMIT_APPLICATION:
       let tasksCopy = [...prevState.tasks, ...action.payload.tasks]
       let applicationsCopy = [...prevState.applications, action.payload.application]
-      //add tasks to tasks without nesting them in another array!!!
       //add application to adopterApplication and applications 
       return {...prevState, adopterApplication: action.payload.application, tasks: tasksCopy, applications: applicationsCopy}
     case NEW_TASK:
@@ -75,7 +75,8 @@ function reducer(prevState = defaultState, action) {
       let foundTask = tasksCopy2.find(task=>task.id === action.payload.updatedTask.id)
       //mark the updated task as complete
       foundTask.complete = true
-      return {...prevState, applications: applicationsCopy2, tasks: tasksCopy2}
+      let notificationsCopy = [...prevState.adopterNotifications, action.payload.notification]
+      return {...prevState, applications: applicationsCopy2, tasks: tasksCopy2, adopterNotifications: notificationsCopy}
     case FINAL_APPROVAL_TASK:
       //update the task & the application
       let applicationsCopy3 = [...prevState.applications]
@@ -90,7 +91,13 @@ function reducer(prevState = defaultState, action) {
       //replace it with the updated task 
       foundTask2.complete = true
       // foundTask2 = action.payload.updatedTask
-      return {...prevState, applications: applicationsCopy3, tasks: tasksCopy3}
+      let notificationsCopy2 = [...prevState.adopterNotifications, action.payload.notification]
+      return {...prevState, applications: applicationsCopy3, tasks: tasksCopy3, adopterNotifications: notificationsCopy2}
+    case REMOVE_NOTIFICATION:
+      let adopterNotificationsCopy = [...prevState.adopterNotifications]
+      let foundNotification = adopterNotificationsCopy.find(notification => notification.id === action.payload.id)
+      foundNotification.read = true
+      return {...prevState, adopterNotifications: adopterNotificationsCopy}
     default:
       return prevState
   }

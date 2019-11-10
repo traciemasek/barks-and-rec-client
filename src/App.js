@@ -97,7 +97,8 @@ function msp(state){
     adopterApplication: state.adopterApplication,
     applications: state.applications,
     tasks: state.tasks,
-    allFavorites: state.allFavorites
+    allFavorites: state.allFavorites,
+    adopterNotifications: state.adopterNotifications
   }
   //probably won't want to return the entire store of state, so extract what you need aka shopping at the state store
   //return { likes: state.likes, things: state.things}

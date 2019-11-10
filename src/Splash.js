@@ -1,8 +1,7 @@
 import React from 'react';
-// import LoginAdmin from "./forms/LoginAdmin"
-// import LoginAdopter from "./forms/LoginAdopter"
-// import SignupAdopter from "./forms/SignupAdopter"
 import HeaderSplash from "./menus/HeaderSplash"
+import jumbotron02 from './images/jumbotron03.jpeg'
+// import { Container } from 'semantic-ui-react'
 // import { Route, Switch, Link } from "react-router-dom"
 
 
@@ -20,14 +19,25 @@ class Splash extends React.Component {
   
   render() {
     // console.log("SPLASH state", this.state)
+
+    const style = {
+      // border: "1px solid red",
+      backgroundImage: `url(${jumbotron02})`,
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      height: "100vh"
+    }
+
     return (
-      <div>
-        <HeaderSplash />
+      <>
+      <div style={style}>
+      <HeaderSplash />
         
-        <h1>Barks and Rec</h1>
-        <p>I am the landing page. Eventually I will have a giant image and a header and a logo and shit. For now I have some buttons.</p>
+        
   
       </div>
+      </>
     )
   }
 
