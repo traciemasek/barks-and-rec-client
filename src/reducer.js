@@ -76,7 +76,7 @@ function reducer(prevState = defaultState, action) {
       //mark the updated task as complete
       foundTask.complete = true
       //add the new notification
-      let notificationsCopy = [...prevState.adopterNotifications, action.payload.notification]
+      let notificationsCopy = [action.payload.notification, ...prevState.adopterNotifications]
       return {...prevState, applications: applicationsCopy2, tasks: tasksCopy2, adopterNotifications: notificationsCopy}
     case FINAL_APPROVAL_TASK:
       //update the task & the application
@@ -92,7 +92,7 @@ function reducer(prevState = defaultState, action) {
       //replace it with the updated task 
       foundTask2.complete = true
       //add the new notification
-      let notificationsCopy2 = [...prevState.adopterNotifications, action.payload.notification]
+      let notificationsCopy2 = [action.payload.notification,...prevState.adopterNotifications]
       return {...prevState, applications: applicationsCopy3, tasks: tasksCopy3, adopterNotifications: notificationsCopy2}
     case REMOVE_NOTIFICATION:
       let adopterNotificationsCopy = [...prevState.adopterNotifications]

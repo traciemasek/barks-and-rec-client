@@ -9,7 +9,10 @@ class FeedCard extends Component {
  
   renderFeedItems = () => {
     const { adopterNotifications } = this.props
-    const unreadNotifications = adopterNotifications.filter(notification => !notification.read)
+    let unreadNotifications = adopterNotifications.filter(notification => !notification.read)
+    
+    unreadNotifications.sort((a,b)=>a.created_at < b.created_at ? 1 : -1)
+
     return unreadNotifications.map(note => <FeedItem key={note.id} notification={note} />)
   }
 
