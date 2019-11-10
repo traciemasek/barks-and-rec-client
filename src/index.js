@@ -7,8 +7,9 @@ import App from './App';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk'
-import reducer from './reducer'
+import thunk from 'redux-thunk';
+import reducer from './reducer';
+import { ActionCableProvider } from 'react-actioncable-provider';
 
 //see lecture code for how to use combineReducers
 
@@ -17,12 +18,14 @@ import reducer from './reducer'
 const store = createStore(reducer, applyMiddleware(thunk))
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      {/* optionally making '/' the root here and passing routerProps by doing the component={App} thing */}
-      <Route path='/' component={App}></Route>
-    </BrowserRouter>
-  </Provider>
+  <ActionCableProvider url="ws://localhost:6969/cable">
+    <Provider store={store}>
+      <BrowserRouter>
+        {/* optionally making '/' the root here and passing routerProps by doing the component={App} thing */}
+        <Route path='/' component={App}></Route>
+      </BrowserRouter>
+    </Provider>
+  </ActionCableProvider>
 , document.getElementById('root'));
 
 
