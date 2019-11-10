@@ -9,14 +9,10 @@ class DogShow extends Component {
       let dogId = parseInt(this.props.dogId)
   
       let foundDog = this.props.dogs.find(dog=>dog.id === dogId)
-      let { age_group, name, img1, breed, description, size, dog_friendly, kid_friendly ,cat_friendly, has_special_needs, sex, special_needs_description } = foundDog
+      let { age, name, img1, breed, about, size, goodHome, badHome ,health, color, sex, houseTrained } = foundDog
 
-      let subheader = `${breed} • ${age_group} • ${sex} • ${size}`
+      let subheader = `${breed} • ${age} • ${sex} • ${size} • ${color}`
 
-      // const capitalize = {
-      //   textTransform: "capitalize",
-      //   // color: "DimGray"
-      // }
       const charcoal = {
         color: "#464646"
       }
@@ -41,27 +37,23 @@ class DogShow extends Component {
           <Header style={charcoal} size="large">About</Header>
 
           <Header color="grey" size="medium" content="HEALTH"/>
-          <p>Vaccinations up to date; spayed/neutered. Special needs: {has_special_needs ? special_needs_description : "N/A"}</p>
+          <p>Vaccinations up to date; spayed/neutered. Special needs: {health ? health : "N/A"}</p>
 
           <Header color="grey" size="medium" content="HOUSE-TRAINED"/>
-          <p>Yes</p>
+          <p>{houseTrained}</p>
 
           <Header color="grey" size="medium" content="GOOD IN A HOME WITH"/>
           <p>
-            {dog_friendly ? "dogs " : null}
-            {cat_friendly ? "cats " : null}
-            {kid_friendly ? "children " : null}
+            {goodHome}
           </p>
 
           <Header color="grey" size="medium" content="PREFERS A HOME WITHOUT"/>
           <p>
-            {dog_friendly ? null : "dogs "}
-            {cat_friendly ? null : "cats "}
-            {kid_friendly ? null : "children"}
+            {badHome}
           </p>
 
           <Header style={charcoal} size="large">Meet {name} </Header>
-          <p>{description}</p>
+          <p>{about}</p>
   
           </Grid.Row>
           </Grid.Column>                   

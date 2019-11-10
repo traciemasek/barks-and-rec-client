@@ -19,15 +19,17 @@ class AdminDogsContainer extends Component {
       return (
         <Grid >
           <Grid.Row>
-            <Segment basic floated="right"> 
-              <Button as={Link} to='/admin/new' color="teal" icon labelPosition='left' >
+          </Grid.Row>
+  
+          <Grid centered>
+          <Grid.Row>
+            <Segment basic > 
+              <Button floated="right" as={Link} to='/admin/new' color="teal" icon labelPosition='left' >
                 <Icon name='plus' />
                 Add New Dog
               </Button>
             </Segment>
           </Grid.Row>
-  
-          <Grid centered>
             <Card.Group centered>
               {this.renderDogs()}
             </Card.Group>

@@ -5,20 +5,29 @@ import { Link } from 'react-router-dom';
 import AdminDogEditModal from './AdminDogEditModal';
 
 class DogShow extends Component {
+  state = {
+    showModal: false
+  }
+
+  openModal = () => {
+    this.setState({ showModal: true })
+  } 
+
+  closeModal = () => {
+    this.setState({ showModal: false })
+  }
+
   render() {
     if (this.props.dogs.length > 0) {
  
-      let dogId = parseInt(this.props.dogId)
+      const dogId = parseInt(this.props.dogId)
+      const { showModal } = this.state
   
-      let foundDog = this.props.dogs.find(dog=>dog.id === dogId)
-      let { age, name, img1, breed, about, size, goodHome, badHome ,health, color, sex, houseTrained } = foundDog
+      const foundDog = this.props.dogs.find(dog=>dog.id === dogId)
+      const { age, name, img1, breed, about, size, goodHome, badHome ,health, color, sex, houseTrained } = foundDog
 
-      let subheader = `${breed} • ${age} • ${sex} • ${size} • ${color}`
+      const subheader = `${breed} • ${age} • ${sex} • ${size} • ${color}`
 
-      // const capitalize = {
-      //   textTransform: "capitalize",
-      //   // color: "DimGray"
-      // }
       const charcoal = {
         color: "#464646"
       }
@@ -35,13 +44,13 @@ class DogShow extends Component {
                 Return to all dogs
               </Button>
 
-              <Modal trigger={
-                <Button floated="right" color="teal" icon labelPosition='left' >
+              <Modal open={showModal} trigger={
+                <Button floated="right" color="teal" icon labelPosition='left' onClick={this.openModal}>
                   <Icon name='edit' />
                   Edit Me
                 </Button>}>
                 <Modal.Content>
-                <AdminDogEditModal dogId={dogId}/>
+                <AdminDogEditModal closeModal={this.closeModal} dogId={dogId}/>
               </Modal.Content>
             </Modal>
 

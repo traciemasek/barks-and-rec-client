@@ -1,4 +1,4 @@
-import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG } from "./types"
+import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG } from "./types"
 
 
 function fetchDogs() {
@@ -66,6 +66,24 @@ function createDog(body){
     .then(response => {
       console.log(response)
       dispatch({type: ADD_DOG, payload: response})
+    })
+  }
+}
+
+function updateDog(body, id){
+  return function(dispatch){
+    fetch(`http://localhost:6969/api/v1/dogs/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accepts: "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+    .then(resp => resp.json())
+    .then(response => {
+      console.log(response)
+      dispatch({type: UPDATE_DOG, payload: response})
     })
   }
 }
@@ -182,7 +200,8 @@ export {
   fetchAllFavorites,
   completeTask,
   finalApprovalTask,
-  createDog
+  createDog, 
+  updateDog
 }
 
 //for thunky actions:

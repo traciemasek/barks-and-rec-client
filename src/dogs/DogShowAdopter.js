@@ -13,10 +13,6 @@ class DogShow extends Component {
 
       let subheader = `${breed} • ${age} • ${sex} • ${size} • ${color}`
 
-      // const capitalize = {
-      //   textTransform: "capitalize",
-      //   // color: "DimGray"
-      // }
       const charcoal = {
         color: "#464646"
       }

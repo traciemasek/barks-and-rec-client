@@ -1,4 +1,4 @@
-import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG } from "./types"
+import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG } from "./types"
 
 const defaultState = {
   userLoading: true,
@@ -28,6 +28,12 @@ function reducer(prevState = defaultState, action) {
       return {...prevState, favorites: [...prevState.favorites, action.payload.favorite], favoriteDogs: [...prevState.favoriteDogs, action.payload.favoriteDog]}
     case ADD_DOG:
       return {...prevState, dogs: [action.payload, ...prevState.dogs]}
+    case UPDATE_DOG:
+      let dogsCopy = [...prevState.dogs]
+      const id = action.payload.id
+      dogsCopy = dogsCopy.filter(dog => dog.id !== id)
+      dogsCopy = [...dogsCopy, action.payload]
+      return {...prevState, dogs: dogsCopy}
     case REMOVE_FAVORITE:
       let favoritesCopy = [...prevState.favorites]
       let favoriteDogsCopy = [...prevState.favoriteDogs]

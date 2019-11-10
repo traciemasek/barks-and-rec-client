@@ -86,21 +86,21 @@ class NewDog extends Component {
 
 
         <Form.Group widths="equal">
-          <Image style={{paddingLeft: "10px"}}src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='tiny' />
+          <Image style={{paddingLeft: "10px"}} src={img1 ? img1 : 'https://react.semantic-ui.com/images/wireframe/square-image.png'} size='tiny' />
           <Form.Input required fluid label='Image URL' name="img1" onChange={this.handleChange} placeholder='http//...' value={img1}/>
         </Form.Group>
         <Form.Group widths="equal">
-          <Image style={{paddingLeft: "10px"}}src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='tiny' />
+          <Image style={{paddingLeft: "10px"}} src={img2 ? img2 : 'https://react.semantic-ui.com/images/wireframe/square-image.png'} size='tiny' />
           <Form.Input fluid label='Image URL' name="img2" onChange={this.handleChange} placeholder='http//...' value={img2}/>
         </Form.Group>
         <Form.Group widths="equal">
-          <Image style={{paddingLeft: "10px"}}src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='tiny' />
+          <Image style={{paddingLeft: "10px"}} src={img3 ? img3 : 'https://react.semantic-ui.com/images/wireframe/square-image.png'} size='tiny' />
           <Form.Input fluid label='Image URL' name="img3" onChange={this.handleChange} placeholder='http//...' value={img3}/>
         </Form.Group>
 
         <Form.TextArea label='Health' name="health" placeholder='Any known health issues...' onChange={this.handleChange} value={health}/>
         <Form.TextArea label='Good in a home with' name="goodHome" placeholder='Other dogs, children, cats, etc...' onChange={this.handleChange} value={goodHome}/>
-        <Form.TextArea label='Prefers a home witout' name="badHome" placeholder='Other dogs, children, cats, etc...' onChange={this.handleChange} value={badHome}/>
+        <Form.TextArea label='Prefers a home without' name="badHome" placeholder='Other dogs, children, cats, etc...' onChange={this.handleChange} value={badHome}/>
         <Form.TextArea label='About' name="about" placeholder='Add a description of the dog...' onChange={this.handleChange} value={about}/>
       
        
