@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Checkbox, Table, Icon } from 'semantic-ui-react'
 import { connect } from "react-redux"
 import { completeTask, finalApprovalTask } from "../actions"
+import * as moment from "moment";
 
 class TaskCard extends Component {
 
@@ -53,10 +54,11 @@ class TaskCard extends Component {
   render() {
     // console.log("task card props", this.props)
     let { category, adopter_id, complete, created_at } = this.props.task
-    let month = created_at.slice(8, 10)
-    let day = created_at.slice(5, 7)
-    let year = created_at.slice(0, 4)
-    let date = `${day}/${month}/${year}`
+    // let month = created_at.slice(8, 10)
+    // let day = created_at.slice(5, 7)
+    // let year = created_at.slice(0, 4)
+    // let date = `${day}/${month}/${year}`
+    let parsedDate = moment(created_at).format('MMMM Do, YYYY')
     let adopterName
     if (this.props.adopters.length > 0) {
       let adopter = this.props.adopters.find(adopter => adopter.id === adopter_id)
@@ -73,7 +75,7 @@ class TaskCard extends Component {
         <Table.Cell> <Icon name={this.icon(category)}/>{this.categoryPretty(category)}</Table.Cell>
         <Table.Cell>{adopterName}</Table.Cell>
         <Table.Cell>{complete ? "Complete" : "Pending"}</Table.Cell>
-        <Table.Cell>{date}</Table.Cell>
+        <Table.Cell>{parsedDate}</Table.Cell>
       </Table.Row>
     )
     } else {
@@ -85,7 +87,7 @@ class TaskCard extends Component {
         <Table.Cell> <Icon name={this.icon(category)}/>{this.categoryPretty(category)}</Table.Cell>
         <Table.Cell>{adopterName}</Table.Cell>
         <Table.Cell>{complete ? "Complete" : "Pending"}</Table.Cell>
-        <Table.Cell>{date}</Table.Cell>
+        <Table.Cell>{parsedDate}</Table.Cell>
       </Table.Row>
     )
     }

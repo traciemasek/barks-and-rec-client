@@ -75,6 +75,7 @@ function reducer(prevState = defaultState, action) {
       let foundTask = tasksCopy2.find(task=>task.id === action.payload.updatedTask.id)
       //mark the updated task as complete
       foundTask.complete = true
+      //add the new notification
       let notificationsCopy = [...prevState.adopterNotifications, action.payload.notification]
       return {...prevState, applications: applicationsCopy2, tasks: tasksCopy2, adopterNotifications: notificationsCopy}
     case FINAL_APPROVAL_TASK:
@@ -90,7 +91,7 @@ function reducer(prevState = defaultState, action) {
       let foundTask2 = tasksCopy3.find(task=>task.id === action.payload.updatedTask.id)
       //replace it with the updated task 
       foundTask2.complete = true
-      // foundTask2 = action.payload.updatedTask
+      //add the new notification
       let notificationsCopy2 = [...prevState.adopterNotifications, action.payload.notification]
       return {...prevState, applications: applicationsCopy3, tasks: tasksCopy3, adopterNotifications: notificationsCopy2}
     case REMOVE_NOTIFICATION:

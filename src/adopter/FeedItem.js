@@ -3,7 +3,7 @@ import { Feed, Icon } from 'semantic-ui-react';
 // import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { removeNotification } from '../actions'
+import { removeNotification } from '../actions';
 import * as moment from "moment";
 
 function FeedItem(props) {

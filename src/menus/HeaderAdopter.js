@@ -103,7 +103,7 @@ class HeaderAdopter extends Component {
         //make this a drop down with options 
          icon="user circle outline"
          name={this.props.user.username}
-         onClick={this.userMenu}
+        //  onClick={this.userMenu}
        />
          <Menu.Item
          name='log out'
