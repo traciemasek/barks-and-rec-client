@@ -47,6 +47,7 @@ class TaskCard extends Component {
     if (category === "final_approval") {
       this.props.finalApprovalTask(taskBody, id)
     } else {
+      console.log("TASK CARD handle complete taskBody", taskBody)
       this.props.completeTask(taskBody)
     }
   }

@@ -64,7 +64,8 @@ function reducer(prevState = defaultState, action) {
       //add application to adopterApplication and applications 
       return {...prevState, adopterApplication: action.payload.application, tasks: tasksCopy, applications: applicationsCopy}
     case NEW_TASK:
-      console.log("NEW TASK", action.payload)
+      console.log("REDUCER NEW TASK ACTION.PAYLOAD", action.payload)
+   
       let applicationsCopy2 = [...prevState.applications]
       //find the copy of the updated application and remove it from the array 
       applicationsCopy2 = applicationsCopy2.filter(application => application.id !==action.payload.updatedApplication.id)

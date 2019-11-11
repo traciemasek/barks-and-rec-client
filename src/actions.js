@@ -202,7 +202,6 @@ function addFinalNotification(response){
   return {type: FINAL_APPROVAL_TASK, payload: response}
 }
 
-
 function setAdmin(admin) {
   return {type: SET_ADMIN_USER, payload: admin}
 } 
