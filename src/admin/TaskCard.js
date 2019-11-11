@@ -53,7 +53,7 @@ class TaskCard extends Component {
   }
 
   render() {
-    // console.log("task card props", this.props)
+    console.log("task card props", this.props)
     let { category, adopter_id, complete, created_at } = this.props.task
     // let month = created_at.slice(8, 10)
     // let day = created_at.slice(5, 7)

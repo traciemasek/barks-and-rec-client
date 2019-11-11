@@ -8,12 +8,12 @@ import AdoptersContainer from './AdoptersContainer';
 import AdoptersShow from './AdoptersShow';
 import TasksContainer from './TasksContainer';
 import NewDog from '../dogs/NewDog';
-import { fetchAdopters, fetchApplications, fetchDogs, fetchTasks, fetchAllFavorites } from '../actions';
+import { fetchAdopters, fetchApplications, fetchDogs, fetchTasks, fetchAllFavorites, addAppSubmittedTask } from '../actions';
 import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
 import TasksTeaserCard from '../teasers/TasksTeaserCard'
 import AdoptersTeaserCard from '../teasers/AdoptersTeaserCard'
 import { Grid, Card } from 'semantic-ui-react'
-
+import { ActionCableConsumer } from 'react-actioncable-provider';
 
 
 
@@ -90,6 +90,15 @@ class AdminMainContainer extends React.Component {
           </Switch>
         </Grid.Column>
       </Grid> 
+
+      <ActionCableConsumer
+        channel={{ channel: 'TaskChannel' }}
+        onReceived={response => {
+          console.log("action cable task consumer", response);
+          this.props.addAppSubmittedTask(response)
+        }}
+      />
+
      </div>
     )
     }
@@ -106,4 +115,4 @@ function msp(state){
 }
 
 
-export default connect(msp, { fetchAdopters, fetchApplications, fetchDogs, fetchTasks, fetchAllFavorites })(AdminMainContainer)
+export default connect(msp, { fetchAdopters, fetchApplications, fetchDogs, fetchTasks, fetchAllFavorites, addAppSubmittedTask })(AdminMainContainer)

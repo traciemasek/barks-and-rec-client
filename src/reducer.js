@@ -1,4 +1,4 @@
-import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG, REMOVE_NOTIFICATION, ADD_NOTIFICATION, ADD_FINAL_NOTIFICATION } from "./types"
+import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG, REMOVE_NOTIFICATION, ADD_NOTIFICATION, ADD_FINAL_NOTIFICATION, ADD_APP_SUBMITTED_TASK } from "./types"
 
 const defaultState = {
   userLoading: true,
@@ -59,10 +59,14 @@ function reducer(prevState = defaultState, action) {
     case FETCH_ALL_FAVORITES:
       return {...prevState, allFavorites: action.payload}
     case SUBMIT_APPLICATION:
-      let tasksCopy = [...prevState.tasks, ...action.payload.tasks]
-      let applicationsCopy = [...prevState.applications, action.payload.application]
-      //add application to adopterApplication and applications 
-      return {...prevState, adopterApplication: action.payload.application, tasks: tasksCopy, applications: applicationsCopy}
+      // let tasksCopy = [...prevState.tasks, ...action.payload.tasks]
+      // let applicationsCopy = [...prevState.applications, action.payload.application]
+      // //add application to adopterApplication and applications 
+      // return {...prevState, adopterApplication: action.payload.application, tasks: tasksCopy, applications: applicationsCopy}
+      return {...prevState, adopterApplication: action.payload.application}
+    case ADD_APP_SUBMITTED_TASK:
+      let tasksCopy = [...prevState.tasks, action.payload.task]
+      return {...prevState, tasks: tasksCopy}
     case NEW_TASK:   
       let applicationsCopy2 = [...prevState.applications]
       //find the copy of the updated application and remove it from the array 

@@ -1,4 +1,4 @@
-import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG, REMOVE_NOTIFICATION, ADD_FINAL_NOTIFICATION, ADD_NOTIFICATION } from "./types"
+import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG, REMOVE_NOTIFICATION, ADD_FINAL_NOTIFICATION, ADD_NOTIFICATION, ADD_APP_SUBMITTED_TASK } from "./types"
 
 
 function fetchDogs() {
@@ -193,15 +193,20 @@ function removeNotification(id){
 }
 
 function addNotification(response){
-  console.log("addNotification action", response)
+  // console.log("addNotification action", response)
   //from adopter perspective 
   return {type: ADD_NOTIFICATION, payload: response}
 }
 
 function addFinalNotification(response){
-  console.log("addNotification action", response)
+  // console.log("addNotification action", response)
   //from adopter perspective 
   return {type: ADD_FINAL_NOTIFICATION, payload: response}
+}
+
+function addAppSubmittedTask(response){
+  //from admin perspective
+  return {type: ADD_APP_SUBMITTED_TASK, payload: response}
 }
 
 
@@ -236,7 +241,8 @@ export {
   updateDog, 
   removeNotification, 
   addNotification, 
-  addFinalNotification
+  addFinalNotification,
+  addAppSubmittedTask
 }
 
 //for thunky actions:

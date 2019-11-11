@@ -1,5 +1,5 @@
 import React from 'react';
-import banner02 from '../images/banner02.png'
+// import banner02 from '../images/banner02.png'
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import DogShow from '../dogs/DogShowAdopter'
@@ -11,7 +11,7 @@ import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
 import FavoriteDogsTeaserCard from '../teasers/FavoriteDogsTeaserCard'
 import ApplicationTeaserCard from '../teasers/ApplicationTeaserCard'
 import { fetchDogs, addNotification, addFinalNotification } from '../actions';
-import { Grid, Card, Segment } from 'semantic-ui-react'
+import { Grid, Card } from 'semantic-ui-react'
 import { ActionCableConsumer } from 'react-actioncable-provider';
 
 class AdopterMainContainer extends React.Component {
@@ -105,7 +105,6 @@ class AdopterMainContainer extends React.Component {
             :
             this.props.addFinalNotification(response)
           }
-  
         }}
       />
 

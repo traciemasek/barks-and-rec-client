@@ -9,7 +9,7 @@ class TasksContainer extends Component {
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
-  renderTasks() {
+  renderTasks = () => {
     return this.props.tasks.map(task => <TaskCard key={task.id} task={task}/>)
   }
   

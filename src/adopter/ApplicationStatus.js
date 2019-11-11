@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Step } from 'semantic-ui-react'
+import { Grid, Step, Segment} from 'semantic-ui-react'
 import { connect } from 'react-redux'
 
 class ApplicationStatus extends Component {
@@ -74,7 +74,9 @@ class ApplicationStatus extends Component {
     } else {
       return (
         <Grid centered>
+          <Segment>
           <Step.Group vertical items={steps} />
+          </Segment>
         </Grid>
       )
     }
