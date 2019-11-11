@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import AdoptersCard from './AdoptersCard'
-import { Segment, Card } from 'semantic-ui-react'
+import { Header, Card } from 'semantic-ui-react'
 
 function AdoptersContainer(props) {
 
@@ -13,7 +13,7 @@ function AdoptersContainer(props) {
     <div>
       <br></br>
       <br></br>
-      <Segment>THIS LOOKS EXACTLY HOW I WANT DON'T WORRY ABOUT IT</Segment>
+      <Header as="h1" style={{fontFamily: "Roboto"}} >Our potential adopters</Header>
       <Card.Group>
       {renderAdopters()}
       </Card.Group>
