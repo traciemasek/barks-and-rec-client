@@ -9,8 +9,9 @@ import HeaderAdopter from '../menus/HeaderAdopter';
 import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
 import FavoriteDogsTeaserCard from '../teasers/FavoriteDogsTeaserCard'
 import ApplicationTeaserCard from '../teasers/ApplicationTeaserCard'
-import { fetchDogs } from '../actions';
+import { fetchDogs, addNotification, addFinalNotification } from '../actions';
 import { Grid, Card } from 'semantic-ui-react'
+import { ActionCableConsumer } from 'react-actioncable-provider';
 
 class AdopterMainContainer extends React.Component {
 
@@ -76,6 +77,22 @@ class AdopterMainContainer extends React.Component {
           </Switch>
         </Grid.Column>
       </Grid>
+
+      <ActionCableConsumer
+        channel={{ channel: 'NotificationChannel' }}
+        onReceived={response => {
+          console.log("action cable consumer", response);
+          if (response.notification.adopter_id === this.props.user.id) {
+            response.newTask 
+            ?
+            this.props.addNotification(response)
+            :
+            this.props.addFinalNotification(response)
+          }
+  
+        }}
+      />
+
     </div>
     )
     }
@@ -93,4 +110,4 @@ function msp(state){
 }
 
 
-export default connect(msp, { fetchDogs })(AdopterMainContainer)
+export default connect(msp, { fetchDogs, addNotification, addFinalNotification })(AdopterMainContainer)

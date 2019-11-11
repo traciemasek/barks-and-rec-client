@@ -8,7 +8,7 @@ class ApplicationContainer extends Component {
 
   //would be awesome to start with instructions and a step/button/card that says Apply! Submit Your Application exactly like the first step in the group. Clicking that should render the application. Once the application has been submitted, only the checklist should show
   render() {
-    console.log("application container props", this.props)
+    // console.log("application container props", this.props)
     const { adopterApplication, userLoading } = this.props
     if (userLoading) {
       return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>

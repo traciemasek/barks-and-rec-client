@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { logout, addNotification, addFinalNotification } from '../actions.js'
 import FeedCard from '../adopter/FeedCard'
-import { ActionCableConsumer } from 'react-actioncable-provider';
+// import { ActionCableConsumer } from 'react-actioncable-provider';
 
 class HeaderAdopter extends Component {
   state = { activeItem: '' }
@@ -84,7 +84,7 @@ class HeaderAdopter extends Component {
         <Popup 
           on="click"
           trigger={
-            <Menu.Item onClick={()=>console.log("I need this to be a drop down with a feed")}>
+            <Menu.Item >
               <Icon fitted name="alarm"/>
               <Label color='red' floating>
                   {adopterNotifications.length}
@@ -117,7 +117,7 @@ class HeaderAdopter extends Component {
 
 {/* SHOULD THIS BE IN ADOPTER MAIN CONTAINER??? */}
 {/* this is messy and might need stream_to so that adopter only gets their own notifications?? */}
-      <ActionCableConsumer
+      {/* <ActionCableConsumer
         channel={{ channel: 'NotificationChannel' }}
         onReceived={response => {
           console.log("action cable consumer", response);
@@ -130,7 +130,7 @@ class HeaderAdopter extends Component {
           }
   
         }}
-      />
+      /> */}
 
       </Menu>
     </Segment>
