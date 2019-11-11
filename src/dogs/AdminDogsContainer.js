@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AdminDogCard from './AdminDogCard';
-import { Grid, Button, Icon, Card , Segment} from 'semantic-ui-react';
+import { Grid, Button, Icon, Card , Segment, Header} from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { fetchDogs } from '../actions';
 import { Link } from 'react-router-dom';
@@ -18,19 +18,17 @@ class AdminDogsContainer extends Component {
     } else {
       return (
         <Grid >
-          <Grid.Row>
-          </Grid.Row>
-  
-          <Grid centered>
-          <Grid.Row>
-            <Segment basic > 
-              <Button floated="right" as={Link} to='/admin/new' color="teal" icon labelPosition='left' >
+          <Grid.Row></Grid.Row>
+          <Grid.Row >
+            <Segment basic floated="right"> 
+              <Button as={Link} to='/admin/new' color="teal" icon labelPosition='left' >
                 <Icon name='plus' />
                 Add New Dog
               </Button>
             </Segment>
           </Grid.Row>
-            <Card.Group centered>
+          <Grid centered>
+            <Card.Group itemsPerRow={3} centered>
               {this.renderDogs()}
             </Card.Group>
           </Grid>

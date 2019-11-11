@@ -76,7 +76,7 @@ class AdminMainContainer extends React.Component {
                 </Grid.Row>
                 <Grid.Row></Grid.Row>
               
-                <Card.Group centered>
+                <Card.Group itemsPerRow={3} centered>
                   <AdoptableDogsTeaserCard />
                   <TasksTeaserCard />
                   <AdoptersTeaserCard />

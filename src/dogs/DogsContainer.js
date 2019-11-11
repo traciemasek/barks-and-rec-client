@@ -35,17 +35,17 @@ class DogsContainer extends Component {
   
           <Grid.Row centered>
             <Segment basic>
-              <Header as={"h1"}>Meet our available dogs!</Header>
+              <Header style={{fontFamily: "Roboto"}} as={"h1"}>Meet our available dogs!</Header>
               <Container text>
-            <p> If a dog is listed here, that means they are AVAILABLE for adoption. </p>
+            <p style={{fontFamily: "Roboto"}}> If a dog is listed here, that means they are AVAILABLE for adoption. </p>
 
-          <p>While we may have pending adoption applications ahead of you for your dog of interest, the best thing to do is still to apply. Once you are approved, you remain approved for any new dogs that we rescue in the future!</p>
+          <p style={{fontFamily: "Roboto"}}>While we may have pending adoption applications ahead of you for your dog of interest, the best thing to do is still to apply. Once you are approved, you remain approved for any new dogs that we rescue in the future!</p>
           </Container>
             </Segment>
           </Grid.Row>
           <Grid.Row></Grid.Row>
           
-          <Card.Group centered>
+          <Card.Group itemsPerRow={3} centered>
             {this.renderDogs()}
           </Card.Group>
        

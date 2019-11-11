@@ -23,7 +23,7 @@ class ApplicationContainer extends Component {
           <Grid centered>
             <Segment basic>
               <Segment basic padded key={"big"} size={"big"}>
-                <h1>Check your application status!</h1>
+                <Header style={{fontFamily: "Roboto"}} as="h1">Check your application status!</Header>
               </Segment>
             </Segment>
             </Grid>
@@ -36,7 +36,7 @@ class ApplicationContainer extends Component {
         <Grid centered>
           <Grid.Row></Grid.Row>
           <Grid.Row>
-            <Header as={"h1"}>Congrats! You're approved to adopt!</Header>
+            <Header style={{fontFamily: "Roboto"}} as={"h1"}>Congrats! You're approved to adopt!</Header>
             
           </Grid.Row>
           
@@ -53,7 +53,7 @@ class ApplicationContainer extends Component {
       <Grid centered>
         <Segment basic>
           <Segment basic padded key={"big"} size={"big"}>
-            Apply to adopt!
+            <Header style={{fontFamily: "Roboto"}} as="h1">Submit an application to adopt!</Header>
           </Segment>
         </Segment>
         </Grid>

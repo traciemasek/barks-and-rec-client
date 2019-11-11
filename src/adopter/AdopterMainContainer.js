@@ -1,4 +1,5 @@
 import React from 'react';
+import banner02 from '../images/banner02.png'
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import DogShow from '../dogs/DogShowAdopter'
@@ -10,7 +11,7 @@ import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
 import FavoriteDogsTeaserCard from '../teasers/FavoriteDogsTeaserCard'
 import ApplicationTeaserCard from '../teasers/ApplicationTeaserCard'
 import { fetchDogs, addNotification, addFinalNotification } from '../actions';
-import { Grid, Card } from 'semantic-ui-react'
+import { Grid, Card, Segment } from 'semantic-ui-react'
 import { ActionCableConsumer } from 'react-actioncable-provider';
 
 class AdopterMainContainer extends React.Component {
@@ -22,6 +23,18 @@ class AdopterMainContainer extends React.Component {
   render() {
     // console.log("ADOPTER MAIN PROPS", this.props)
     // console.log("ADOPTER MAIN STATE", this.state)
+
+    const style = {
+      // border: "1px solid red",
+      background: "grey",
+      // backgroundImage: `url(${banner02})`,
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      height: "15vh",
+      width: "100vw"
+    }
+
     if (this.props.userLoading || this.props.dogsLoading) {
       return (
         <Grid centered>
@@ -30,8 +43,10 @@ class AdopterMainContainer extends React.Component {
       )
     } else {
       return (
-        <div>
+        <div >
           <HeaderAdopter />
+          {/* <div style={style}></div> */}
+          {/* <Segment attached style={style}></Segment> */}
 
           <Grid centered>
             <Grid.Row></Grid.Row>
@@ -57,13 +72,14 @@ class AdopterMainContainer extends React.Component {
             <Route path="/adopter" render={()=>{
               return (
               <>
+           
               <Grid verticalAlign="top" centered>
                 <Grid.Row>
-                  <h1>Welcome potential adopters</h1>
+                  <h1 >Welcome to Barks and Rec</h1>
                 </Grid.Row>
                 <Grid.Row></Grid.Row>
 
-                <Card.Group centered>
+                <Card.Group centered itemsPerRow={3}>
                   <AdoptableDogsTeaserCard />
                   <FavoriteDogsTeaserCard />
                   <ApplicationTeaserCard />

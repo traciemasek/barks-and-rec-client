@@ -104,7 +104,7 @@ class NewDog extends Component {
         <Form.TextArea label='About' name="about" placeholder='Add a description of the dog...' onChange={this.handleChange} value={about}/>
       
        
-        <Form.Button>Submit</Form.Button>
+        <Form.Button color="instagram">Submit</Form.Button>
       </Form>     
     )
   }

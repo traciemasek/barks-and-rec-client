@@ -37,7 +37,7 @@ class ApplicationForm extends Component {
             <Form.Input required fluid label='Last name' name='last_name' placeholder='Last name' onChange={this.handleChange} value={this.state.last_name}/>
           </Form.Group>
           <Form.TextArea required label='Why Do You Want to Adopt a Dog?' placeholder='Tell us more about why you want to adopt a dog...' name='why_adopt' value={this.state.why_adopt} onChange={this.handleChange}/>
-        <Form.Button>Submit</Form.Button>
+        <Form.Button inverted color="instagram">Submit</Form.Button>
           </Form>
         </Container>
       </div>

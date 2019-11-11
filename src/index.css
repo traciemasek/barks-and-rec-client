@@ -1,4 +1,12 @@
 body {
+  /* background-color: #f0f0f0; */
+  /* background-color: #f2f2f2; */
+  /* background: rgb(223,222,231);
+  background: radial-gradient(circle, rgba(223,222,231,1) 0%, rgba(237,246,247,1) 85%, rgba(248,248,251,1) 100%); */
+  background: rgb(232,231,237);
+background: radial-gradient(circle, rgba(232,231,237,1) 0%, rgba(237,246,247,1) 85%, rgba(248,248,251,1) 100%);
+  
+  background-size: cover;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",

@@ -1,4 +1,4 @@
-import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG, REMOVE_NOTIFICATION, ADD_NOTIFICATION } from "./types"
+import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG, REMOVE_NOTIFICATION, ADD_NOTIFICATION, ADD_FINAL_NOTIFICATION } from "./types"
 
 const defaultState = {
   userLoading: true,
@@ -63,9 +63,7 @@ function reducer(prevState = defaultState, action) {
       let applicationsCopy = [...prevState.applications, action.payload.application]
       //add application to adopterApplication and applications 
       return {...prevState, adopterApplication: action.payload.application, tasks: tasksCopy, applications: applicationsCopy}
-    case NEW_TASK:
-      console.log("REDUCER NEW TASK ACTION.PAYLOAD", action.payload)
-   
+    case NEW_TASK:   
       let applicationsCopy2 = [...prevState.applications]
       //find the copy of the updated application and remove it from the array 
       applicationsCopy2 = applicationsCopy2.filter(application => application.id !==action.payload.updatedApplication.id)
@@ -97,8 +95,11 @@ function reducer(prevState = defaultState, action) {
       let notificationsCopy2 = [action.payload.notification,...prevState.adopterNotifications]
       return {...prevState, applications: applicationsCopy3, tasks: tasksCopy3, adopterNotifications: notificationsCopy2}
     case ADD_NOTIFICATION:
-      let notifications = [action.payload, ...prevState.adopterNotifications]
-      return {...prevState, adopterNotifications: notifications}
+      let notifications = [action.payload.notification, ...prevState.adopterNotifications]
+      return {...prevState, adopterNotifications: notifications, adopterApplication: action.payload.updatedApplication}
+    case ADD_FINAL_NOTIFICATION:
+        let notifications2 = [action.payload.notification, ...prevState.adopterNotifications]
+      return {...prevState, adopterNotifications: notifications2, adopterApplication: action.payload.updatedApplication}
     case REMOVE_NOTIFICATION:
       let adopterNotificationsCopy = [...prevState.adopterNotifications]
       let foundNotification = adopterNotificationsCopy.find(notification => notification.id === action.payload.id)

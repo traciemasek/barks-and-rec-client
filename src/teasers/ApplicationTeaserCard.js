@@ -9,7 +9,7 @@ function ApplicationTeaserCard(props) {
   //   console.log(props.adopterApplication)
   // }
   return (
-    <Card as={Link} to='/adopter/application'>
+    <Card raised as={Link} to='/adopter/application'>
       <Image src='https://www.greatriverrescue.com/wp-content/uploads/2015/10/pet-friendly-search.jpg' wrapped ui={false} />
       <Card.Content>
         <Card.Header>Application</Card.Header>

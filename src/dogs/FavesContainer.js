@@ -20,12 +20,12 @@ class FavesContainer extends Component {
       return (
         <Grid centered >
           <Grid.Row></Grid.Row>
-          <Grid.Row>
-          <Header as={"h1"}>You don't have any favorite dogs yet!</Header>
+          <Grid.Row verticalAlign="middle">
+          <Header style={{fontFamily: "Roboto"}} as="h1">You don't have any favorite dogs yet!</Header>
           </Grid.Row>
 
           <Grid.Row>
-          <p>Check out the list of dogs currently available for adoption and click the heart to add it to your favorites!</p>
+          <Header style={{fontFamily: "Roboto"}} as="h3">Check out the list of dogs currently available for adoption and click the heart to add it to your favorites!</Header>
           </Grid.Row>
           
           <AdoptableDogsTeaserCard />

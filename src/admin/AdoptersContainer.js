@@ -1,24 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AdoptersCard from './AdoptersCard'
-import { Segment } from 'semantic-ui-react'
+import { Segment, Card } from 'semantic-ui-react'
 
-class AdoptersContainer extends Component {
+function AdoptersContainer(props) {
 
-  renderAdopters = () =>{
-    return this.props.adopters.map(adopter => <AdoptersCard key={adopter.id} adopter={adopter}/>)
+  function renderAdopters() {
+    return props.adopters.map(adopter => <AdoptersCard key={adopter.id} adopter={adopter}/>)
   }
 
-  render() {
-    return (
-      <div>
-        <br></br>
-        <br></br>
-        <Segment>THIS LOOKS EXACTLY HOW I WANT DON'T WORRY ABOUT IT</Segment>
-        {this.renderAdopters()}
-      </div>
-    )
-  }
+  return (
+    <div>
+      <br></br>
+      <br></br>
+      <Segment>THIS LOOKS EXACTLY HOW I WANT DON'T WORRY ABOUT IT</Segment>
+      <Card.Group>
+      {renderAdopters()}
+      </Card.Group>
+    </div>
+  )
+  
 }
 
 function msp(state) {

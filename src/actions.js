@@ -1,4 +1,4 @@
-import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG, REMOVE_NOTIFICATION } from "./types"
+import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG, REMOVE_NOTIFICATION, ADD_FINAL_NOTIFICATION, ADD_NOTIFICATION } from "./types"
 
 
 function fetchDogs() {
@@ -150,8 +150,7 @@ function completeTask(taskBody){
     .then(resp => resp.json())
     .then(response => {
       console.log("complete task response", response)
-      // now need to call it from the Action Cable broadcast
-      // dispatch({type: NEW_TASK, payload: response})
+      dispatch({type: NEW_TASK, payload: response})
     })
     }
 }
@@ -170,7 +169,7 @@ function finalApprovalTask(taskBody, id){
     .then(resp => resp.json())
     .then(response => {
       console.log("complete final task response", response)
-      // dispatch({type: FINAL_APPROVAL_TASK, payload: response})
+      dispatch({type: FINAL_APPROVAL_TASK, payload: response})
     })
   }
 }
@@ -195,12 +194,16 @@ function removeNotification(id){
 
 function addNotification(response){
   console.log("addNotification action", response)
-  return {type: NEW_TASK, payload: response}
+  //from adopter perspective 
+  return {type: ADD_NOTIFICATION, payload: response}
 }
 
 function addFinalNotification(response){
-  return {type: FINAL_APPROVAL_TASK, payload: response}
+  console.log("addNotification action", response)
+  //from adopter perspective 
+  return {type: ADD_FINAL_NOTIFICATION, payload: response}
 }
+
 
 function setAdmin(admin) {
   return {type: SET_ADMIN_USER, payload: admin}
