@@ -21,7 +21,6 @@ ReactDOM.render(
   <ActionCableProvider url="ws://localhost:6969/cable">
     <Provider store={store}>
       <BrowserRouter>
-        {/* optionally making '/' the root here and passing routerProps by doing the component={App} thing */}
         <Route path='/' component={App}></Route>
       </BrowserRouter>
     </Provider>

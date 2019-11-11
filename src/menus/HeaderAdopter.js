@@ -3,8 +3,9 @@ import { Menu, Segment, Sticky, Icon, Label, Popup } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { logout } from '../actions.js'
+import { logout, addNotification, addFinalNotification } from '../actions.js'
 import FeedCard from '../adopter/FeedCard'
+import { ActionCableConsumer } from 'react-actioncable-provider';
 
 class HeaderAdopter extends Component {
   state = { activeItem: '' }
@@ -112,6 +113,25 @@ class HeaderAdopter extends Component {
        </Menu.Menu>
        </>
         : null }
+
+
+{/* SHOULD THIS BE IN ADOPTER MAIN CONTAINER??? */}
+{/* this is messy and might need stream_to so that adopter only gets their own notifications?? */}
+      <ActionCableConsumer
+        channel={{ channel: 'NotificationChannel' }}
+        onReceived={response => {
+          console.log("action cable consumer", response);
+          if (response.notification.adopter_id === this.props.user.id) {
+            response.newTask 
+            ?
+            this.props.addNotification(response)
+            :
+            this.props.addFinalNotification(response)
+          }
+  
+        }}
+      />
+
       </Menu>
     </Segment>
     </Sticky>
@@ -129,4 +149,7 @@ function msp(state){
 
 
 
-export default withRouter(connect(msp, { logout })(HeaderAdopter))
+export default withRouter(connect(msp, { logout, addNotification, addFinalNotification })(HeaderAdopter))
+
+// addNotification
+// may need to remove the add notification logic from the task actions

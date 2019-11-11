@@ -26,7 +26,7 @@ class ApplicationForm extends Component {
   }
 
   render() {
-    console.log("APPLICATION STATE", this.state)
+    // console.log("APPLICATION STATE", this.state)
     return (
       <div>
         

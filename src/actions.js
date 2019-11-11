@@ -150,7 +150,8 @@ function completeTask(taskBody){
     .then(resp => resp.json())
     .then(response => {
       console.log("complete task response", response)
-      dispatch({type: NEW_TASK, payload: response})
+      // now need to call it from the Action Cable broadcast
+      // dispatch({type: NEW_TASK, payload: response})
     })
     }
 }
@@ -169,7 +170,7 @@ function finalApprovalTask(taskBody, id){
     .then(resp => resp.json())
     .then(response => {
       console.log("complete final task response", response)
-      dispatch({type: FINAL_APPROVAL_TASK, payload: response})
+      // dispatch({type: FINAL_APPROVAL_TASK, payload: response})
     })
   }
 }
@@ -190,6 +191,15 @@ function removeNotification(id){
       dispatch({type: REMOVE_NOTIFICATION, payload: response})
     })
   }
+}
+
+function addNotification(response){
+  console.log("addNotification action", response)
+  return {type: NEW_TASK, payload: response}
+}
+
+function addFinalNotification(response){
+  return {type: FINAL_APPROVAL_TASK, payload: response}
 }
 
 
@@ -222,7 +232,9 @@ export {
   finalApprovalTask,
   createDog, 
   updateDog, 
-  removeNotification
+  removeNotification, 
+  addNotification, 
+  addFinalNotification
 }
 
 //for thunky actions:

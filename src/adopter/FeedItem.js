@@ -15,7 +15,6 @@ function FeedItem(props) {
   }
 
   function removeNotification() {
-    console.log("need to mark the notification read: true")
     props.removeNotification(id)
   }
 
