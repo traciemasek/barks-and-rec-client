@@ -1,7 +1,7 @@
 import React from 'react';
 import banner01_crop from '../images/banner01_crop.png'
 import boopModal from '../images/boopModal.jpg'
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import DogShow from '../dogs/DogShowAdopter'
 import DogsContainer from '../dogs/DogsContainer';
@@ -13,7 +13,7 @@ import FavoriteDogsTeaserCard from '../teasers/FavoriteDogsTeaserCard'
 import ApplicationTeaserCard from '../teasers/ApplicationTeaserCard'
 import AboutModal from './AboutModal'
 import { fetchDogs, addNotification, addFinalNotification } from '../actions';
-import { Grid, Card, Image, Modal, Rail, Segment, Icon, Button } from 'semantic-ui-react'
+import { Grid, Card, Image, Modal, Rail, Segment, Button } from 'semantic-ui-react'
 import { ActionCableConsumer } from 'react-actioncable-provider';
 
 class AdopterMainContainer extends React.Component {
@@ -95,9 +95,6 @@ class AdopterMainContainer extends React.Component {
             <Route path="/adopter/application" render={() => {
               return <ApplicationContainer />
             }} />
-             {/* <Route path="/adopter/about" render={() => {
-              return <AboutModal />
-            }} /> */}
             <Route path="/adopter" render={()=>{
               return (
               <>
@@ -105,9 +102,6 @@ class AdopterMainContainer extends React.Component {
               <div>
               <Image fluid src={banner01_crop}></Image>
                 </div>
-
-             
-  
 
               <Grid centered>
                 <Grid.Row></Grid.Row>
@@ -121,18 +115,14 @@ class AdopterMainContainer extends React.Component {
                     <Modal closeIcon style={modalStyle}
                       trigger={<Rail position='right'>
                       <Segment basic compact><Button basic circular icon="question"></Button></Segment></Rail>}>
-                      {/* <Modal.Content image> */}
                         <AboutModal />
-                      {/* </Modal.Content> */}
-                  </Modal>
+                    </Modal>
 
                     <Card.Group centered itemsPerRow={3}>
-
                       <AdoptableDogsTeaserCard />
                       <FavoriteDogsTeaserCard />
                       <ApplicationTeaserCard />
                     </Card.Group>
-
                     
                   </Grid>
                 </Grid.Column>
@@ -159,7 +149,6 @@ class AdopterMainContainer extends React.Component {
           }
         }}
       />
-
     </div>
     )
     }

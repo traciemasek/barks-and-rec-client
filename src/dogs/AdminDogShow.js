@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Image, Header, Segment, Button, Icon, Modal } from 'semantic-ui-react';
+import { Grid, Image, Header, Segment, Button, Icon, Modal, Card } from 'semantic-ui-react';
+import "pure-react-carousel/dist/react-carousel.es.css"
 import { Link } from 'react-router-dom';
 import AdminDogEditModal from './AdminDogEditModal';
+// import ImageCarousel from './ImageCarousel';
 
 class DogShow extends Component {
   state = {
-    showModal: false
+    showModal: false,
+    image: ""
   }
+  
+  componentDidMount
 
   openModal = () => {
     this.setState({ showModal: true })
@@ -17,6 +22,10 @@ class DogShow extends Component {
     this.setState({ showModal: false })
   }
 
+  setImage = (img) => {
+    this.setState({image: img})
+  }
+
   render() {
     if (this.props.dogs.length > 0) {
  
@@ -24,14 +33,26 @@ class DogShow extends Component {
       const { showModal } = this.state
   
       const foundDog = this.props.dogs.find(dog=>dog.id === dogId)
-      const { age, name, img1, breed, about, size, goodHome, badHome ,health, color, sex, houseTrained } = foundDog
+      const { age, name, img1, img2, img3, breed, about, size, goodHome, badHome ,health, color, sex, houseTrained } = foundDog
 
       const subheader = `${breed} • ${age} • ${sex} • ${size} • ${color}`
 
       const charcoal = {
         color: "#464646"
       }
-    
+
+      let imageArr = [img1, img2, img3]
+      // const images = imageArr.filter(img => !!img)
+      
+      let imageDots = imageArr.map((img, i) => {
+        if (img) {
+          return <Button onClick={()=>this.setImage(img)} key={i} icon>
+          <Icon name='circle'/>
+        </Button>
+        }
+      })
+
+     
       return (
         <Grid centered>
           <Grid.Row></Grid.Row>
@@ -40,7 +61,28 @@ class DogShow extends Component {
           <Grid centered >
             <Grid.Row></Grid.Row>
             <Grid.Column width={8}>
-              <Image rounded alt="" src={img1}  />
+        
+              {/* <ImageCarousel images={images}/> */}
+              <Card fluid>
+                <Image rounded alt="" src={this.state.image? this.state.image : img1}  />
+              <Card.Content extra textAlign="center">
+                <Segment basic textAlign="center">
+                  <Button.Group>
+                    {imageDots}
+                    {/* <Button icon>
+                      <Icon name='circle'/>
+                    </Button>
+                    <Button icon>
+                      <Icon name='circle'/>
+                    </Button>
+                    <Button icon>
+                      <Icon name='circle'/>
+                    </Button> */}
+                  </Button.Group>
+                </Segment>
+              </Card.Content>
+            </Card> 
+
               <Segment basic > 
                 <Button as={Link} to="/admin/dogs" floated="left" icon labelPosition='left' >
                   <Icon name='arrow left' />
