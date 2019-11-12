@@ -1,63 +1,104 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Grid, Image, Header } from 'semantic-ui-react'
+import { Grid, Image, Header, Button, Icon, Segment } from 'semantic-ui-react'
 
 class DogShow extends Component {
+  state = {
+    image: ""
+  }
+
+  setImage = (img) => {
+    this.setState({image: img})
+  }
+
+
   render() {
+    console.log("ADOPTER DOG SHOW STATE", this.state)
     if (this.props.dogs.length > 0) {
  
       let dogId = parseInt(this.props.dogId)
   
       let foundDog = this.props.dogs.find(dog=>dog.id === dogId)
-      let { age, name, img1, breed, about, size, goodHome, badHome ,health, color, sex, houseTrained } = foundDog
+      let { age, name, img1, img2, img3, breed, about, size, goodHome, badHome ,health, color, sex, houseTrained } = foundDog
 
       let subheader = `${breed} • ${age} • ${sex} • ${size} • ${color}`
 
       const charcoal = {
         color: "#464646"
       }
+
+      let imageArr = [img1, img2, img3]
+
+      let imageDots = imageArr.map((img, i) => {
+        if (img) {
+          return <Button onClick={()=>this.setImage(img)} key={i} icon>
+          <Icon name='circle'/>
+        </Button>
+        }
+      })
     
       return (
-        <Grid centered >
+        <Grid centered>
           <Grid.Row></Grid.Row>
-          <Grid.Column width={8}>
-            <Image rounded alt="" src={img1} />
-          </Grid.Column>
-          <Grid.Column  width={8}>
-            <Header style={{paddingBottom: "10px", color: "#464646"}}
-              as="h1"
-              size="huge" 
-              dividing
-              content={name}
-              subheader={subheader} >
-            </Header>
-            
-          <Grid.Row>
-      
-          <Header style={charcoal} size="large">About</Header>
+          <Grid.Column width={12}>
 
-          <Header color="grey" size="medium" content="HEALTH"/>
-          <p>Vaccinations up to date; spayed/neutered. Special needs: {health ? health : "N/A"}</p>
+          <Grid centered >
+            <Grid.Row></Grid.Row>
+            <Grid.Column width={8}>
+              <Image fluid rounded alt="" src={this.state.image? this.state.image : img1} />
+              <Segment basic textAlign="center">
+                  <Button.Group>
+                    {imageDots}
+                    {/* <Button icon>
+                      <Icon name='circle'/>
+                    </Button>
+                    <Button icon>
+                      <Icon name='circle'/>
+                    </Button>
+                    <Button icon>
+                      <Icon name='circle'/>
+                    </Button> */}
+                  </Button.Group>
+                </Segment>
+            </Grid.Column>
 
-          <Header color="grey" size="medium" content="HOUSE-TRAINED"/>
-          <p>{houseTrained}</p>
+            <Grid.Column  width={8}>
+              <Header style={{paddingBottom: "10px", color: "#464646"}}
+                as="h1"
+                size="huge" 
+                dividing
+                content={name}
+                subheader={subheader} >
+              </Header>
+              
+            <Grid.Row>
+        
+            <Header style={charcoal} size="large">About</Header>
 
-          <Header color="grey" size="medium" content="GOOD IN A HOME WITH"/>
-          <p>
-            {goodHome}
-          </p>
+            <Header color="grey" size="medium" content="HEALTH"/>
+            <p>Vaccinations up to date; spayed/neutered. Special needs: {health ? health : "N/A"}</p>
 
-          <Header color="grey" size="medium" content="PREFERS A HOME WITHOUT"/>
-          <p>
-            {badHome}
-          </p>
+            <Header color="grey" size="medium" content="HOUSE-TRAINED"/>
+            <p>{houseTrained}</p>
 
-          <Header style={charcoal} size="large">Meet {name} </Header>
-          <p>{about}</p>
-  
-          </Grid.Row>
-          </Grid.Column>                   
-        </Grid>
+            <Header color="grey" size="medium" content="GOOD IN A HOME WITH"/>
+            <p>
+              {goodHome}
+            </p>
+
+            <Header color="grey" size="medium" content="PREFERS A HOME WITHOUT"/>
+            <p>
+              {badHome}
+            </p>
+
+            <Header style={charcoal} size="large">Meet {name} </Header>
+            <p>{about}</p>
+    
+            </Grid.Row>
+            </Grid.Column>                   
+          </Grid>
+        </Grid.Column>
+      </Grid>
       )  
     } else {
         return <img alt="loading" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>

@@ -33,7 +33,7 @@ class DogShow extends Component {
       const { showModal } = this.state
   
       const foundDog = this.props.dogs.find(dog=>dog.id === dogId)
-      const { age, name, img1, img2, img3, breed, about, size, goodHome, badHome ,health, color, sex, houseTrained } = foundDog
+      const { age, name, img1, img2, img3, breed, about, size, goodHome, badHome ,health, color, sex, houseTrained} = foundDog
 
       const subheader = `${breed} • ${age} • ${sex} • ${size} • ${color}`
 
@@ -41,6 +41,7 @@ class DogShow extends Component {
         color: "#464646"
       }
 
+      
       let imageArr = [img1, img2, img3]
       // const images = imageArr.filter(img => !!img)
       
@@ -52,7 +53,6 @@ class DogShow extends Component {
         }
       })
 
-     
       return (
         <Grid centered>
           <Grid.Row></Grid.Row>
@@ -69,15 +69,6 @@ class DogShow extends Component {
                 <Segment basic textAlign="center">
                   <Button.Group>
                     {imageDots}
-                    {/* <Button icon>
-                      <Icon name='circle'/>
-                    </Button>
-                    <Button icon>
-                      <Icon name='circle'/>
-                    </Button>
-                    <Button icon>
-                      <Icon name='circle'/>
-                    </Button> */}
                   </Button.Group>
                 </Segment>
               </Card.Content>
@@ -129,6 +120,7 @@ class DogShow extends Component {
 
             <Header style={charcoal} size="large">Meet {name} </Header>
             <p>{about}</p>
+
     
             </Grid.Row>
             </Grid.Column>                   
