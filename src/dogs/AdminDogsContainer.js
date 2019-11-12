@@ -17,24 +17,36 @@ class AdminDogsContainer extends Component {
       return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
     } else {
       return (
-        <Grid >
+        <Grid centered>
           <Grid.Row></Grid.Row>
-          <Grid.Row >
-            <Segment basic floated="right"> 
-              <Button as={Link} to='/admin/new' color="teal" icon labelPosition='left' >
-                <Icon name='plus' />
-                Add New Dog
-              </Button>
-            </Segment>
-          </Grid.Row>
-          <Grid centered>
+          <Grid.Column width={12}>
+
+            <Grid centered >
+
+            <Grid.Row centered>
+              <Segment basic >
+                <Header style={{fontFamily: "Roboto"}} as={"h1"}>All Available Dogs</Header>
+              </Segment>
+              </Grid.Row>
+
+              <Grid.Row>
+              {/* <Segment basic floated="right">  */}
+                <Button as={Link} floated="right" to='/admin/new' color="teal" icon labelPosition='left' >
+                  <Icon name='plus' />
+                  Add New Dog
+                </Button>
+              {/* </Segment> */}
+            </Grid.Row>
+            <Grid.Row></Grid.Row>
+           
             <Card.Group itemsPerRow={3} centered>
               {this.renderDogs()}
             </Card.Group>
+          
+    
           </Grid>
-  
-        </Grid>
-        
+        </Grid.Column>
+      </Grid>
       )
     }
   }

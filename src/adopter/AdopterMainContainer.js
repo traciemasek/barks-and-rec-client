@@ -1,6 +1,7 @@
 import React from 'react';
-// import banner02 from '../images/banner02.png'
-import { Switch, Route } from 'react-router-dom';
+import banner01_crop from '../images/banner01_crop.png'
+import boopModal from '../images/boopModal.jpg'
+import { Switch, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import DogShow from '../dogs/DogShowAdopter'
 import DogsContainer from '../dogs/DogsContainer';
@@ -10,30 +11,57 @@ import HeaderAdopter from '../menus/HeaderAdopter';
 import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
 import FavoriteDogsTeaserCard from '../teasers/FavoriteDogsTeaserCard'
 import ApplicationTeaserCard from '../teasers/ApplicationTeaserCard'
+import AboutModal from './AboutModal'
 import { fetchDogs, addNotification, addFinalNotification } from '../actions';
-import { Grid, Card } from 'semantic-ui-react'
+import { Grid, Card, Image, Modal, Rail, Segment, Icon, Button } from 'semantic-ui-react'
 import { ActionCableConsumer } from 'react-actioncable-provider';
 
 class AdopterMainContainer extends React.Component {
 
+  state = {
+    showModal: false
+  }
+
   componentDidMount(){
     this.props.fetchDogs()
   }
+
+  openModal = () => {
+    console.log("clicking on image")
+    this.setState({
+      showModal: true
+    })
+  }
+
+  closeModal = () => {
+    this.setState({
+      showModal: false
+    })
+  }
+
+  handleClick = () => {
+    this.openModal()
+  }
   
   render() {
-    // console.log("ADOPTER MAIN PROPS", this.props)
-    // console.log("ADOPTER MAIN STATE", this.state)
 
-    const style = {
-      // border: "1px solid red",
-      background: "grey",
-      // backgroundImage: `url(${banner02})`,
+    const modalStyle = {
+      backgroundImage: `url(${boopModal})`,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      height: "15vh",
-      width: "100vw"
+      height: "70vh",
+      width: "70vw"
     }
+
+    // const style = {
+    //   backgroundImage: `url(${banner01_crop})`,
+    //   backgroundPosition: 'center',
+    //   backgroundSize: 'cover',
+    //   backgroundRepeat: 'no-repeat',
+    //   height: "35vh",
+    //   width: "100vw"
+    // }
 
     if (this.props.userLoading || this.props.dogsLoading) {
       return (
@@ -45,12 +73,10 @@ class AdopterMainContainer extends React.Component {
       return (
         <div >
           <HeaderAdopter />
-          {/* <div style={style}></div> */}
-          {/* <Segment attached style={style}></Segment> */}
 
-          <Grid centered>
+          {/* <Grid centered>
             <Grid.Row></Grid.Row>
-          <Grid.Column width={12}>
+          <Grid.Column width={12}> */}
 
           <Switch>
             <Route path="/adopter/dogs/:id" render={routerProps => {
@@ -69,30 +95,56 @@ class AdopterMainContainer extends React.Component {
             <Route path="/adopter/application" render={() => {
               return <ApplicationContainer />
             }} />
+             {/* <Route path="/adopter/about" render={() => {
+              return <AboutModal />
+            }} /> */}
             <Route path="/adopter" render={()=>{
               return (
               <>
-           
-              <Grid verticalAlign="top" centered>
-                <Grid.Row>
-                  <h1 >Welcome to Barks and Rec</h1>
-                </Grid.Row>
+             
+              <div>
+              <Image fluid src={banner01_crop}></Image>
+                </div>
+
+             
+  
+
+              <Grid centered>
                 <Grid.Row></Grid.Row>
+              
+                <Grid.Column width={12}>
+          
+                  <Grid verticalAlign="top" centered>
+                    <Grid.Row></Grid.Row>
+                    <Grid.Row></Grid.Row>
 
-                <Card.Group centered itemsPerRow={3}>
-                  <AdoptableDogsTeaserCard />
-                  <FavoriteDogsTeaserCard />
-                  <ApplicationTeaserCard />
-                </Card.Group>
+                    <Modal closeIcon style={modalStyle}
+                      trigger={<Rail position='right'>
+                      <Segment basic compact><Button basic circular icon="question"></Button></Segment></Rail>}>
+                      {/* <Modal.Content image> */}
+                        <AboutModal />
+                      {/* </Modal.Content> */}
+                  </Modal>
 
+                    <Card.Group centered itemsPerRow={3}>
+
+                      <AdoptableDogsTeaserCard />
+                      <FavoriteDogsTeaserCard />
+                      <ApplicationTeaserCard />
+                    </Card.Group>
+
+                    
+                  </Grid>
+                </Grid.Column>
+                
               </Grid>
               
              </>)
             }} />
             
           </Switch>
-        </Grid.Column>
-      </Grid>
+        {/* </Grid.Column>
+      </Grid> */}
 
       <ActionCableConsumer
         channel={{ channel: 'NotificationChannel' }}

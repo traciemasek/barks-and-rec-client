@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import AdoptersCard from './AdoptersCard'
-import { Header, Card } from 'semantic-ui-react'
+import { Header, Card, Grid, Segment } from 'semantic-ui-react'
 
 function AdoptersContainer(props) {
 
@@ -10,14 +10,27 @@ function AdoptersContainer(props) {
   }
 
   return (
-    <div>
-      <br></br>
-      <br></br>
-      <Header as="h1" style={{fontFamily: "Roboto"}} >Our potential adopters</Header>
-      <Card.Group>
-      {renderAdopters()}
-      </Card.Group>
-    </div>
+    <Grid centered>
+      <Grid.Row></Grid.Row>
+      <Grid.Column width={12}>
+        
+        <Grid>
+
+          <Grid.Row centered>
+            <Segment basic>
+              <Header as="h1" style={{fontFamily: "Roboto"}} >Our potential adopters</Header>
+            </Segment>
+          </Grid.Row>
+
+          <Grid.Row></Grid.Row>
+          
+          <Card.Group itemsPerRow={3} >
+          {renderAdopters()}
+          </Card.Group>
+
+        </Grid>
+      </Grid.Column>
+    </Grid>
   )
   
 }

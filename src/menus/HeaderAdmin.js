@@ -90,8 +90,8 @@ class HeaderAdmin extends Component {
         //make this a drop down with options 
          icon="user circle outline"
          name={this.props.user.username}
-         active={activeItem === 'log out'}
-         onClick={this.userMenu}
+        //  active={activeItem === 'log out'}
+        //  onClick={this.userMenu}
        />
          <Menu.Item
          name='admin log out'

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Card, Image, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import images from '../dog_avatars/dogImages'
@@ -12,22 +12,22 @@ function AdoptersCard(props) {
   const image = images[Math.floor(Math.random()*images.length)]
   const favoriteDogs = dogs.map(dog => dog.name)
 
-  function applicationStatus(){
+  let applicationStatus
 
     if (!application){
-      return applicationStatus = "Not submitted"
+      applicationStatus = "Not submitted"
     } else if (application.submitted && !application.initial_review) {
-      return applicationStatus = "Initial review pending"
+      applicationStatus = "Initial review pending"
     } else if (application.initial_review && !application.references) {
-      return applicationStatus = "Reference check pending"
+      applicationStatus = "Reference check pending"
     } else if (application.references && !application.home_visit) {
-      return applicationStatus = "Home visit pending"
+      applicationStatus = "Home visit pending"
     } else if (application.home_visit && !application.final_approval) {
-      return applicationStatus = "Final approval pending"
+      applicationStatus = "Final approval pending"
     } else if (application.final_approval) {
-      return applicationStatus = "Approved to adopt!"
+      applicationStatus = "Approved to adopt!"
     }
-  }
+  
 
   return (
     <>
@@ -48,7 +48,7 @@ function AdoptersCard(props) {
       <Card.Content extra>
         <div>
           <Icon name={application && application.final_approval ? "clipboard check" : "wpforms" }></Icon>
-          Application Status: {applicationStatus()}
+          Application Status: {applicationStatus}
         </div>
       </Card.Content>
     </Card>

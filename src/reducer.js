@@ -51,7 +51,6 @@ function reducer(prevState = defaultState, action) {
       return {...prevState, dogs: action.payload, dogsLoading: false}
     case FETCH_ALL_ADOPTERS:
       return {...prevState, adopters: action.payload, adoptersLoading: false}
-      //am I using all applications for anything???
     case FETCH_ALL_APPLICATIONS:
       return {...prevState, applications: action.payload, applicationsLoading: false}
     case FETCH_ALL_TASKS:
@@ -59,10 +58,6 @@ function reducer(prevState = defaultState, action) {
     case FETCH_ALL_FAVORITES:
       return {...prevState, allFavorites: action.payload}
     case SUBMIT_APPLICATION:
-      // let tasksCopy = [...prevState.tasks, ...action.payload.tasks]
-      // let applicationsCopy = [...prevState.applications, action.payload.application]
-      // //add application to adopterApplication and applications 
-      // return {...prevState, adopterApplication: action.payload.application, tasks: tasksCopy, applications: applicationsCopy}
       return {...prevState, adopterApplication: action.payload.application}
     case ADD_APP_SUBMITTED_TASK:
       let tasksCopy = [...prevState.tasks, action.payload.task]

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Form, Grid, Image, Header } from 'semantic-ui-react'
+import { Form, Grid, Image, Header, Button, Icon} from 'semantic-ui-react'
 import { updateDog } from '../actions'
 
 class DogShow extends Component {
@@ -52,10 +52,16 @@ class DogShow extends Component {
   
 
   handleSubmit = (e) => {
+    console.log("submitting edits")
     e.preventDefault()
     let dogBody = {dog: this.state}
     let id = parseInt(this.props.dogId)
     this.props.updateDog(dogBody, id)
+    this.props.closeModal()
+  }
+
+  handleClick = () => {
+    console.log("clicking close button")
     this.props.closeModal()
   }
 
@@ -94,7 +100,7 @@ class DogShow extends Component {
       }
     
       return (
-        
+        <>
         <Form onSubmit={this.handleSubmit}>
         <Grid centered >
           <Grid.Row></Grid.Row>
@@ -149,12 +155,19 @@ class DogShow extends Component {
         
           <Form.TextArea label='Prefers a home without' name="badHome" placeholder='Other dogs, children, cats, etc...' onChange={this.handleChange} value={badHome}/>
 
-
-          <Form.Button floated="right">Submit Edits</Form.Button>
+          <Form.Button 
+          icon labelPosition='left' color="instagram" floated="right">
+            <Icon name="edit"/>
+            Submit Edits</Form.Button>
           </Grid.Row>
           </Grid.Column>                   
         </Grid>
         </Form>
+        <Button onClick={this.handleClick} style={{marginBottom: '15px', marginTop: '10px'}} icon labelPosition='left' floated="right" >
+          <Icon name="delete"/>
+          Nevermind!
+        </Button>
+        </>
       )  
     } else {
         return <img alt="loading" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>

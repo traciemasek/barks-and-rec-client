@@ -30,27 +30,31 @@ class DogsContainer extends Component {
       return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
     } else {
       return (
-        
         <Grid centered>
-  
-          <Grid.Row centered>
-            <Segment basic>
-              <Header style={{fontFamily: "Roboto"}} as={"h1"}>Meet our available dogs!</Header>
-              <Container text>
-            <p style={{fontFamily: "Roboto"}}> If a dog is listed here, that means they are AVAILABLE for adoption. </p>
-
-          <p style={{fontFamily: "Roboto"}}>While we may have pending adoption applications ahead of you for your dog of interest, the best thing to do is still to apply. Once you are approved, you remain approved for any new dogs that we rescue in the future!</p>
-          </Container>
-            </Segment>
-          </Grid.Row>
           <Grid.Row></Grid.Row>
-          
-          <Card.Group itemsPerRow={3} centered>
-            {this.renderDogs()}
-          </Card.Group>
-       
-        </Grid>
+          <Grid.Column width={12}>
         
+            <Grid centered>
+  
+            <Grid.Row centered>
+              <Segment basic>
+                <Header style={{fontFamily: "Roboto"}} as={"h1"}>Meet our available dogs!</Header>
+                <Container text>
+                  <p style={{fontFamily: "Roboto"}}> If a dog is listed here, that means they are AVAILABLE for adoption. </p>
+
+                  <p style={{fontFamily: "Roboto"}}>While we may have pending adoption applications ahead of you for your dog of interest, the best thing to do is still to apply. Once you are approved, you remain approved for any new dogs that we rescue in the future!</p>
+                </Container>
+              </Segment>
+            </Grid.Row>
+            <Grid.Row></Grid.Row>
+            
+            <Card.Group itemsPerRow={3} centered>
+              {this.renderDogs()}
+            </Card.Group>
+        
+          </Grid>
+        </Grid.Column>
+      </Grid>
       )
     }
   }

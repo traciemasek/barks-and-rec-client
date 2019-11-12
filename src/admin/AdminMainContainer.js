@@ -1,4 +1,6 @@
 import React from 'react'
+// import banner05 from '../images/banner05.jpg'
+import banner05 from '../images/banner05_text.png'
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HeaderAdmin from '../menus/HeaderAdmin'
@@ -12,7 +14,7 @@ import { fetchAdopters, fetchApplications, fetchDogs, fetchTasks, fetchAllFavori
 import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
 import TasksTeaserCard from '../teasers/TasksTeaserCard'
 import AdoptersTeaserCard from '../teasers/AdoptersTeaserCard'
-import { Grid, Card } from 'semantic-ui-react'
+import { Grid, Card, Image } from 'semantic-ui-react'
 import { ActionCableConsumer } from 'react-actioncable-provider';
 
 
@@ -29,6 +31,17 @@ class AdminMainContainer extends React.Component {
 
 
   render() {
+
+    // const style = {
+    //   backgroundImage: `url(${banner05})`,
+    //   backgroundPosition: 'center',
+    //   backgroundSize: 'cover',
+    //   backgroundRepeat: 'no-repeat',
+    //   height: "35vh",
+    //   width: "100vw"
+    // }
+
+
     if (this.props.userLoading) {
       return (
         <Grid centered>
@@ -40,9 +53,9 @@ class AdminMainContainer extends React.Component {
         <div>
           <HeaderAdmin/>
 
-          <Grid centered>
+          {/* <Grid centered>
             <Grid.Row></Grid.Row>
-          <Grid.Column width={12}>
+          <Grid.Column width={12}> */}
       
           <Switch>
             <Route path="/admin/dogs/:id" render={routerProps => {
@@ -70,26 +83,31 @@ class AdminMainContainer extends React.Component {
             <Route path="/admin" render={()=>{
               return (
               <>
-              <Grid verticalAlign="top" centered>
-                <Grid.Row>
-                  <h1>ADMINS ONLY!!! </h1>
-                </Grid.Row>
+              <div><Image fluid src={banner05}></Image></div>
+
+              <Grid centered>
                 <Grid.Row></Grid.Row>
+                <Grid.Column width={12}>
+
+                  <Grid verticalAlign="top" centered>
+                    <Grid.Row></Grid.Row>
+                    <Grid.Row></Grid.Row>
+                  
+                    <Card.Group itemsPerRow={3} centered>
+                      <AdoptableDogsTeaserCard />
+                      <TasksTeaserCard />
+                      <AdoptersTeaserCard />
+                    </Card.Group>
               
-                <Card.Group itemsPerRow={3} centered>
-                  <AdoptableDogsTeaserCard />
-                  <TasksTeaserCard />
-                  <AdoptersTeaserCard />
-                </Card.Group>
-            
+                  </Grid>
+                </Grid.Column>
               </Grid>
-    
               </>)
             }} />
             
           </Switch>
-        </Grid.Column>
-      </Grid> 
+        {/* </Grid.Column>
+      </Grid>  */}
 
       <ActionCableConsumer
         channel={{ channel: 'TaskChannel' }}

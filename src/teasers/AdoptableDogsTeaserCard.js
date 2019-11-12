@@ -23,7 +23,8 @@ function AdoptableDogsTeaserCard(props) {
   :
    (
     <Card raised as={Link} to='/adopter/dogs'>
-      <Image src='https://www.sciencemag.org/site/extra/dogs/dog-collage.jpg' wrapped ui={false} />
+      <Image src='https://www.sccmo.org/ImageRepository/Document?documentID=8299' wrapped ui={false} />
+      {/* <Image src='https://www.sciencemag.org/site/extra/dogs/dog-collage.jpg' wrapped ui={false} /> */}
       <Card.Content>
         <Card.Header>Adoptable Dogs</Card.Header>
       

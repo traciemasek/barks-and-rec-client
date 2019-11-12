@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AdopterDogCard from './AdopterDogCard';
 import AdoptableDogsTeaserCard from '../teasers/AdoptableDogsTeaserCard'
-import { Container, Grid, Card, Header } from 'semantic-ui-react'
+import { Container, Grid, Card, Header, Segment } from 'semantic-ui-react'
 
 class FavesContainer extends Component {
 
@@ -18,36 +18,55 @@ class FavesContainer extends Component {
     // } else if (!this.props.favoriteDogs.length) {
     } else if (!this.props.favoriteDogs.length) {
       return (
-        <Grid centered >
+        <Grid centered>
           <Grid.Row></Grid.Row>
-          <Grid.Row verticalAlign="middle">
-          <Header style={{fontFamily: "Roboto"}} as="h1">You don't have any favorite dogs yet!</Header>
-          </Grid.Row>
+          <Grid.Column width={12}>
+            <Grid centered>
+              <Grid.Row></Grid.Row>
+              <Grid.Row></Grid.Row>
+              <Grid.Row></Grid.Row>
+        
+              <Grid.Row centered>
+                <Header style={{fontFamily: "Roboto"}} as="h1">You don't have any favorite dogs yet!</Header>
+              </Grid.Row>
 
-          <Grid.Row>
-          <Header style={{fontFamily: "Roboto"}} as="h3">Check out the list of dogs currently available for adoption and click the heart to add it to your favorites!</Header>
-          </Grid.Row>
-          
-          <AdoptableDogsTeaserCard />
-        </Grid>
+              <Grid.Row>
+                <Header style={{fontFamily: "Roboto"}} as="h3">Check out the list of dogs currently available for adoption and click the heart to add it to your favorites!</Header>
+              </Grid.Row>
+
+              <Grid.Row></Grid.Row>
+              <AdoptableDogsTeaserCard />
+          </Grid>
+        </Grid.Column>
+      </Grid>
       )
     } else {
         return (
-          <Container fluid>
-            <br/>
-              <Container>
-                <Grid centered>
-                  <Grid.Row>
-                    <Header size="huge">Favorites</Header>
-                  </Grid.Row>
-                  
-                  <Card.Group>
-                  {this.renderFavorites()}
-                  </Card.Group>
-                </Grid>
-              </Container>
-           
-        </Container>
+          <Grid centered>
+            <Grid.Row></Grid.Row>
+            <Grid.Column width={12}>
+    
+              <Grid centered>
+
+              <Grid.Row centered>
+                <Segment basic>
+                
+                  <Header as="h1" style={{fontFamily: "Roboto"}}>Favorites</Header>
+                  <Container text>
+                    <p style={{fontFamily: "Roboto"}}> Dogs you're interested in adopting. </p>
+                  </Container>
+                    
+                </Segment>
+              </Grid.Row>
+              <Grid.Row></Grid.Row>
+
+              <Card.Group itemsPerRow={3} centered>
+              {this.renderFavorites()}
+              </Card.Group>
+            </Grid>
+             
+          </Grid.Column>
+        </Grid>
       )
     }
   }

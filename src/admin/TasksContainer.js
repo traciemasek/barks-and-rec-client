@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import TaskCard from './TaskCard'
-import { Grid, Container, Menu, Segment, Table, Label, Icon } from 'semantic-ui-react'
+import { Grid, Menu, Segment, Table, Label, Icon, Header } from 'semantic-ui-react'
 
 
 class TasksContainer extends Component {
@@ -35,12 +35,20 @@ class TasksContainer extends Component {
       return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
     } else {
       return (
-        <div>
-          <Grid centered >
-            <Grid.Row></Grid.Row>
-            <Grid.Row></Grid.Row>     
+        <Grid centered >
+          <Grid.Row></Grid.Row>
+          <Grid.Column width={12}>  
 
-          <Container >
+          <Grid centered >
+            <Grid.Row centered>
+              <Segment basic fluid>
+                <Header style={{fontFamily: "Roboto"}} as={"h1"}>Adopter Application Pending Tasks</Header>
+              </Segment>
+            </Grid.Row>
+            <Grid.Row></Grid.Row>
+          </Grid>
+
+          <Segment >
           <Menu attached='top' tabular color="teal">
             <Menu.Item
               name='all'
@@ -120,9 +128,11 @@ class TasksContainer extends Component {
             </Table.Body>
           </Table> 
           </Segment>
-          </Container>
-          </Grid>
-        </div>
+          </Segment>
+          
+        </Grid.Column>
+      </Grid>
+        
       )
     }
   }
