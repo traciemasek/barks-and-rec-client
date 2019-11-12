@@ -41,7 +41,7 @@ class TasksContainer extends Component {
 
           <Grid centered >
             <Grid.Row centered>
-              <Segment basic fluid>
+              <Segment basic>
                 <Header style={{fontFamily: "Roboto"}} as={"h1"}>Adopter Application Pending Tasks</Header>
               </Segment>
             </Grid.Row>
