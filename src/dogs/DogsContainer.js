@@ -27,7 +27,11 @@ class DogsContainer extends Component {
   render() {
     // console.log("DOG CONTAINER PROPS", dog, favoriteDog)
     if (this.props.dogsLoading || this.props.userLoading) {
-      return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+      return (
+        <Grid centered>
+          <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+        </Grid>
+      )
     } else {
       return (
         <Grid centered>

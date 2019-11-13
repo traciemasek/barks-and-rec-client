@@ -14,8 +14,10 @@ class TasksContainer extends Component {
   }
   
   renderCategoryTasks(category) {
-    let completedTasks = this.props.tasks.filter(task => task.complete).map(task => <TaskCard key={task.id} task={task}/>)
+    let completedTasks = this.props.tasks.sort((a,b)=>a.created_at < b.created_at ? 1 : -1).filter(task => task.complete).map(task => <TaskCard key={task.id} task={task}/>)
+
     let allTasks = this.props.tasks.filter(task => !task.complete).map(task => <TaskCard key={task.id} task={task}/>)
+
     let categoryTasks = this.props.tasks.filter(task => !task.complete).filter(task => task.category === category)
 
     if (category === "all") {

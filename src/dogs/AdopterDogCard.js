@@ -26,7 +26,7 @@ class AdopterDogCard extends Component {
   render() {
     // console.log("dog card dog props", this.props)
     const {img1, name, id, breed, age } = this.props.dog
-    const favorite = this.props.favorite
+    const { favorite } = this.props
     const style= {
       textTransform: "capitalize"
     }
@@ -34,9 +34,9 @@ class AdopterDogCard extends Component {
     return (
   
       <Card raised>
-        <Modal trigger={<Image fluid src={img1} wrapped ui={false}/>}>
+        <Modal size="fullscreen" trigger={<Image fluid src={img1} wrapped ui={false}/>}>
           <Modal.Content>
-            <DogShowAdopter dogId={id}/>
+            <DogShowAdopter favorite={favorite} dogId={id}/>
           </Modal.Content>
         </Modal>
         
@@ -72,49 +72,6 @@ class AdopterDogCard extends Component {
       </Card>
    
     )
-    // return (
-    // favorite 
-    // ?
-    //   <Card raised>
-    //     <Image fluid src={img1} wrapped ui={false} as={Link} to={`/adopter/dogs/${id}`}/>
-    //     <Card.Content as={Link} to={`/adopter/dogs/${id}`}>
-    //       <Card.Header>{name}</Card.Header>
-    //       <Card.Meta 
-    //         style={style}>
-    //         {breed} • {age_group}
-    //       </Card.Meta>
-    //     </Card.Content>
-        
-    //     <Card.Content extra>
-    //       <Button color="red" onClick={this.removeFavorite}>
-    //         <Button.Content>
-    //           <Icon name={'heart'} />Favorite 
-    //         </Button.Content>
-    //       </Button>
-    //     </Card.Content>
-    //   </Card>
-    // :
-    // <Card raised>
-    //   <Image fluid src={img1} wrapped ui={false} as={Link} to={`/adopter/dogs/${id}`}/>
-    //   <Card.Content as={Link} to={`/adopter/dogs/${id}`}>
-    //     <Card.Header>{name}</Card.Header>
-    //     <Card.Meta 
-    //         style={style}>
-    //         {breed} • {age_group}
-    //       </Card.Meta>
-    //   </Card.Content>
-    //   <Card.Content extra>
-
-    //     <Button basic color="red" animated="fade" onClick={this.createFavorite}>
-    //       <Button.Content visible>Add to favorites</Button.Content>
-    //       <Button.Content hidden>
-    //         <Icon name='heart' />
-    //       </Button.Content>
-    //     </Button>
-
-    //   </Card.Content>
-    // </Card>
-    // )
   }
 }
 

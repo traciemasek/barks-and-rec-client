@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Image, Header, Button, Segment, Card } from 'semantic-ui-react'
 
+// AM I ACTUALLY USING THIS??? OR JUST THE OTHER SHOW COMPONENT?
+
 class DogShow extends Component {
   state = {
     image: ""

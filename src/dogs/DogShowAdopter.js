@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { createFavorite, removeFavorite } from "../actions"
 import { Grid, Image, Header, Button, Icon, Segment } from 'semantic-ui-react'
 
 class DogShow extends Component {
@@ -11,9 +12,25 @@ class DogShow extends Component {
     this.setState({image: img})
   }
 
+  createFavorite = (id) => {
+    let body = {
+      adopter_id: this.props.user.id,
+      dog_id: id
+    }
+    this.props.createFavorite(body)
+  }
+
+  removeFavorite = (id) => {
+    // const { id } = this.props.dog
+    let favorites = this.props.favorites
+    let favorite = favorites.find(favorite => favorite.dog_id === id)
+    this.props.removeFavorite(favorite.id)
+  }
+
 
   render() {
-    console.log("ADOPTER DOG SHOW STATE", this.state)
+    const { favorite } = this.props
+
     if (this.props.dogs.length > 0) {
  
       let dogId = parseInt(this.props.dogId)
@@ -49,17 +66,28 @@ class DogShow extends Component {
               <Segment basic textAlign="center">
                   <Button.Group>
                     {imageDots}
-                    {/* <Button icon>
-                      <Icon name='circle'/>
-                    </Button>
-                    <Button icon>
-                      <Icon name='circle'/>
-                    </Button>
-                    <Button icon>
-                      <Icon name='circle'/>
-                    </Button> */}
                   </Button.Group>
                 </Segment>
+   {/* FAVORITE BUTTON */}
+                <Segment basic textAlign="center">
+                {favorite 
+                ? 
+                  <Button color="red" onClick={()=>this.removeFavorite(dogId)}>
+                  <Button.Content>
+                    <Icon name={'heart'} />Favorite 
+                  </Button.Content>
+                  </Button>
+                : 
+                  <Button basic color="red" animated="fade" onClick={()=>this.createFavorite(dogId)}>
+                    <Button.Content visible>Add to favorites</Button.Content>
+                    <Button.Content hidden>
+                      <Icon name='heart' />
+                    </Button.Content>
+                  </Button>
+                }
+                </Segment>
+
+
             </Grid.Column>
 
             <Grid.Column  width={8}>
@@ -110,7 +138,10 @@ class DogShow extends Component {
 }
 function msp(state){
   return {
-    dogs: state.dogs
+    dogs: state.dogs,
+    user: state.user, 
+    favorites: state.favorites,
+    favoriteDogs: state.favoriteDogs
   }
 }
-export default connect(msp)(DogShow)
+export default connect(msp, { createFavorite, removeFavorite })(DogShow)
