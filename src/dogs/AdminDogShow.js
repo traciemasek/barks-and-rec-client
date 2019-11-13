@@ -75,7 +75,7 @@ class DogShow extends Component {
         
               {/* <ImageCarousel images={images}/> */}
             <Card fluid>
-              <Image rounded alt="" src={this.state.image? this.state.image : img1}  />
+              <Image wrapped ui={false} fluid rounded alt="" src={this.state.image? this.state.image : img1}  />
               <Card.Content extra textAlign="center">
                 <Segment basic textAlign="center">
                   <Button.Group>
