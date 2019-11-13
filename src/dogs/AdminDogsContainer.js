@@ -13,8 +13,11 @@ class AdminDogsContainer extends Component {
 
 
   render() {
-    if (this.props.dogsLoading || this.props.userLoading) {
-      return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+    if (this.props.dogsLoading || this.props.userLoading) {return (
+      <Grid centered>
+        <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+      </Grid>
+    )
     } else {
       return (
         <Grid centered>

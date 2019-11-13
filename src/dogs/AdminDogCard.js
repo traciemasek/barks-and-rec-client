@@ -16,7 +16,6 @@ class AdminDogCard extends Component {
       <Card >
         <Image 
           src={img1} as={Link} to={`/admin/dogs/${id}`}
-          // label={{ as: 'a', color: 'teal', corner: 'right', icon: 'edit' }}
           />
         <Card.Content as={Link} to={`/admin/dogs/${id}`}>
           <Card.Header>{name}</Card.Header>
@@ -38,7 +37,6 @@ class AdminDogCard extends Component {
   }
 }
 
-// color="red"
 
 function msp(state){
   return {

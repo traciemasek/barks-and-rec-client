@@ -10,12 +10,14 @@ class FavesContainer extends Component {
     return this.props.favoriteDogs.map(dog=><AdopterDogCard key={dog.id} dog={dog} favorite/>)
   }
 
-  //need functionality to remove a favorite
 
   render() {
     if(this.props.userLoading || this.props.dogsLoading){
-      return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
-    // } else if (!this.props.favoriteDogs.length) {
+      return (
+        <Grid centered>
+          <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+        </Grid>
+      )
     } else if (!this.props.favoriteDogs.length) {
       return (
         <Grid centered>

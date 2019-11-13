@@ -27,6 +27,17 @@ class DogShow extends Component {
   }
 
   render() {
+
+    if (!this.props.dogs.find(dog=> dog.id === parseInt(this.props.dogId))) {
+      return (
+        <Grid centered>
+          <Grid.Row></Grid.Row>
+          <Grid.Row></Grid.Row>
+          <Image alt="" src="https://httpstatusdogs.com/img/404.jpg"/>
+        </Grid>
+      )
+    }
+
     if (this.props.dogs.length > 0) {
  
       const dogId = parseInt(this.props.dogId)
@@ -63,8 +74,8 @@ class DogShow extends Component {
             <Grid.Column width={8}>
         
               {/* <ImageCarousel images={images}/> */}
-              <Card fluid>
-                <Image rounded alt="" src={this.state.image? this.state.image : img1}  />
+            <Card fluid>
+              <Image rounded alt="" src={this.state.image? this.state.image : img1}  />
               <Card.Content extra textAlign="center">
                 <Segment basic textAlign="center">
                   <Button.Group>
@@ -115,8 +126,15 @@ class DogShow extends Component {
             <Header color="grey" size="medium" content="GOOD IN A HOME WITH"/>
             <p>{goodHome}</p>
 
-            <Header color="grey" size="medium" content="PREFERS A HOME WITHOUT"/>
-            <p>{badHome}</p>
+            {badHome 
+            ? 
+            <><Header color="grey" size="medium" content="PREFERS A HOME WITHOUT"/>
+            <p>
+              {badHome}
+            </p></>
+            :
+            null
+            }
 
             <Header style={charcoal} size="large">Meet {name} </Header>
             <p>{about}</p>
@@ -130,7 +148,11 @@ class DogShow extends Component {
 
       )  
     } else {
-        return <img alt="loading" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+      return (
+        <Grid centered>
+          <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+        </Grid>
+      )
       }
     } 
       

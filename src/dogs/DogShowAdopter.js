@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createFavorite, removeFavorite } from "../actions"
-import { Grid, Image, Header, Button, Icon, Segment } from 'semantic-ui-react'
+import { Grid, Image, Header, Button, Icon, Segment, Card } from 'semantic-ui-react'
 
 class DogShow extends Component {
   state = {
@@ -30,6 +30,16 @@ class DogShow extends Component {
 
   render() {
     const { favorite } = this.props
+
+    if (!this.props.dogs.find(dog=> dog.id === parseInt(this.props.dogId))) {
+      return (
+        <Grid centered>
+        <Grid.Row></Grid.Row>
+        <Grid.Row></Grid.Row>
+        <Image alt="" src="https://httpstatusdogs.com/img/404.jpg"/>
+      </Grid>
+      )
+    }
 
     if (this.props.dogs.length > 0) {
  
@@ -62,12 +72,18 @@ class DogShow extends Component {
           <Grid centered >
             <Grid.Row></Grid.Row>
             <Grid.Column width={8}>
-              <Image fluid rounded alt="" src={this.state.image? this.state.image : img1} />
-              <Segment basic textAlign="center">
-                  <Button.Group>
-                    {imageDots}
-                  </Button.Group>
-                </Segment>
+   {/* IMAGE CARD */} 
+              <Card fluid>         
+                <Image fluid rounded alt="" src={this.state.image? this.state.image : img1} />
+                <Card.Content extra textAlign="center">
+                  <Segment basic textAlign="center">
+                    <Button.Group>
+                      {imageDots}
+                    </Button.Group>
+                  </Segment>
+                </Card.Content>
+              </Card> 
+
    {/* FAVORITE BUTTON */}
                 <Segment basic textAlign="center">
                 {favorite 
@@ -113,11 +129,16 @@ class DogShow extends Component {
             <p>
               {goodHome}
             </p>
-
-            <Header color="grey" size="medium" content="PREFERS A HOME WITHOUT"/>
+              
+            {badHome 
+            ? 
+            <><Header color="grey" size="medium" content="PREFERS A HOME WITHOUT"/>
             <p>
               {badHome}
-            </p>
+            </p></>
+            :
+            null
+            }
 
             <Header style={charcoal} size="large">Meet {name} </Header>
             <p>{about}</p>
@@ -129,13 +150,15 @@ class DogShow extends Component {
       </Grid>
       )  
     } else {
-        return <img alt="loading" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+        return (
+          <Grid centered>
+            <img alt="loading" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+          </Grid>
+          )
       }
     } 
-      
-    
-  
 }
+
 function msp(state){
   return {
     dogs: state.dogs,

@@ -93,7 +93,11 @@ class DogShow extends Component {
         </Grid>
       )  
     } else {
-        return <img alt="loading" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+      return (
+        <Grid centered>
+          <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+        </Grid>
+      )
       }
     } 
       

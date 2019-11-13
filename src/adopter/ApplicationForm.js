@@ -10,6 +10,14 @@ class ApplicationForm extends Component {
     why_adopt: ""
   }
 
+  componentDidMount(){
+    const { first_name, last_name } = this.props.user
+    this.setState({
+      first_name: first_name,
+      last_name: last_name,
+    })
+  }
+
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value})
   }

@@ -10,7 +10,11 @@ class ApplicationContainer extends Component {
     const { adopterApplication, userLoading } = this.props
 
     if (userLoading) {
-      return <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+      return (
+        <Grid centered>
+          <img alt="fetching" src="https://miro.medium.com/max/450/1*dgfd5JaT0d7JT4VfhFEnzg.gif"/>
+        </Grid>
+      )
     } else {
     return(
       <>

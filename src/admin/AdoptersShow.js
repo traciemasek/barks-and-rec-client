@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import { Grid, Image} from 'semantic-ui-react'
 
 export default class AdoptersShow extends Component {
   render() {
     return (
-      <div>
-        This should render detailed information about the particular adopter, including the status of their application, and the dogs that they are interested in.
-      </div>
+      <Grid centered>
+        <Grid.Row></Grid.Row>
+        <Grid.Row></Grid.Row>
+        <Image alt="" src="https://httpstatusdogs.com/img/404.jpg"/>
+      </Grid>
     )
   }
 }

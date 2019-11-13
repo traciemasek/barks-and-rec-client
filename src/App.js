@@ -6,7 +6,7 @@ import Splash from './Splash';
 import AdminMainContainer from './admin/AdminMainContainer';
 import AdopterMainContainer from './adopter/AdopterMainContainer';
 import { setAdmin, setAdopter } from './actions.js';
-
+import UhOh from './UhOh'
 
 
 class App extends React.Component {
@@ -75,7 +75,7 @@ class App extends React.Component {
               </Route>
 
               {/* 404 */}
-              <Route render={() => <img alt="404 Not Found" src="https://httpstatusdogs.com/img/404.jpg"></img>} />
+              <Route component={UhOh} />
             </Switch>
           
         </div>
