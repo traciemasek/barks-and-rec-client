@@ -60,8 +60,10 @@ function reducer(prevState = defaultState, action) {
     case SUBMIT_APPLICATION:
       return {...prevState, adopterApplication: action.payload.application}
     case ADD_APP_SUBMITTED_TASK:
+      let adoptersCopy = [...prevState.adopters]
+      if (!adoptersCopy.find(adopter=>adopter.id === action.payload.adopter.id)) {adoptersCopy.push(action.payload.adopter)}
       let tasksCopy = [...prevState.tasks, action.payload.task]
-      return {...prevState, tasks: tasksCopy}
+      return {...prevState, tasks: tasksCopy, adopters: adoptersCopy}
     case NEW_TASK:   
       let applicationsCopy2 = [...prevState.applications]
       //find the copy of the updated application and remove it from the array 

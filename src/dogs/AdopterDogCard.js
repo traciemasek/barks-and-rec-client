@@ -34,7 +34,7 @@ class AdopterDogCard extends Component {
     return (
   
       <Card raised>
-        <Modal size="fullscreen" trigger={<Image fluid src={img1} wrapped ui={false}/>}>
+        <Modal size="large" trigger={<Image fluid src={img1} wrapped ui={false}/>}>
           <Modal.Content>
             <DogShowAdopter favorite={favorite} dogId={id}/>
           </Modal.Content>
