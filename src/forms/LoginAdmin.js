@@ -18,7 +18,7 @@ class LoginAdmin extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
 
-    fetch("http://localhost:6969/api/v1/admin_login", {
+    fetch("http://localhost:3001/api/v1/admin_login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +34,6 @@ class LoginAdmin extends React.Component {
     })
     .then(resp => resp.json())
     .then(response => {
-      console.log("ADMIN LOG IN RESPONSE", response)
       if (response.exception === "#<NoMethodError: undefined method `authenticate' for nil:NilClass>") {
         alert("Admin user doesn't exist")
       } else if (response.errors){

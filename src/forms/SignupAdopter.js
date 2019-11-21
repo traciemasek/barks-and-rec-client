@@ -19,11 +19,11 @@ class SignupAdopter extends React.Component {
     })
   }
 
-  //ask steven for help refactoring this with the promise return in actions
+  //refactor this with the promise return in actions
   handleSubmit = e => {
     e.preventDefault()
     if (this.state.password === this.state.passwordConfirmation) {
-      fetch("http://localhost:6969/api/v1/signup", {
+      fetch("http://localhost:3001/api/v1/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,14 +61,15 @@ class SignupAdopter extends React.Component {
     return(
 
       <Form onSubmit={this.handleSubmit}>
-        {/* <Form.Group widths='equal'> */}
+      
         <Form.Input required fluid label='First name' name='first_name' placeholder='First name' onChange={this.handleChange} value={first_name}/>
         <Form.Input required fluid label='Last name' name='last_name' placeholder='Last name' onChange={this.handleChange} value={last_name}/>
         <Form.Input required fluid label='Username' name='username' placeholder='username' onChange={this.handleChange} value={username}/>
         <Form.Input required fluid label='Password' name='password' placeholder='Password' type="password" onChange={this.handleChange} value={password}/>
         <Form.Input required fluid label='Password Confirmation' name='passwordConfirmation' placeholder='Password' type="password" onChange={this.handleChange} value={passwordConfirmation}/>
-        {/* </Form.Group> */}
+
         <Form.Button color="instagram">Submit</Form.Button>
+        
       </Form>
     )
   }

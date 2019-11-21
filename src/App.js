@@ -19,7 +19,7 @@ class App extends React.Component {
   }
 
   autoLogin = (token) => {
-    fetch("http://localhost:6969/api/v1/auto_login", {
+    fetch("http://localhost:3001/api/v1/auto_login", {
       headers: {
         "Authorization": token
       }

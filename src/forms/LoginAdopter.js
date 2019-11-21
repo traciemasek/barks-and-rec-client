@@ -18,7 +18,7 @@ class LoginAdopter extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
 
-    fetch("http://localhost:6969/api/v1/adopter_login", {
+    fetch("http://localhost:3001/api/v1/adopter_login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

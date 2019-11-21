@@ -1,8 +1,6 @@
 import React from 'react';
 import HeaderSplash from "./menus/HeaderSplash"
 import jumbotrons from './images/jumbotrons'
-// import { Container } from 'semantic-ui-react'
-// import { Route, Switch, Link } from "react-router-dom"
 
 
 function Splash (props) {

@@ -1,9 +1,16 @@
 import { SET_ADOPTER_USER, SET_ADMIN_USER, LOGOUT, FETCH_ALL_DOGS, FETCH_ALL_ADOPTERS, FETCH_ALL_APPLICATIONS, ADD_FAVORITE, REMOVE_FAVORITE, SUBMIT_APPLICATION, FETCH_ALL_TASKS, FETCH_ALL_FAVORITES, NEW_TASK, FINAL_APPROVAL_TASK, ADD_DOG, UPDATE_DOG, REMOVE_NOTIFICATION, ADD_FINAL_NOTIFICATION, ADD_NOTIFICATION, ADD_APP_SUBMITTED_TASK } from "./types"
 
+const API_URL = `http://localhost:3001/api/v1`;
+
+const headers = {
+  Accepts: 'application/json',
+  'Content-Type': 'application/json'
+}
+
 
 function fetchDogs() {
   return function(dispatch){
-    fetch("http://localhost:6969/api/v1/dogs")
+    fetch(`${API_URL}/dogs`)
     .then(resp => resp.json())
     .then(dogs => {
       dispatch({type: FETCH_ALL_DOGS, payload: dogs})
@@ -13,7 +20,7 @@ function fetchDogs() {
 
 function fetchAllFavorites() {
   return function(dispatch){
-    fetch("http://localhost:6969/api/v1/favorites")
+    fetch(`${API_URL}/favorites`)
     .then(resp => resp.json())
     .then(favorites => {
       dispatch({type: FETCH_ALL_FAVORITES, payload: favorites})
@@ -23,7 +30,7 @@ function fetchAllFavorites() {
 
 function fetchAdopters() {
   return function(dispatch){
-    fetch("http://localhost:6969/api/v1/adopters")
+    fetch(`${API_URL}/adopters`)
     .then(resp => resp.json())
     .then(adopters => {
       dispatch({type: FETCH_ALL_ADOPTERS, payload: adopters})
@@ -33,7 +40,7 @@ function fetchAdopters() {
 
 function fetchApplications() {
   return function(dispatch){
-    fetch("http://localhost:6969/api/v1/applications")
+    fetch(`${API_URL}/applications`)
     .then(resp => resp.json())
     .then(applications => {
       dispatch({type: FETCH_ALL_APPLICATIONS, payload: applications})
@@ -43,7 +50,7 @@ function fetchApplications() {
 
 function fetchTasks() {
   return function(dispatch){
-    fetch("http://localhost:6969/api/v1/tasks")
+    fetch(`${API_URL}/tasks`)
     .then(resp => resp.json())
     .then(tasks => {
       dispatch({type: FETCH_ALL_TASKS, payload: tasks})
@@ -53,12 +60,9 @@ function fetchTasks() {
 
 function createDog(body){
   return function(dispatch){
-    fetch("http://localhost:6969/api/v1/dogs", {
+    fetch(`${API_URL}/dogs`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accepts: "application/json"
-      },
+      headers,
       body: JSON.stringify(body)
     })
     .then(resp => resp.json())
@@ -70,12 +74,9 @@ function createDog(body){
 
 function updateDog(body, id){
   return function(dispatch){
-    fetch(`http://localhost:6969/api/v1/dogs/${id}`, {
+    fetch(`${API_URL}/dogs/${id}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Accepts: "application/json"
-      },
+      headers,
       body: JSON.stringify(body)
     })
     .then(resp => resp.json())
@@ -87,17 +88,13 @@ function updateDog(body, id){
 
 function createFavorite(body) {
   return function(dispatch){
-    fetch("http://localhost:6969/api/v1/favorites", {
+    fetch(`${API_URL}/favorites`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accepts: "application/json"
-      },
+      headers,
       body: JSON.stringify(body)
     })
     .then(resp => resp.json())
     .then(response => {
-      // console.log(response.favoriteDog)
       dispatch({type: ADD_FAVORITE, payload: response})
     })
   }
@@ -105,12 +102,11 @@ function createFavorite(body) {
 
 function removeFavorite(id) {
   return function(dispatch){
-    fetch(`http://localhost:6969/api/v1/favorites/${id}`, {
+    fetch(`${API_URL}/favorites/${id}`, {
       method: "DELETE"
     })
     .then(resp => resp.json())
     .then(response => {
-      // console.log(response)
       dispatch({type: REMOVE_FAVORITE, payload: response})
     })
   }
@@ -118,17 +114,13 @@ function removeFavorite(id) {
 
 function submitApplication(application) {
   return function(dispatch){
-    fetch("http://localhost:6969/api/v1/applications", {
+    fetch(`${API_URL}/applications`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accepts: "application/json"
-      },
+      headers,
       body: JSON.stringify(application)
     })
     .then(resp => resp.json())
     .then(response => {
-      console.log("submitapplication response", response)
       dispatch({type: SUBMIT_APPLICATION, payload: response})
     })
     }
@@ -136,17 +128,13 @@ function submitApplication(application) {
 
 function completeTask(taskBody){
   return function(dispatch){
-    fetch("http://localhost:6969/api/v1/tasks", {
+    fetch(`${API_URL}/tasks`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accepts: "application/json"
-      },
+      headers,
       body: JSON.stringify(taskBody)
     })
     .then(resp => resp.json())
     .then(response => {
-      console.log("complete task response", response)
       dispatch({type: NEW_TASK, payload: response})
     })
     }
@@ -154,17 +142,13 @@ function completeTask(taskBody){
 
 function finalApprovalTask(taskBody, id){
   return function(dispatch){
-    fetch(`http://localhost:6969/api/v1/tasks/${id}`, {
+    fetch(`${API_URL}/tasks/${id}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Accepts: "application/json"
-      },
+      headers,
       body: JSON.stringify(taskBody)
     })
     .then(resp => resp.json())
     .then(response => {
-      console.log("complete final task response", response)
       dispatch({type: FINAL_APPROVAL_TASK, payload: response})
     })
   }
@@ -172,16 +156,12 @@ function finalApprovalTask(taskBody, id){
 
 function removeNotification(id){
   return function(dispatch){
-    fetch(`http://localhost:6969/api/v1/notifications/${id}`, {
+    fetch(`${API_URL}/notifications/${id}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Accepts: "application/json"
-      },
+      headers,
     })
     .then(resp => resp.json())
     .then(response => {
-      console.log("remove notification response", response)
       dispatch({type: REMOVE_NOTIFICATION, payload: response})
     })
   }
