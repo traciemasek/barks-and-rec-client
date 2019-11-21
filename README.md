@@ -1,5 +1,6 @@
 # Barks and Rec
 
+![welcome to barks and rec banner](./src/images/banner01_crop.png)
 _Developed by Tracie Masek_ 
 
 Barks and Rec is a role-based user app that facilitates communication about the adoption process between an animal rescue or shelter and its potential adopters.
