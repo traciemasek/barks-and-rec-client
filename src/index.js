@@ -1,5 +1,3 @@
-// import * as serviceWorker from './serviceWorker';
-// import 'semantic-ui-css/semantic.min.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -11,10 +9,7 @@ import thunk from 'redux-thunk';
 import reducer from './reducer';
 import { ActionCableProvider } from 'react-actioncable-provider';
 
-//see lecture code for how to use combineReducers
 
-
-//don't forget to createStore if using redux
 const store = createStore(reducer, applyMiddleware(thunk))
 
 ReactDOM.render(
@@ -32,9 +27,3 @@ ReactDOM.render(
 
 
 
-
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();

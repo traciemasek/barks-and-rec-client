@@ -26,11 +26,9 @@ class App extends React.Component {
     })
     .then(resp => resp.json())
     .then(response => {
-      // console.log(response)
       if (response.errors) {
         alert(response.errors)
       } else if(response.admin){
-        // look at back end to see exactly how you're rendering this
       this.props.setAdmin(response.admin)
       } else {
       this.props.setAdopter(response)

@@ -31,7 +31,6 @@ function fetchAdopters() {
   }
 }
 
-//actually probably want this serialized to come attached to each Adopter
 function fetchApplications() {
   return function(dispatch){
     fetch("http://localhost:6969/api/v1/applications")
@@ -64,7 +63,6 @@ function createDog(body){
     })
     .then(resp => resp.json())
     .then(response => {
-      console.log(response)
       dispatch({type: ADD_DOG, payload: response})
     })
   }
@@ -82,7 +80,6 @@ function updateDog(body, id){
     })
     .then(resp => resp.json())
     .then(response => {
-      console.log(response)
       dispatch({type: UPDATE_DOG, payload: response})
     })
   }
@@ -157,7 +154,6 @@ function completeTask(taskBody){
 
 function finalApprovalTask(taskBody, id){
   return function(dispatch){
-    //  this is going to update action in tasks, probably want to make a custom route
     fetch(`http://localhost:6969/api/v1/tasks/${id}`, {
       method: "PATCH",
       headers: {
@@ -182,7 +178,6 @@ function removeNotification(id){
         "Content-Type": "application/json",
         Accepts: "application/json"
       },
-      // body: JSON.stringify({read: true})
     })
     .then(resp => resp.json())
     .then(response => {
@@ -193,13 +188,11 @@ function removeNotification(id){
 }
 
 function addNotification(response){
-  // console.log("addNotification action", response)
   //from adopter perspective 
   return {type: ADD_NOTIFICATION, payload: response}
 }
 
 function addFinalNotification(response){
-  // console.log("addNotification action", response)
   //from adopter perspective 
   return {type: ADD_FINAL_NOTIFICATION, payload: response}
 }
