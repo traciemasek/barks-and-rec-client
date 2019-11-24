@@ -46,13 +46,15 @@ Then you can start running the program with `npm start`.
 
 ## NPM Packages
   * moment
-  * react-actioncable-provider: "github:ihollander/react-actioncable-provider"
+  * react-actioncable-provider: ihollander/react-actioncable-provider*
   * react-dom
   * react-router-dom
   * redux
   * react-redux
   * redux-thunk
   * semantic-ui-react
+
+*react-actioncable-provider has a bug that makes it unsubscribe any time the parent component rerenders, use fixed version until PR is merged: `npm uninstall --save react-actioncable-provider && npm install --save ihollander/react-actioncable-provider`
 
 
 # Preview
