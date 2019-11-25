@@ -41,7 +41,7 @@ class TasksContainer extends Component {
       )
     } else {
       return (
-        <Grid centered >
+        <Grid centered doubling>
           <Grid.Row></Grid.Row>
           <Grid.Column width={12}>  
 

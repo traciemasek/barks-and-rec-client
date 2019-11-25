@@ -13,7 +13,7 @@ import { ActionCableProvider } from 'react-actioncable-provider';
 const store = createStore(reducer, applyMiddleware(thunk))
 
 ReactDOM.render(
-  <ActionCableProvider url="ws://localhost:6969/cable">
+  <ActionCableProvider url="ws://localhost:3001/cable">
     <Provider store={store}>
       <BrowserRouter>
         <Route path='/' component={App}></Route>

@@ -52,7 +52,7 @@ class DogsContainer extends Component {
             </Grid.Row>
             <Grid.Row></Grid.Row>
             
-            <Card.Group itemsPerRow={3} centered>
+            <Card.Group stackable itemsPerRow={3} centered>
               {this.renderDogs()}
             </Card.Group>
         

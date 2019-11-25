@@ -24,7 +24,7 @@ function AdoptersContainer(props) {
 
           <Grid.Row></Grid.Row>
           
-          <Card.Group itemsPerRow={3} >
+          <Card.Group stackable itemsPerRow={3} >
           {renderAdopters()}
           </Card.Group>
 

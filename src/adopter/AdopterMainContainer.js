@@ -118,7 +118,7 @@ class AdopterMainContainer extends React.Component {
                         <AboutModal />
                     </Modal>
 
-                    <Card.Group centered itemsPerRow={3}>
+                    <Card.Group centered stackable itemsPerRow={3}>
                       <AdoptableDogsTeaserCard />
                       <FavoriteDogsTeaserCard />
                       <ApplicationTeaserCard />
