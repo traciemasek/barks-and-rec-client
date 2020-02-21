@@ -59,7 +59,7 @@ Then you can start running the program with `npm start`.
 
 # Preview
 
-**COMING SOON!**
+[Check out a video demo of the app](https://www.youtube.com/watch?v=YEKhnv2B8ko&feature=youtu.be)
 
 ![adopter dashboard screen cap](https://live.staticflickr.com/65535/49101957766_6f9e159db5_b.jpg)
 
